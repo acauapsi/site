@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Clínico — Acauã Sites</title>
+    <meta name="description" content="Questionário oficial de criação de sites para psicólogos — Acauã Sites.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (Static Built) -->
+    <link rel="stylesheet" href="tailwind-output.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121F21;
+            color: #FAF0EB;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .font-heading {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+        }
+        .mono-num {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Logo Nobre e Imponente */
+        .brand-logo-main {
+            height: 160px !important;
+            width: auto !important;
+            max-height: 160px !important;
+            max-width: 220px !important;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        .brand-logo-header {
+            height: 28px !important;
+            width: auto !important;
+            max-height: 28px !important;
+            object-fit: contain;
+        }
+
+        /* Step Card Animation */
+        .step-view {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .step-view.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Main Container - 100% Unificado com o Fundo (Sem Borda e Sem Caixa Dentro de Caixa) */
+        .panel-container {
+            background-color: #121F21;
+            border: none;
+            box-shadow: none;
+        }
+
+        /* Unified Option Card (Used for Radios & Checkboxes) */
+        .option-box {
+            background-color: #0D191B;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0.875rem;
+            padding: 0.85rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: #D4C5B8;
+            user-select: none;
+        }
+        .option-box:hover {
+            border-color: rgba(192, 137, 78, 0.5);
+            background-color: #16292C;
+            color: #FAF0EB;
+        }
+        .option-box.selected {
+            border-color: #C0894E !important;
+            background-color: rgba(192, 137, 78, 0.15) !important;
+            color: #FAF0EB !important;
+            box-shadow: 0 0 0 1px #C0894E inset;
+        }
+        .option-box.selected .indicator-circle {
+            border-color: #C0894E;
+            background-color: #C0894E;
+        }
+        .option-box.selected .indicator-square {
+            border-color: #C0894E;
+            background-color: #C0894E;
+        }
+        .option-box.selected .indicator-square svg {
+            display: block;
+        }
+
+        /* Text Input */
+        .custom-input {
+            background-color: #0D191B;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #FAF0EB;
+            border-radius: 0.75rem;
+            padding: 0.8rem 1rem;
+            font-size: 0.875rem;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        .custom-input:focus {
+            border-color: #C0894E;
+            box-shadow: 0 0 0 1px #C0894E;
+            outline: none;
+            background-color: #0A1315;
+        }
+        .custom-input::placeholder {
+            color: rgba(212, 197, 184, 0.4);
+        }
+
+        /* Copper Action Button */
+        .btn-copper {
+            background-color: #C0894E;
+            color: #0E1719;
+            font-weight: 700;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px rgba(192, 137, 78, 0.25);
+        }
+        .btn-copper:hover {
+            background-color: #D4A574;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 25px rgba(192, 137, 78, 0.4);
+        }
+
+        /* Back Ghost Button */
+        .btn-ghost {
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #D4C5B8;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+        }
+        .btn-ghost:hover {
+            border-color: #C0894E;
+            color: #FAF0EB;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* WhatsApp Button (Maximum Vibrancy & Contrast) */
+        .btn-wpp-master {
+            background-color: #25D366 !important;
+            color: #072214 !important;
+            font-weight: 800 !important;
+            border-radius: 9999px;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+            transition: all 0.2s ease;
+        }
+        .btn-wpp-master:hover {
+            background-color: #20BD5A !important;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.6);
+        }
+    </style>
+</head>
+<body class="min-h-full flex flex-col justify-between selection:bg-[#C0894E] selection:text-[#121F21]">
+
+    <!-- Top Header -->
+    <header class="sticky top-0 z-50 bg-[#121F21] border-b border-white/5">
+        <div class="max-w-2xl mx-auto px-5 py-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <img src="logo_acaua.svg" alt="Acauã" class="brand-logo-header" style="width: 24px; height: 24px; max-width: 24px; max-height: 24px;">
+                <div>
+                    <span class="font-heading font-bold text-lg tracking-wider text-[#FAF0EB]">ACAUÃ <span class="text-[#C0894E]">SITES</span></span>
+                </div>
+            </div>
+            
+            <div id="topBadge" class="hidden flex items-center gap-2">
+                <span class="mono-num text-xs text-[#C0894E] font-medium bg-[#16292C] px-3 py-1 rounded-full border border-[#C0894E]/30" id="badgeStepText">Etapa 01 / 09</span>
+            </div>
+        </div>
+
+        <!-- Progress Line Bar -->
+        <div class="w-full bg-white/5 h-[2px]">
+            <div id="progressFill" class="bg-[#C0894E] h-[2px] transition-all duration-300" style="width: 0%;"></div>
+        </div>
+    </header>
+
+    <!-- Main Container (Clean & Centered) -->
+    <main class="max-w-2xl mx-auto px-5 py-8 flex-1 w-full flex flex-col justify-center">
+
+        <!-- ===================================================================
+             ETAPA 0: TELA INICIAL (EQUILIBRADA & LIMPA)
+             =================================================================== -->
+        <div id="step-0" class="step-view active">
+            <div class="panel-container p-8 sm:p-12 text-center space-y-5">
+                <!-- Logo Nobre e Proporcional Sem Borda -->
+                <div class="flex justify-center py-2">
+                    <img src="logo_acaua.svg" alt="Acauã" class="brand-logo-main" style="height: 160px; width: auto; max-height: 160px;">
+                </div>
+
+                <div class="space-y-2">
+                    <span class="inline-block text-[10px] font-bold tracking-[0.2em] text-[#C0894E] uppercase">
+                        BRIEFING CLÍNICO OFICIAL
+                    </span>
+                    <h1 class="font-heading text-3xl sm:text-4xl font-bold text-[#FAF0EB] leading-tight">
+                        Criação do seu Site Profissional
+                    </h1>
+                    <p class="text-[#D4C5B8] text-xs sm:text-sm font-light max-w-md mx-auto leading-relaxed pt-1">
+                        Responda em poucos minutos para definirmos a estrutura, a sua abordagem e a identidade do seu consultório.
+                    </p>
+                </div>
+
+                <div class="pt-2">
+                    <button type="button" onclick="goToStep(1)" class="btn-copper py-3.5 px-8 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2.5 cursor-pointer">
+                        <span>Iniciar Questionário</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </div>
+
+                <div class="flex items-center justify-center pt-3 text-[11px] text-[#D4C5B8]/60 border-t border-white/5">
+                    <span>Tempo estimado: ~5 minutos</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             ETAPA 1: IDENTIFICAÇÃO & REGISTRO PROFISSIONAL
+             =================================================================== -->
+        <div id="step-1" class="step-view">
+            <div class="panel-container p-6 sm:p-9 space-y-5">
+                <div>
+                    <span class="mono-num text-[11px] text-[#C0894E] font-medium block mb-0.5">ETAPA 01 / 09</span>
+                    <h2 class="font-heading text-2xl font-bold text-[#FAF0EB]">Identificação & Registro</h2>
+                    <p class="text-xs text-[#D4C5B8]">Informações essenciais para validação no CFP e rodapé.</p>
+                </div>
+
+                <!-- Q1: Assinatura -->
+                <div class="space-y-2">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">1. Como deseja assinar seu nome principal no site?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="group_assinatura">
+                        <div class="option-box" onclick="selectRadio(this, 'assinatura', 'Dra. / Dr. [Nome]')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>Dra. / Dr. [Meu Nome]</span>
+                        </div>
+                        <div class="option-box selected" onclick="selectRadio(this, 'assinatura', 'Psicóloga / Psicólogo [Nome]')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>Psicóloga / Psicólogo [Meu Nome]</span>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'assinatura', '[Nome] | Psicóloga Clínica')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>[Nome] | Psicólogo(a) Clínico(a)</span>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'assinatura', 'Outro formato')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>Outro formato</span>
+                        </div>
+                    </div>
+                    <input type="text" id="nome_completo" placeholder="Digite seu Nome Completo Profissional" class="custom-input mt-1">
+                </div>
+
+                <!-- Q2 & Q3: CRP e e-Psi -->
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-[#FAF0EB] mb-1">2. Número do CRP & Região:</label>
+                        <input type="text" id="crp_numero" placeholder="Ex: CRP 06/142980" class="custom-input">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-[#FAF0EB] mb-1.5">3. Atende online com cadastro no e-Psi?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="group_epsi">
+                            <div class="option-box selected justify-center" onclick="selectRadio(this, 'epsi', 'Sim, e-Psi ativo')">
+                                <span>Sim, e-Psi ativo</span>
+                            </div>
+                            <div class="option-box justify-center" onclick="selectRadio(this, 'epsi', 'Apenas Presencial')">
+                                <span>Só Presencial</span>
+                            </div>
+                            <div class="option-box justify-center" onclick="selectRadio(this, 'epsi', 'Estou me cadastrando')">
+                                <span>Me cadastrando</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4: Idiomas -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">4. Idiomas de Atendimento:</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="group_idiomas">
+                        <div class="option-box selected justify-center" onclick="toggleCheckbox(this, 'idiomas', 'Português')">
+                            <span>Português</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="toggleCheckbox(this, 'idiomas', 'Inglês')">
+                            <span>Inglês</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="toggleCheckbox(this, 'idiomas', 'Espanhol')">
+                            <span>Espanhol</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="toggleCheckbox(this, 'idiomas', 'Outro')">
+                            <span>Outro</span>
+                        </div>
+                    </div>
+                    <input type="text" id="idioma_outro" placeholder="Se marcou 'Outro', digite os idiomas (ex: Francês, Libras, Italiano...)" class="custom-input mt-1.5">
+                </div>
+
+                <!-- Q5 & Q6: Contatos -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-[#FAF0EB] mb-1">5. WhatsApp Profissional (com DDD): *</label>
+                        <input type="tel" id="whatsapp_num" placeholder="(11) 99999-9999" class="custom-input">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[#FAF0EB] mb-1">6. Instagram Profissional:</label>
+                        <input type="text" id="instagram_user" placeholder="@psicologa.camila (ou 'Não tenho')" class="custom-input">
+                    </div>
+                </div>
+
+                <!-- Q7: Modalidade / Endereço -->
+                <div class="space-y-2">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">7. Modalidade & Endereço:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="group_modalidade">
+                        <div class="option-box selected" onclick="selectRadio(this, 'modalidade', '100% Online')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>Atendo 100% Online</span>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'modalidade', 'Presencial / Híbrido')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>Presencial / Híbrido</span>
+                        </div>
+                    </div>
+                    <input type="text" id="endereco_completo" placeholder="Se atende presencial, digite o endereço do consultório" class="custom-input">
+                </div>
+
+                <!-- Nav Buttons -->
+                <div class="pt-4 flex justify-between items-center border-t border-white/5">
+                    <button type="button" onclick="goToStep(0)" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">
+                        ← Voltar
+                    </button>
+                    <button type="button" onclick="handleNextStep(1)" class="btn-copper py-3 px-8 text-xs uppercase tracking-wider flex items-center gap-2">
+                        <span>Avançar</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             ETAPA 2: ABORDAGEM TEÓRICA (INDIVIDUALIZADAS)
+             =================================================================== -->
+        <div id="step-2" class="step-view">
+            <div class="panel-container p-6 sm:p-9 space-y-5">
+                <div>
+                    <span class="mono-num text-[11px] text-[#C0894E] font-medium block mb-0.5">ETAPA 02 / 09</span>
+                    <h2 class="font-heading text-2xl font-bold text-[#FAF0EB]">Abordagem Teórica Principal</h2>
+                    <p class="text-xs text-[#D4C5B8]">Selecione a sua linha teórica para fundamentarmos a comunicação.</p>
+                </div>
+
+                <!-- Q8: Abordagens -->
+                <div class="space-y-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="group_linha_teorica">
+                        <div class="option-box selected" onclick="selectRadio(this, 'linha_teorica', 'TCC (Terapia Cognitivo-Comportamental)')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">TCC</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Cognitivo-Comportamental</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'linha_teorica', 'Psicanálise Freudiana')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Psicanálise Freudiana</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Inconsciente e pulsão</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'linha_teorica', 'Psicanálise Lacaniana')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Psicanálise Lacaniana</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Linguagem e significante</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'linha_teorica', 'Psicanálise Winnicott / Klein')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Psicanálise Winnicott / Klein</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Relações objetais</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'linha_teorica', 'Fenomenologia-Existencial')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Fenomenologia-Existencial</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Existência e sentido</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'linha_teorica', 'Gestalt-Terapia')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Gestalt-Terapia</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Aqui-e-agora e contato</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'linha_teorica', 'Humanista (Carl Rogers)')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Humanista (Carl Rogers)</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Aceitação incondicional</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'linha_teorica', 'ACT (Aceitação e Compromisso)')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">ACT</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Aceitação e Compromisso</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'linha_teorica', 'DBT (Comportamental Dialética)')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">DBT</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Regulação emocional</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'linha_teorica', 'Terapia do Esquema')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Terapia do Esquema</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Esquemas e modos</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'linha_teorica', 'Terapia Sistêmica')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Terapia Sistêmica</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Casal e família</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'linha_teorica', 'Psicologia Analítica (Junguiana)')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Psicologia Junguiana</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Arquétipos e símbolos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" id="abordagem_outra" placeholder="Ou digite sua abordagem caso seja diferente das opções acima..." class="custom-input mt-2">
+                </div>
+
+                <!-- Nav Buttons -->
+                <div class="pt-4 flex justify-between items-center border-t border-white/5">
+                    <button type="button" onclick="goToStep(1)" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">
+                        ← Voltar
+                    </button>
+                    <button type="button" onclick="handleNextStep(2)" class="btn-copper py-3 px-8 text-xs uppercase tracking-wider flex items-center gap-2">
+                        <span>Avançar</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             ETAPA 3: PÚBLICO, QUEIXAS & DIFERENCIAL
+             =================================================================== -->
+        <div id="step-3" class="step-view">
+            <div class="panel-container p-6 sm:p-9 space-y-5">
+                <div>
+                    <span class="mono-num text-[11px] text-[#C0894E] font-medium block mb-0.5">ETAPA 03 / 09</span>
+                    <h2 class="font-heading text-2xl font-bold text-[#FAF0EB]">Público & Queixas</h2>
+                    <p class="text-xs text-[#D4C5B8]">Defina quem você atende e o que você trata com prioridade.</p>
+                </div>
+
+                <!-- Q9: Público (10 Opções) -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">9. Público Prioritário (Marque os que atende):</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="group_publico_alvo">
+                        <div class="option-box selected" onclick="toggleCheckbox(this, 'publico_alvo', 'Adultos')">
+                            <span>Adultos em geral</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'publico_alvo', 'Mulheres')">
+                            <span>Mulheres</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'publico_alvo', 'Homens')">
+                            <span>Homens</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'publico_alvo', 'Adolescentes')">
+                            <span>Adolescentes</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'publico_alvo', 'Crianças e Pais')">
+                            <span>Crianças / Pais</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'publico_alvo', 'Casais e Famílias')">
+                            <span>Casais & Famílias</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'publico_alvo', 'Brasileiros no Exterior')">
+                            <span>Brasileiros no Exterior</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'publico_alvo', 'Idosos (60+)')">
+                            <span>Idosos (60+)</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'publico_alvo', 'LGBTQIA+')">
+                            <span>LGBTQIA+</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'publico_alvo', 'Estudantes & Universitários')">
+                            <span>Estudantes / Universitários</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q10: Queixas -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">10. Queixas que mais trata no consultório:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="group_queixas">
+                        <div class="option-box selected" onclick="toggleCheckbox(this, 'queixas_lista', 'Ansiedade e Pânico')">
+                            <span>Ansiedade e crises de pânico</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'queixas_lista', 'Depressão e Luto')">
+                            <span>Desânimo, luto e depressão</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'queixas_lista', 'Autoestima e Relações')">
+                            <span>Autoestima e dependência</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'queixas_lista', 'Burnout e Estresse')">
+                            <span>Burnout e sobrecarga profissional</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'queixas_lista', 'Conflitos Amorosos')">
+                            <span>Conflitos amorosos e ciúmes</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'queixas_lista', 'TOC e Insônia')">
+                            <span>TOC, fobias e insônia</span>
+                        </div>
+                    </div>
+                    <input type="text" id="queixas_outras" placeholder="Ou descreva outras queixas..." class="custom-input mt-1">
+                </div>
+
+                <!-- Q11: Anti-Perfil -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">11. ⛔ Existe algum caso que NÃO atende?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="group_anti_perfil">
+                        <div class="option-box selected" onclick="selectRadio(this, 'anti_perfil', 'Não tenho restrições (Atendo tudo)')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>Não tenho restrições</span>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'anti_perfil', 'Sim, possuo restrições')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>Sim, possuo restrições</span>
+                        </div>
+                    </div>
+                    <input type="text" id="casos_nao_atende" placeholder="Se marcou 'Sim', descreva (ex: dependência química, perícias...)" class="custom-input">
+                </div>
+
+                <!-- Q12: Diferencial Clínico (Apenas Escrita) -->
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">12. Seu Diferencial Clínico:</label>
+                    <p class="text-[11px] text-[#D4C5B8]/80 mb-1">Escreva em suas próprias palavras o que torna o seu atendimento e a sua escuta únicos:</p>
+                    <textarea id="diferencial_custom" rows="3" placeholder="Ex: Ofereço um acolhimento caloroso e ferramentas práticas fundamentadas em evidências para que o paciente conquiste autonomia emocional no seu próprio ritmo..." class="custom-input"></textarea>
+                </div>
+
+                <!-- Nav Buttons -->
+                <div class="pt-4 flex justify-between items-center border-t border-white/5">
+                    <button type="button" onclick="goToStep(2)" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">
+                        ← Voltar
+                    </button>
+                    <button type="button" onclick="handleNextStep(3)" class="btn-copper py-3 px-8 text-xs uppercase tracking-wider flex items-center gap-2">
+                        <span>Avançar</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             ETAPA 4: SERVIÇOS B2B & FORMAÇÃO
+             =================================================================== -->
+        <div id="step-4" class="step-view">
+            <div class="panel-container p-6 sm:p-9 space-y-5">
+                <div>
+                    <span class="mono-num text-[11px] text-[#C0894E] font-medium block mb-0.5">ETAPA 04 / 09</span>
+                    <h2 class="font-heading text-2xl font-bold text-[#FAF0EB]">Serviços & Formação</h2>
+                    <p class="text-xs text-[#D4C5B8]">Palestras, supervisão e títulos acadêmicos.</p>
+                </div>
+
+                <!-- Q13: B2B -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">13. Serviços além da clínica individual:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="group_servicos_b2b">
+                        <div class="option-box selected" onclick="toggleCheckbox(this, 'servicos_b2b', 'Não, apenas Clínica Individual')">
+                            <span><strong>Não</strong> — Apenas Clínica Individual</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'servicos_b2b', 'Palestras & Workshops para Empresas')">
+                            <span>Sim — Palestras & Workshops em Empresas</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'servicos_b2b', 'Supervisão para Psicólogos')">
+                            <span>Sim — Supervisão para Psicólogos</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'servicos_b2b', 'Grupos Terapêuticos')">
+                            <span>Sim — Grupos Terapêuticos</span>
+                        </div>
+                    </div>
+                    <input type="text" id="servicos_b2b_custom" placeholder="Ou descreva outros serviços/eventos corporativos caso ofereça..." class="custom-input mt-1.5">
+                </div>
+
+                <!-- Q14: Formação -->
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">14. Sua Formação Acadêmica & Especializações: *</label>
+                    <textarea id="formacao_academica" rows="3" placeholder="Graduação, Especializações, Pós-graduações, Cursos de extensão..." class="custom-input"></textarea>
+                </div>
+
+                <!-- Q15: Mídia -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">15. Presença na Mídia, Podcasts ou Livros:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="group_midia">
+                        <div class="option-box selected" onclick="selectRadio(this, 'midia_opcao', 'Não possuo')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>Não possuo</span>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'midia_opcao', 'Sim, possuo')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>Sim, possuo</span>
+                        </div>
+                    </div>
+                    <input type="text" id="midia_publicacoes" placeholder="Se marcou 'Sim', digite títulos, matérias ou links..." class="custom-input">
+                </div>
+
+                <!-- Nav Buttons -->
+                <div class="pt-4 flex justify-between items-center border-t border-white/5">
+                    <button type="button" onclick="goToStep(3)" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">
+                        ← Voltar
+                    </button>
+                    <button type="button" onclick="handleNextStep(4)" class="btn-copper py-3 px-8 text-xs uppercase tracking-wider flex items-center gap-2">
+                        <span>Avançar</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             ETAPA 5: LOGÍSTICA DA SESSÃO & PAGAMENTOS
+             =================================================================== -->
+        <div id="step-5" class="step-view">
+            <div class="panel-container p-6 sm:p-9 space-y-5">
+                <div>
+                    <span class="mono-num text-[11px] text-[#C0894E] font-medium block mb-0.5">ETAPA 05 / 09</span>
+                    <h2 class="font-heading text-2xl font-bold text-[#FAF0EB]">Logística & Pagamentos</h2>
+                    <p class="text-xs text-[#D4C5B8]">Duração das sessões e regras práticas.</p>
+                </div>
+
+                <!-- Q16: Duração -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">16. Duração da Sessão:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="group_duracao">
+                        <div class="option-box selected justify-center" onclick="selectRadio(this, 'duracao', '50 minutos')">
+                            <span>50 minutos</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'duracao', '60 minutos (1h)')">
+                            <span>60 minutos (1h)</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'duracao', '45 minutos')">
+                            <span>45 minutos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q17: Frequência -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">17. Frequência Habitual:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="group_frequencia">
+                        <div class="option-box selected justify-center" onclick="selectRadio(this, 'frequencia', 'Semanal')">
+                            <span>Semanal</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'frequencia', 'Quinzenal')">
+                            <span>Quinzenal</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'frequencia', 'Definida caso a caso')">
+                            <span>Caso a caso</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q18: 1º Contato -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">18. Primeiro Contato:</label>
+                    <div class="space-y-1.5" id="group_primeiro_contato">
+                        <div class="option-box selected" onclick="selectRadio(this, 'primeiro_contato', 'Sessão regular paga')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>A primeira consulta já é uma sessão regular paga.</span>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'primeiro_contato', 'Conversa inicial gratuita (15 min)')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>Conversa inicial gratuita de 15 min para alinhamento.</span>
+                        </div>
+                    </div>
+                    <input type="text" id="primeiro_contato_custom" placeholder="Ou descreva como prefere conduzir o primeiro contato..." class="custom-input mt-1">
+                </div>
+
+                <!-- Q19: Formas de Pagamento -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">19. Formas de Pagamento Aceitas:</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="group_pagto">
+                        <div class="option-box selected justify-center" onclick="toggleCheckbox(this, 'pagto', 'Pix')">
+                            <span>Pix</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="toggleCheckbox(this, 'pagto', 'Cartão de Crédito')">
+                            <span>Cartão</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="toggleCheckbox(this, 'pagto', 'Boleto')">
+                            <span>Boleto</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="toggleCheckbox(this, 'pagto', 'Wise / PayPal')">
+                            <span>Wise / PayPal</span>
+                        </div>
+                    </div>
+                    <input type="text" id="pagto_custom" placeholder="Outras formas de pagamento ou detalhes (ex: pacotes mensais, nota fiscal...)" class="custom-input mt-1.5">
+                </div>
+
+                <!-- Q20: Cancelamento -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">20. Cancelamento de Sessão & Faltas:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="group_cancelamento">
+                        <div class="option-box selected justify-center" onclick="selectRadio(this, 'cancelamento', 'Aviso de 24h sem custo')">
+                            <span>Aviso de 24h</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'cancelamento', 'Aviso de 48h sem custo')">
+                            <span>Aviso de 48h</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'cancelamento', 'Cobrada no mesmo dia')">
+                            <span>Cobrada no dia</span>
+                        </div>
+                    </div>
+                    <input type="text" id="cancelamento_custom" placeholder="Ou descreva sua política de faltas e reagendamentos..." class="custom-input mt-1">
+                </div>
+
+                <!-- Nav Buttons -->
+                <div class="pt-4 flex justify-between items-center border-t border-white/5">
+                    <button type="button" onclick="goToStep(4)" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">
+                        ← Voltar
+                    </button>
+                    <button type="button" onclick="handleNextStep(5)" class="btn-copper py-3 px-8 text-xs uppercase tracking-wider flex items-center gap-2">
+                        <span>Avançar</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             ETAPA 6: ESTÉTICA & REFERÊNCIAS VISUAIS
+             =================================================================== -->
+        <div id="step-6" class="step-view">
+            <div class="panel-container p-6 sm:p-9 space-y-5">
+                <div>
+                    <span class="mono-num text-[11px] text-[#C0894E] font-medium block mb-0.5">ETAPA 06 / 09</span>
+                    <h2 class="font-heading text-2xl font-bold text-[#FAF0EB]">Estética & Referências</h2>
+                    <p class="text-xs text-[#D4C5B8]">Defina a identidade visual e o clima do site.</p>
+                </div>
+
+                <!-- Q22: Sensação & Sentimento do Site -->
+                <div class="space-y-2">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">22. O que você quer que as pessoas sintam ao entrar em seu site?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="group_estilo_visual">
+                        <div class="option-box selected" onclick="selectRadio(this, 'estilo_visual', 'Acolhimento, Paz & Alívio')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Acolhimento, Paz & Alívio</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Sensação de abrigo e escuta humanizada.</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'estilo_visual', 'Segurança, Rigor & Confiança')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Segurança & Confiança</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Forte embasamento ético e científico.</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'estilo_visual', 'Sofisticação & Autoridade')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Sofisticação & Elegância</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Posicionamento refinado e exclusivo.</span>
+                            </div>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'estilo_visual', 'Leveza, Clareza & Modernidade')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <div>
+                                <strong class="text-[#FAF0EB] block text-xs">Leveza & Clareza</strong>
+                                <span class="text-[11px] text-[#D4C5B8]/80">Design limpo, direto e descomplicado.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <textarea id="sensacao_site" rows="2" placeholder="Descreva com suas palavras o sentimento ou impressão que você deseja transmitir ao seu paciente..." class="custom-input mt-1.5"></textarea>
+                </div>
+
+                <!-- Q23: 3 Linhas de Links -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">23. Sites de Referência (Cole até 3 links, 1 por linha):</label>
+                    <div class="space-y-1.5">
+                        <input type="url" id="link_ref_1" placeholder="Link 1: https://..." class="custom-input">
+                        <input type="url" id="link_ref_2" placeholder="Link 2: https://..." class="custom-input">
+                        <input type="url" id="link_ref_3" placeholder="Link 3: https://..." class="custom-input">
+                    </div>
+                </div>
+
+                <!-- Q24: Anti-Referências -->
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">24. ⛔ O que você ODEIA em sites e quer evitar:</label>
+                    <input type="text" id="anti_referencias" placeholder="Ex: Fotos genéricas cafonas de pessoas chorando, popups invasivos..." class="custom-input">
+                </div>
+
+                <!-- Nav Buttons -->
+                <div class="pt-4 flex justify-between items-center border-t border-white/5">
+                    <button type="button" onclick="goToStep(5)" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">
+                        ← Voltar
+                    </button>
+                    <button type="button" onclick="handleNextStep(6)" class="btn-copper py-3 px-8 text-xs uppercase tracking-wider flex items-center gap-2">
+                        <span>Avançar</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             ETAPA 7: SEÇÕES DO SITE & FOTOS (SEM VALORES)
+             =================================================================== -->
+        <div id="step-7" class="step-view">
+            <div class="panel-container p-6 sm:p-9 space-y-5">
+                <div>
+                    <span class="mono-num text-[11px] text-[#C0894E] font-medium block mb-0.5">ETAPA 07 / 09</span>
+                    <h2 class="font-heading text-2xl font-bold text-[#FAF0EB]">Seções & Fotos</h2>
+                    <p class="text-xs text-[#D4C5B8]">Defina os blocos que farão parte da sua página.</p>
+                </div>
+
+                <!-- Q25: Seções -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">25. Seções que você deseja no site:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div class="option-box selected" onclick="toggleCheckbox(this, 'secoes_site', 'Hero com Foto e Botão WhatsApp')">
+                            <span>Hero (Apresentação + Foto + CTA)</span>
+                        </div>
+                        <div class="option-box selected" onclick="toggleCheckbox(this, 'secoes_site', 'Sobre Mim & Formação')">
+                            <span>Sobre Mim & Formação</span>
+                        </div>
+                        <div class="option-box selected" onclick="toggleCheckbox(this, 'secoes_site', 'Especialidades & Tratamentos')">
+                            <span>Especialidades & Tratamentos</span>
+                        </div>
+                        <div class="option-box selected" onclick="toggleCheckbox(this, 'secoes_site', 'Como Funciona a Terapia')">
+                            <span>Como Funciona (Passo a passo)</span>
+                        </div>
+                        <div class="option-box selected" onclick="toggleCheckbox(this, 'secoes_site', 'Perguntas Frequentes (FAQ)')">
+                            <span>Perguntas Frequentes (FAQ)</span>
+                        </div>
+                        <div class="option-box" onclick="toggleCheckbox(this, 'secoes_site', 'Localização e Mapa Presencial')">
+                            <span>Localização e Mapa (Presencial)</span>
+                        </div>
+                        <div class="option-box selected" onclick="toggleCheckbox(this, 'secoes_site', 'Botão Flutuante do WhatsApp')">
+                            <span>Botão Flutuante do WhatsApp</span>
+                        </div>
+                        <div class="option-box selected" onclick="toggleCheckbox(this, 'secoes_site', 'Rodapé Oficial com CRP e e-Psi')">
+                            <span>Rodapé Ético CFP / e-Psi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q26: Fotos -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">26. Material Fotográfico Disponível:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="group_fotos">
+                        <div class="option-box selected justify-center" onclick="selectRadio(this, 'fotos', 'Fotos de ensaio profissional')">
+                            <span>Fotos de ensaio</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'fotos', 'Fotos de celular com boa luz')">
+                            <span>Fotos de celular</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'fotos', 'Sem fotos pessoais (Usar ilustrações)')">
+                            <span>Usar ilustrações</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nav Buttons -->
+                <div class="pt-4 flex justify-between items-center border-t border-white/5">
+                    <button type="button" onclick="goToStep(6)" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">
+                        ← Voltar
+                    </button>
+                    <button type="button" onclick="handleNextStep(7)" class="btn-copper py-3 px-8 text-xs uppercase tracking-wider flex items-center gap-2">
+                        <span>Avançar</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             ETAPA 8: HEADLINE (TEXTO ABERTO) & WHATSAPP
+             =================================================================== -->
+        <div id="step-8" class="step-view">
+            <div class="panel-container p-6 sm:p-9 space-y-5">
+                <div>
+                    <span class="mono-num text-[11px] text-[#C0894E] font-medium block mb-0.5">ETAPA 08 / 09</span>
+                    <h2 class="font-heading text-2xl font-bold text-[#FAF0EB]">Título Principal & WhatsApp</h2>
+                    <p class="text-xs text-[#D4C5B8]">Frase de impacto no topo do site e mensagem automática.</p>
+                </div>
+
+                <!-- Q27: HEADLINE (TEXTO ABERTO) -->
+                <div class="space-y-1">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">27. Título Principal da Página (Headline da Hero): *</label>
+                    <textarea id="headline_texto" rows="3" placeholder="Ex: Psicoterapia para cuidar da sua saúde emocional com acolhimento e base científica." class="custom-input"></textarea>
+                </div>
+
+                <!-- Q28: Texto do Botão -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">28. Texto do Botão Principal:</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="group_btn_texto">
+                        <div class="option-box selected justify-center" onclick="selectRadio(this, 'btn_texto', 'FALAR NO WHATSAPP')">
+                            <span>FALAR NO WHATSAPP</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'btn_texto', 'AGENDAR CONSULTA')">
+                            <span>AGENDAR CONSULTA</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'btn_texto', 'CONVERSAR COMIGO')">
+                            <span>CONVERSAR COMIGO</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'btn_texto', 'SOLICITAR HORÁRIO')">
+                            <span>SOLICITAR HORÁRIO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q29: Mensagem WhatsApp -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">29. Mensagem Automática do WhatsApp:</label>
+                    <div class="space-y-1.5" id="group_wpp_msg">
+                        <div class="option-box selected" onclick="selectRadio(this, 'wpp_msg', 'Olá! Vi seu site e gostaria de saber sobre horários para psicoterapia.')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>"Olá! Vi seu site e gostaria de saber sobre horários para psicoterapia."</span>
+                        </div>
+                        <div class="option-box" onclick="selectRadio(this, 'wpp_msg', 'Olá! Gostaria de entender melhor como funciona o atendimento.')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span>"Olá! Gostaria de entender melhor como funciona o atendimento."</span>
+                        </div>
+                    </div>
+                    <input type="text" id="wpp_msg_custom" placeholder="Ou digite sua própria mensagem personalizada..." class="custom-input mt-1">
+                </div>
+
+                <!-- Nav Buttons -->
+                <div class="pt-4 flex justify-between items-center border-t border-white/5">
+                    <button type="button" onclick="goToStep(7)" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">
+                        ← Voltar
+                    </button>
+                    <button type="button" onclick="handleNextStep(8)" class="btn-copper py-3 px-8 text-xs uppercase tracking-wider flex items-center gap-2">
+                        <span>Avançar</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             ETAPA 9: DOMÍNIO INCLUSIVO & GOOGLE
+             =================================================================== -->
+        <div id="step-9" class="step-view">
+            <div class="panel-container p-6 sm:p-9 space-y-5">
+                <div>
+                    <span class="mono-num text-[11px] text-[#C0894E] font-medium block mb-0.5">ETAPA 09 / 09</span>
+                    <h2 class="font-heading text-2xl font-bold text-[#FAF0EB]">Domínio, Google & Conclusão</h2>
+                    <p class="text-xs text-[#D4C5B8]">Últimos detalhes técnicos para colocar seu site no ar.</p>
+                </div>
+
+                <!-- Q30: Domínio -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">30. Domínio do seu Site (ex: www.seunome.com.br): *</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="group_dominio">
+                        <div class="option-box" onclick="selectRadio(this, 'dominio_situacao', 'Já possuo domínio')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span><strong>Sim</strong> — Já possuo domínio</span>
+                        </div>
+                        <div class="option-box selected" onclick="selectRadio(this, 'dominio_situacao', 'Não possuo (Acauã auxilia)')">
+                            <span class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0 indicator-circle"></span>
+                            <span><strong>Não</strong> — Acauã auxilia no registro</span>
+                        </div>
+                    </div>
+                    <input type="text" id="dominio_nome" placeholder="Digite seu domínio existente ou sugestão de nome (ex: renatamello.com.br)" class="custom-input">
+                </div>
+
+                <!-- Q31: Google Meu Negócio -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">31. Perfil no Google Meu Negócio:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="group_gmn">
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'gmn', 'Já possuo perfil ativo')">
+                            <span>Já possuo ativo</span>
+                        </div>
+                        <div class="option-box selected justify-center" onclick="selectRadio(this, 'gmn', 'Não possuo perfil')">
+                            <span>Não possuo</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'gmn', 'Não se aplica (100% Online)')">
+                            <span>Só Online</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q32: Anúncios -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold text-[#FAF0EB]">32. Pretende rodar anúncios no Google ou Instagram?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="group_ads">
+                        <div class="option-box selected justify-center" onclick="selectRadio(this, 'ads', 'Sim, pretendo anunciar')">
+                            <span>Sim, pretendo anunciar</span>
+                        </div>
+                        <div class="option-box justify-center" onclick="selectRadio(this, 'ads', 'Não por enquanto')">
+                            <span>Não por enquanto</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q33 & Q34: SEO & Obs -->
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-[#FAF0EB] mb-1">33. Termos de busca prioritários no Google:</label>
+                        <input type="text" id="palavras_chave_seo" placeholder="Ex: 'Psicóloga TCC em Pinheiros', 'Terapia ansiedade'..." class="custom-input">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[#FAF0EB] mb-1">34. Observações Finais ou Pedidos Especiais:</label>
+                        <textarea id="observacoes_finais" rows="2" placeholder="Algum detalhe adicional que gostaria de destacar..." class="custom-input"></textarea>
+                    </div>
+                </div>
+
+                <!-- Termos de Alinhamento & Transparência Acauã Sites -->
+                <div class="mt-4 p-4 rounded-xl bg-[#0D191B] border border-white/10 space-y-2.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[#C0894E] text-xs font-bold uppercase tracking-wider">⚖️ Termos de Alinhamento do Projeto</span>
+                    </div>
+                    <div class="text-[11px] text-[#D4C5B8]/80 space-y-1.5 leading-relaxed max-h-36 overflow-y-auto pr-1">
+                        <p>• <strong>Domínio Próprio:</strong> O domínio próprio (ex: <em>seunome.com.br</em>) não está incluso no valor de criação. O registro é contratado em nome do próprio profissional (no Registro.br ~R$ 40/ano), e a Acauã Sites fornece todo o suporte técnico gratuito para configuração dos DNS e apontamentos.</p>
+                        <p>• <strong>Hospedagem & Infraestrutura:</strong> Auxiliaremos na configuração e publicação gratuita do seu site no GitHub Pages, garantindo alta estabilidade, segurança e velocidade sem mensalidades recorrentes de servidores.</p>
+                        <p>• <strong>Código de Ética Profissional:</strong> O site é desenvolvido em conformidade com as normas do CFP e e-Psi, sem promessas de cura, garantia de resultados ou práticas antiéticas.</p>
+                        <p>• <strong>Início da Produção:</strong> Após o envio das respostas deste briefing, iniciaremos a organização da estrutura e identidade do seu site.</p>
+                    </div>
+                    <label class="flex items-start gap-2.5 pt-2 border-t border-white/5 cursor-pointer select-none" id="label_termos">
+                        <input type="checkbox" id="aceite_termos" class="mt-0.5 w-4 h-4 rounded border-white/20 text-[#C0894E] focus:ring-[#C0894E] accent-[#C0894E]">
+                        <span class="text-xs text-[#FAF0EB] font-medium">Li e concordo com os termos de alinhamento e transparência do projeto. *</span>
+                    </label>
+                </div>
+
+                <!-- Nav Buttons -->
+                <div class="pt-4 flex justify-between items-center border-t border-white/5">
+                    <button type="button" onclick="goToStep(8)" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">
+                        ← Voltar
+                    </button>
+                    <button type="button" onclick="handleFinalSubmit()" class="btn-wpp-master py-2.5 px-6 text-xs uppercase tracking-wider flex items-center gap-2 cursor-pointer">
+                        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                        <span>Enviar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             ETAPA 10: TELA FINAL COM O BOTÃO WHATSAPP EM DESTAQUE
+             =================================================================== -->
+        <div id="step-10" class="step-view">
+            <div class="panel-container p-8 sm:p-12 text-center space-y-6">
+                <!-- Check Icon -->
+                <div class="w-16 h-16 mx-auto rounded-full bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366]">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                </div>
+
+                <div class="space-y-1.5">
+                    <span class="mono-num text-[11px] text-[#25D366] font-medium tracking-widest uppercase">
+                        ✓ BRIEFING COPIADO COM SUCESSO
+                    </span>
+                    <h2 class="font-heading text-2xl font-bold text-[#FAF0EB]">Agora é só colar no WhatsApp!</h2>
+                </div>
+
+                <!-- Instruções passo a passo -->
+                <div class="bg-[#0D191B] border border-white/10 rounded-2xl p-5 text-left space-y-3 max-w-sm mx-auto">
+                    <p class="text-[11px] text-[#C0894E] font-bold uppercase tracking-wider">Siga os 3 passos:</p>
+                    <div class="flex items-start gap-3">
+                        <span class="w-6 h-6 rounded-full bg-[#C0894E] text-[#121F21] text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                        <p class="text-xs text-[#FAF0EB]">Clique em <strong>"Abrir WhatsApp"</strong> abaixo — o WhatsApp Web vai abrir.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="w-6 h-6 rounded-full bg-[#C0894E] text-[#121F21] text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                        <p class="text-xs text-[#FAF0EB]">Abra a conversa com a <strong>Acauã Sites</strong> (ou busque o número).</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="w-6 h-6 rounded-full bg-[#C0894E] text-[#121F21] text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                        <p class="text-xs text-[#FAF0EB]">Clique na caixa de texto e pressione <strong>Ctrl+V</strong> (ou segure e cole no celular) para colar o briefing — depois é só enviar!</p>
+                    </div>
+                </div>
+
+                <!-- Botões -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer"
+                       class="btn-wpp-master py-2.5 px-7 text-xs uppercase tracking-wider flex items-center justify-center gap-2 w-full sm:w-auto no-underline">
+                        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                        <span>Abrir WhatsApp</span>
+                    </a>
+                    <button type="button" onclick="copiarTextoBriefing()" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider flex items-center justify-center gap-2 w-full sm:w-auto">
+                        <span>Copiar Novamente</span>
+                    </button>
+                </div>
+
+                <div class="pt-1">
+                    <button type="button" onclick="goToStep(9)" class="btn-ghost py-2 px-5 text-[11px] uppercase tracking-wider font-semibold opacity-50 hover:opacity-100">
+                        ← Revisar Respostas
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Copyright -->
+    <footer class="text-center py-4 text-[11px] text-[#D4C5B8]/40 border-t border-white/5">
+        <span>Copyright © 2026 Acauãpsi. Todos os direitos reservados.</span>
+    </footer>
+
+    <!-- Toast Error Notification -->
+    <div id="toastError" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#2D1214] border border-[#FF6B6B]/40 text-[#FAF0EB] px-5 py-3 rounded-full text-xs font-medium shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2 max-w-sm text-center">
+    </div>
+
+    <!-- Interactive Logic & State Store -->
+    <script>
+        // State Store
+        const formState = {
+            assinatura: 'Psicóloga / Psicólogo [Nome]',
+            epsi: 'Sim, e-Psi ativo',
+            idiomas: ['Português'],
+            modalidade: '100% Online',
+            linha_teorica: 'TCC (Terapia Cognitivo-Comportamental)',
+            publico_alvo: ['Adultos'],
+            queixas_lista: ['Ansiedade e Pânico'],
+            anti_perfil: 'Não tenho restrições (Atendo tudo)',
+            servicos_b2b: ['Não, apenas Clínica Individual'],
+            midia_opcao: 'Não possuo',
+            duracao: '50 minutos',
+            frequencia: 'Semanal',
+            primeiro_contato: 'Sessão regular paga',
+            pagto: ['Pix'],
+            cancelamento: 'Aviso de 24h sem custo',
+            estilo_visual: 'Acolhimento, Paz & Alívio',
+            secoes_site: ['Hero com Foto e Botão WhatsApp', 'Sobre Mim & Formação', 'Especialidades & Tratamentos', 'Como Funciona a Terapia', 'Perguntas Frequentes (FAQ)', 'Botão Flutuante do WhatsApp', 'Rodapé Oficial com CRP e e-Psi'],
+            fotos: 'Fotos de ensaio profissional',
+            btn_texto: 'FALAR NO WHATSAPP',
+            wpp_msg: 'Olá! Vi seu site e gostaria de saber sobre horários para psicoterapia.',
+            dominio_situacao: 'Não possuo (Acauã auxilia)',
+            gmn: 'Já possuo perfil ativo',
+            ads: 'Sim, pretendo anunciar'
+        };
+
+        // Radio Selection Handler
+        function selectRadio(element, fieldName, value) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.option-box').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            formState[fieldName] = value;
+        }
+
+        // Checkbox Toggle Handler
+        function toggleCheckbox(element, fieldName, value) {
+            if (!Array.isArray(formState[fieldName])) {
+                formState[fieldName] = [];
+            }
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                formState[fieldName] = formState[fieldName].filter(v => v !== value);
+            } else {
+                element.classList.add('selected');
+                if (!formState[fieldName].includes(value)) {
+                    formState[fieldName].push(value);
+                }
+            }
+        }
+
+        // Toast Feedback System
+        function showToast(message) {
+            const toast = document.getElementById('toastError');
+            if (!toast) return;
+            toast.innerHTML = `⚠️ ${message}`;
+            toast.style.opacity = '1';
+            toast.style.pointerEvents = 'auto';
+            toast.style.transform = 'translate(-50%, 0)';
+            
+            if (window.toastTimeout) clearTimeout(window.toastTimeout);
+            window.toastTimeout = setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.pointerEvents = 'none';
+                toast.style.transform = 'translate(-50%, 10px)';
+            }, 3500);
+        }
+
+        function highlightError(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.add('border-red-500', 'ring-1', 'ring-red-500');
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.focus();
+                }
+            }
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.border-red-500').forEach(el => {
+                el.classList.remove('border-red-500', 'ring-1', 'ring-red-500');
+            });
+        }
+
+        // Step Validation Logic
+        function handleNextStep(step) {
+            clearErrors();
+
+            if (step === 1) {
+                const nome = document.getElementById('nome_completo').value.trim();
+                const crp = document.getElementById('crp_numero').value.trim();
+                const wpp = document.getElementById('whatsapp_num').value.trim();
+
+                if (!nome) {
+                    highlightError('nome_completo');
+                    showToast('Por favor, informe seu Nome Completo Profissional.');
+                    return;
+                }
+                if (!crp) {
+                    highlightError('crp_numero');
+                    showToast('Por favor, informe seu número de CRP.');
+                    return;
+                }
+                if (!wpp) {
+                    highlightError('whatsapp_num');
+                    showToast('Por favor, informe seu WhatsApp profissional com DDD.');
+                    return;
+                }
+                if (formState.modalidade === 'Presencial / Híbrido') {
+                    const end = document.getElementById('endereco_completo').value.trim();
+                    if (!end) {
+                        highlightError('endereco_completo');
+                        showToast('Como marcou Presencial, informe o endereço do consultório.');
+                        return;
+                    }
+                }
+                if (formState.idiomas.includes('Outro')) {
+                    const outroLang = document.getElementById('idioma_outro').value.trim();
+                    if (!outroLang) {
+                        highlightError('idioma_outro');
+                        showToast('Por favor, especifique os outros idiomas em que atende.');
+                        return;
+                    }
+                }
+            }
+
+            if (step === 3) {
+                if (!formState.publico_alvo || formState.publico_alvo.length === 0) {
+                    showToast('Por favor, selecione ao menos um público prioritário.');
+                    return;
+                }
+                if (!formState.queixas_lista || formState.queixas_lista.length === 0) {
+                    showToast('Por favor, selecione ao menos uma queixa que trata no consultório.');
+                    return;
+                }
+                if (formState.anti_perfil === 'Sim, possuo restrições') {
+                    const casos = document.getElementById('casos_nao_atende').value.trim();
+                    if (!casos) {
+                        highlightError('casos_nao_atende');
+                        showToast('Por favor, descreva quais casos você NÃO atende.');
+                        return;
+                    }
+                }
+                const dif = document.getElementById('diferencial_custom').value.trim();
+                if (!dif) {
+                    highlightError('diferencial_custom');
+                    showToast('Por favor, escreva brevemente seu diferencial clínico.');
+                    return;
+                }
+            }
+
+            if (step === 4) {
+                const formacao = document.getElementById('formacao_academica').value.trim();
+                if (!formacao) {
+                    highlightError('formacao_academica');
+                    showToast('Por favor, descreva sua formação acadêmica e especializações.');
+                    return;
+                }
+                if (formState.midia_opcao === 'Sim, possuo') {
+                    const midia = document.getElementById('midia_publicacoes').value.trim();
+                    if (!midia) {
+                        highlightError('midia_publicacoes');
+                        showToast('Por favor, informe sua presença na mídia, livros ou podcasts.');
+                        return;
+                    }
+                }
+            }
+
+            if (step === 5) {
+                if (!formState.pagto || formState.pagto.length === 0) {
+                    showToast('Por favor, selecione ao menos uma forma de pagamento aceita.');
+                    return;
+                }
+            }
+
+            if (step === 7) {
+                if (!formState.secoes_site || formState.secoes_site.length === 0) {
+                    showToast('Por favor, selecione ao menos uma seção para o seu site.');
+                    return;
+                }
+            }
+
+            if (step === 8) {
+                const headline = document.getElementById('headline_texto').value.trim();
+                if (!headline) {
+                    highlightError('headline_texto');
+                    showToast('Por favor, preencha o Título Principal (Headline da Hero).');
+                    return;
+                }
+            }
+
+            goToStep(step + 1);
+        }
+
+        // Final Submit with Term Agreement Check
+        function handleFinalSubmit() {
+            clearErrors();
+            const domNome = document.getElementById('dominio_nome').value.trim();
+            if (!domNome) {
+                highlightError('dominio_nome');
+                showToast('Por favor, informe seu domínio existente ou sugestão de nome.');
+                return;
+            }
+            const termos = document.getElementById('aceite_termos');
+            if (!termos || !termos.checked) {
+                highlightError('label_termos');
+                showToast('Por favor, marque a caixa de aceite dos termos do projeto.');
+                return;
+            }
+            // Copia o briefing completo para o clipboard
+            const texto = coletarResumoCompleto();
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(texto).catch(() => {});
+            }
+            // Vai para a tela de instruções de envio
+            goToStep(10);
+        }
+
+        // Step Navigation
+        function goToStep(stepIndex) {
+            document.querySelectorAll('.step-view').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            const target = document.getElementById(`step-${stepIndex}`);
+            if (target) {
+                target.classList.add('active');
+            }
+
+            const topBadge = document.getElementById('topBadge');
+            const badgeText = document.getElementById('badgeStepText');
+            const fill = document.getElementById('progressFill');
+
+            if (stepIndex === 0) {
+                topBadge.classList.add('hidden');
+                fill.style.width = '0%';
+            } else if (stepIndex === 10) {
+                topBadge.classList.remove('hidden');
+                badgeText.innerText = 'CONCLUÍDO';
+                fill.style.width = '100%';
+            } else {
+                topBadge.classList.remove('hidden');
+                badgeText.innerText = `Etapa 0${stepIndex} / 09`;
+                const pct = Math.round((stepIndex / 9) * 100);
+                fill.style.width = `${pct}%`;
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function coletarResumoCompleto() {
+            const nome = document.getElementById('nome_completo').value.trim() || 'Não informado';
+            const crp = document.getElementById('crp_numero').value.trim() || 'Não informado';
+            const wpp = document.getElementById('whatsapp_num').value.trim() || 'Não informado';
+            const insta = document.getElementById('instagram_user').value.trim() || 'Não possui';
+            const endereco = document.getElementById('endereco_completo').value.trim() || 'Apenas Online';
+
+            let nomeExibicao = nome;
+            if (formState.assinatura && (formState.assinatura.includes('[Nome]') || formState.assinatura.includes('[Meu Nome]'))) {
+                nomeExibicao = formState.assinatura.replace(/\[Nome\]|\[Meu Nome\]/gi, nome);
+            }
+
+            // Idiomas
+            const idiomasList = [...formState.idiomas];
+            const idiomaOutro = document.getElementById('idioma_outro').value.trim();
+            if (idiomaOutro) idiomasList.push(idiomaOutro);
+            const idiomasStr = idiomasList.join(', ') || 'Português';
+
+            // Abordagem
+            const abOutra = document.getElementById('abordagem_outra').value.trim();
+            const abordagem = abOutra || formState.linha_teorica || 'A definir';
+
+            // Publico
+            const publicos = formState.publico_alvo.join(', ') || 'Adultos em geral';
+
+            // Queixas
+            const queixas = [...formState.queixas_lista];
+            const queixasOutras = document.getElementById('queixas_outras').value.trim();
+            if (queixasOutras) queixas.push(queixasOutras);
+            const queixasStr = queixas.join(', ') || 'Geral';
+
+            // Nao atende
+            const casosNaoAtende = document.getElementById('casos_nao_atende').value.trim();
+            const naoAtende = casosNaoAtende || formState.anti_perfil || 'Sem restrições';
+
+            // Diferencial
+            const diferencial = document.getElementById('diferencial_custom').value.trim() || 'A definir';
+
+            // B2B & Formação
+            const b2bList = [...formState.servicos_b2b];
+            const b2bCustom = document.getElementById('servicos_b2b_custom').value.trim();
+            if (b2bCustom) b2bList.push(b2bCustom);
+            const b2b = b2bList.join(', ') || 'Clínica Individual';
+
+            const formacao = document.getElementById('formacao_academica').value.trim() || 'A informar';
+            const midiaText = document.getElementById('midia_publicacoes').value.trim();
+            const midia = midiaText || formState.midia_opcao || 'Não possui';
+
+            // Logistica
+            const duracao = formState.duracao;
+            const frequencia = formState.frequencia;
+            const primeiroContatoCustom = document.getElementById('primeiro_contato_custom').value.trim();
+            const primeiroContato = primeiroContatoCustom ? `${formState.primeiro_contato} (${primeiroContatoCustom})` : formState.primeiro_contato;
+
+            const pagtoList = [...formState.pagto];
+            const pagtoCustom = document.getElementById('pagto_custom').value.trim();
+            if (pagtoCustom) pagtoList.push(pagtoCustom);
+            const pagto = pagtoList.join(', ') || 'Pix';
+
+            const cancelamentoCustom = document.getElementById('cancelamento_custom').value.trim();
+            const cancelamento = cancelamentoCustom ? `${formState.cancelamento} (${cancelamentoCustom})` : formState.cancelamento;
+
+            // Sensação / Sentimento do Site
+            const sensacaoCustom = document.getElementById('sensacao_site').value.trim();
+            const sensacaoSite = sensacaoCustom ? `${formState.estilo_visual} ("${sensacaoCustom}")` : formState.estilo_visual;
+
+            const ref1 = document.getElementById('link_ref_1').value.trim();
+            const ref2 = document.getElementById('link_ref_2').value.trim();
+            const ref3 = document.getElementById('link_ref_3').value.trim();
+            const refsList = [ref1, ref2, ref3].filter(Boolean);
+            const refs = refsList.length > 0 ? refsList.join(' | ') : 'A critério da Acauã';
+            const antiRef = document.getElementById('anti_referencias').value.trim() || 'Nenhuma';
+
+            // Secoes & Fotos
+            const secoes = formState.secoes_site.join(', ') || 'Padrão';
+            const fotos = formState.fotos;
+
+            // Headline & WhatsApp
+            const headline = document.getElementById('headline_texto').value.trim() || 'A definir pela Acauã';
+            const btnTexto = formState.btn_texto;
+            const wppCustom = document.getElementById('wpp_msg_custom').value.trim();
+            const wppMsg = wppCustom || formState.wpp_msg || 'Padrão';
+
+            // Dominio & SEO
+            const domSit = formState.dominio_situacao;
+            const domNome = document.getElementById('dominio_nome').value.trim() || 'A sugerir';
+            const gmn = formState.gmn;
+            const ads = formState.ads;
+            const seo = document.getElementById('palavras_chave_seo').value.trim() || 'Geral';
+            const obs = document.getElementById('observacoes_finais').value.trim() || 'Nenhuma';
+
+            const linhas = [
+                '*. BRIEFING CLÍNICO — ACAUÃ SITES .*',
+                '',
+                '*. DADOS PROFISSIONAIS*',
+                `• *Nome:* ${nomeExibicao}`,
+                `• *CRP:* ${crp}`,
+                `• *e-Psi:* ${formState.epsi}`,
+                `• *Idiomas:* ${idiomasStr}`,
+                `• *WhatsApp:* ${wpp}`,
+                `• *Instagram:* ${insta}`,
+                `• *Modalidade:* ${formState.modalidade}`,
+                `• *Endereço:* ${endereco}`,
+                '',
+                '*. POSICIONAMENTO CLÍNICO*',
+                `• *Abordagem:* ${abordagem}`,
+                `• *Público:* ${publicos}`,
+                `• *Queixas:* ${queixasStr}`,
+                `• *Não Atende:* ${naoAtende}`,
+                `• *Diferencial:* ${diferencial}`,
+                '',
+                '*. SERVIÇOS & FORMAÇÃO*',
+                `• *Serviços B2B / Eventos:* ${b2b}`,
+                `• *Formação Acadêmica:* ${formacao}`,
+                `• *Mídia / Podcasts / Livros:* ${midia}`,
+                '',
+                '*. LOGÍSTICA DA CONSULTA*',
+                `• *Duração da Sessão:* ${duracao}`,
+                `• *Frequência:* ${frequencia}`,
+                `• *1º Contato:* ${primeiroContato}`,
+                `• *Formas de Pagamento:* ${pagto}`,
+                `• *Política de Cancelamento:* ${cancelamento}`,
+                '',
+                '*. ESTÉTICA & IDENTIDADE*',
+                `• *Sentimento Desejado:* ${sensacaoSite}`,
+                `• *Sites de Referência:* ${refs}`,
+                `• *Evitar no Design:* ${antiRef}`,
+                `• *Material Fotográfico:* ${fotos}`,
+                `• *Seções do Site:* ${secoes}`,
+                '',
+                '*. HEADLINE & CONTATO*',
+                `• *Título Principal (Hero):* ${headline}`,
+                `• *Texto do Botão:* ${btnTexto}`,
+                `• *Mensagem do WhatsApp:* "${wppMsg}"`,
+                '',
+                '*. DOMÍNIO & GOOGLE*',
+                `• *Situação do Domínio:* ${domSit}`,
+                `• *Nome do Domínio:* ${domNome}`,
+                `• *Google Meu Negócio:* ${gmn}`,
+                `• *Anúncios (Tráfego):* ${ads}`,
+                `• *Palavras-Chave SEO:* ${seo}`,
+                `• *Observações Finais:* ${obs}`,
+                '',
+                `*. Termos Aceitos:* Sim (Domínio Próprio & Hospedagem GitHub Pages)`
+            ];
+
+            return linhas.join('\n');
+        }
+
+        function copiarTextoBriefing() {
+            const texto = coletarResumoCompleto();
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(texto).then(() => {
+                    showToast('Copiado com sucesso para a área de transferência!');
+                }).catch(() => {});
+            }
+        }
+
+        function enviarWhatsAppFinal() {
+            const texto = coletarResumoCompleto();
+            
+            // 1. Copiar automaticamente para a área de transferência
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(texto).catch(() => {});
+            }
+            
+            showToast('Abrindo o WhatsApp...');
+
+            // 2. Disparar link codificado em UTF-8 com suporte nativo
+            const encoded = encodeURIComponent(texto);
+            const wppUrl = `https://api.whatsapp.com/send?text=${encoded}`;
+            
+            const a = document.createElement('a');
+            a.href = wppUrl;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                if (document.body.contains(a)) {
+                    document.body.removeChild(a);
+                }
+            }, 300);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acauã | Tecnologia & Presença Digital para Psicólogos</title>
+    
+    <!-- SVG Favicon: "A" on Petrol background -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%231B4B4F'/><text x='50%' y='72%' font-family='serif' font-weight='700' font-size='65' fill='%23FAF0EB' text-anchor='middle'>A</text></svg>">
+
+    <!-- GSAP 3 Animation Engine & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- ReactBits StaggeredMenu CSS -->
+    <link rel="stylesheet" href="staggered-menu.css">
+
+    <!-- ReactBits TextLoop CSS -->
+    <link rel="stylesheet" href="text-loop.css">
+
+    <!-- Tailwind CSS (pre-built estático) -->
+    <link rel="stylesheet" href="tailwind-output.css">
+    
+    <!-- Google Fonts: Cormorant Garamond, Inter, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        html, body {
+            background-color: #FAF0EB;
+            color: #1B4B4F;
+            overflow-x: hidden;
+            max-width: 100vw;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-heading {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+        }
+
+        /* Mobile Typography Scaling & Touch Targets */
+        @media (max-width: 640px) {
+            h1, h2, h3 {
+                word-break: break-word;
+            }
+            button, a {
+                touch-action: manipulation;
+            }
+        }
+
+        /* Scrollbar — Petrol clean */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF0EB;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1B4B4F;
+            border-radius: 9999px;
+            border: 2px solid #FAF0EB;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2A5F63;
+        }
+
+        /* WhatsApp Pulsing Animation */
+        @keyframes wppPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(192, 137, 78, 0.3);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 35px rgba(192, 137, 78, 0.5), 0 0 0 8px rgba(192, 137, 78, 0.1);
+            }
+        }
+        .animate-wpp-pulse {
+            animation: wppPulse 3.5s ease-in-out infinite;
+        }
+
+        /* ScrollReveal Effect */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        /* Ambient Grid Pattern */
+        .bg-grid { 
+            background-image: radial-gradient(rgba(27, 75, 79, 0.07) 1px, transparent 1px); 
+            background-size: 32px 32px; 
+        }
+        .bg-grid-dark { 
+            background-image: radial-gradient(rgba(192, 137, 78, 0.08) 1px, transparent 1px); 
+            background-size: 32px 32px; 
+        }
+
+        /* Card System */
+        .glass-card { 
+            background: #FFFFFF; 
+            border: 1px solid #D4C5B8; 
+            box-shadow: 0 4px 20px rgba(27, 75, 79, 0.04);
+        }
+
+        .glass-card-dark {
+            background: rgba(21, 61, 64, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .copper-accent-card {
+            border: 1px solid rgba(192, 137, 78, 0.45);
+            box-shadow: 0 0 40px -15px rgba(192, 137, 78, 0.25);
+        }
+
+        /* Button Classes */
+        .uiverse-btn-gold, .btn-primary {
+            background: #1B4B4F;
+            color: #FAF0EB;
+            font-weight: 800;
+            border-radius: 9999px;
+            box-shadow: 0 4px 20px rgba(27, 75, 79, 0.25);
+            transition: all 0.3s ease;
+        }
+        .uiverse-btn-gold:hover, .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            background: #2A5F63;
+            box-shadow: 0 6px 25px rgba(27, 75, 79, 0.35);
+        }
+        .uiverse-btn-gold:active, .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-copper {
+            background: #C0894E;
+            color: #121F21;
+            font-weight: 800;
+            border-radius: 9999px;
+            box-shadow: 0 4px 20px rgba(192, 137, 78, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-copper:hover {
+            transform: translateY(-2px) scale(1.02);
+            background: #D4A574;
+            box-shadow: 0 6px 25px rgba(192, 137, 78, 0.45);
+        }
+        .btn-copper:active {
+            transform: scale(0.98);
+        }
+
+        .uiverse-badge {
+            background: rgba(192, 137, 78, 0.12);
+            border: 1px solid rgba(192, 137, 78, 0.35);
+            color: #C0894E;
+        }
+
+        /* Copper Shimmer Text */
+        .shiny-text-gold, .shiny-text-copper {
+            display: inline-block;
+            background-image: linear-gradient(120deg, #A07040 0%, #C0894E 35%, #FAF0EB 50%, #C0894E 65%, #A07040 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shinySweep 3.5s linear infinite;
+        }
+
+        @keyframes shinySweep {
+            0% { background-position: 150% center; }
+            100% { background-position: -50% center; }
+        }
+
+        /* Spotlight Effect */
+        .spotlight-card {
+            position: relative;
+        }
+        .spotlight-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(192, 137, 78, 0.3), transparent 40%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .spotlight-card:hover::after {
+            opacity: 1;
+        }
+
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+
+        /* Rotating Copper Border */
+        @keyframes rotBorderGold {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        .rotating-border-card {
+            position: relative;
+            overflow: hidden;
+            background: #1B4B4F;
+            box-shadow: 0 0 50px rgba(192, 137, 78, 0.25), 0 0 100px rgba(192, 137, 78, 0.1);
+        }
+
+        .rotating-border-card::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: conic-gradient(
+                from 0deg,
+                #A07040 0deg,
+                #C0894E 60deg,
+                #FAF0EB 120deg,
+                #C0894E 180deg,
+                #A07040 240deg,
+                #FAF0EB 300deg,
+                #A07040 360deg
+            );
+            animation: rotBorderGold 4s linear infinite;
+            animation-play-state: var(--rot-state, running);
+            transform-origin: center center;
+        }
+
+        .rotating-border-card::after {
+            content: '';
+            position: absolute;
+            background: #153D40;
+            inset: 3px;
+            border-radius: 26px;
+            z-index: 1;
+        }
+
+        /* Expanding Accordion Cards */
+        .expanding-accordion {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            min-height: 500px;
+        }
+
+        .expanding-card {
+            flex: 1;
+            min-height: 480px;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 24px;
+            transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.4s ease,
+                        box-shadow 0.4s ease,
+                        background-color 0.4s ease;
+            background: #153D40;
+            border: 1px solid rgba(192, 137, 78, 0.25);
+            display: flex;
+            flex-direction: column;
+            padding: 1.75rem;
+            position: relative;
+        }
+
+        .expanding-card.active-expanded,
+        .expanding-card:hover {
+            flex: 4;
+            border-color: rgba(192, 137, 78, 0.75);
+            box-shadow: 0 0 45px rgba(192, 137, 78, 0.25);
+            background: #1B4B4F;
+        }
+
+        .ec-icon-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            padding-bottom: 0.25rem;
+            transition: justify-content 0.4s ease;
+        }
+
+        .expanding-card.active-expanded .ec-icon-area,
+        .expanding-card:hover .ec-icon-area {
+            justify-content: flex-start;
+            padding-bottom: 0.75rem;
+        }
+
+        .ec-collapsed-title {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            color: #C0894E;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-align: center;
+            overflow: hidden;
+            transition: opacity 0.3s ease, flex 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .expanding-card.active-expanded .ec-collapsed-title,
+        .expanding-card:hover .ec-collapsed-title {
+            opacity: 0;
+            flex: 0;
+        }
+
+        .expanding-content-body {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.4s ease 0.15s, max-height 0.5s ease;
+            flex-shrink: 0;
+        }
+
+        .expanding-card.active-expanded .expanding-content-body,
+        .expanding-card:hover .expanding-content-body {
+            opacity: 1;
+            max-height: 430px;
+        }
+
+        .ec-bottom-brand {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .expanding-accordion {
+                flex-direction: column;
+                gap: 12px;
+                min-height: auto;
+            }
+            .expanding-card {
+                min-height: auto;
+                flex: none !important;
+                padding: 1.25rem 1.5rem;
+                border-radius: 18px;
+            }
+            .ec-icon-area {
+                justify-content: flex-start !important;
+            }
+            .ec-collapsed-title {
+                writing-mode: horizontal-tb !important;
+                transform: none !important;
+                flex: 0 !important;
+                opacity: 1 !important;
+                font-size: 1.15rem !important;
+                text-align: left !important;
+                justify-content: flex-start !important;
+                padding: 0.5rem 0 !important;
+            }
+            .expanding-content-body {
+                opacity: 1 !important;
+                max-height: none !important;
+            }
+            .ec-bottom-brand {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Navbar & Hero Animated Brand Gradient */
+        @keyframes brandGradientFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Hero Continuous Animated Gradient (Zero color change on hover) */
+        .brand-gradient {
+            background: linear-gradient(90deg, #FAF0EB 0%, #C0894E 30%, #D4A574 50%, #FAF0EB 70%, #C0894E 100%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            animation: brandGradientFlow 4s ease infinite;
+        }
+
+        /* Navbar Brand Link (Turns solid copper on hover) */
+        .brand-gradient-nav {
+            background: linear-gradient(90deg, #FAF0EB 0%, #C0894E 30%, #D4A574 50%, #FAF0EB 70%, #C0894E 100%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            animation: brandGradientFlow 4s ease infinite;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .brand-gradient-nav:hover {
+            animation: none;
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: #C0894E !important;
+            color: #C0894E !important;
+            text-shadow: 0 0 20px rgba(192, 137, 78, 0.4);
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="relative z-10 selection:bg-[#C0894E] selection:text-[#121F21]">
+
+    <!-- Header Navbar (Smart Auto-Hide on Scroll Down, Reveal on Scroll Up) -->
+    <nav id="navbar" class="fixed top-0 w-full z-[100] py-4 transition-all duration-500 transform ease-in-out bg-transparent border-b border-transparent">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <a href="#hero" class="brand-gradient-nav font-heading font-bold text-2xl tracking-wider select-none cursor-pointer">
+                ACAUÃ
+            </a>
+
+            <div class="hidden md:flex items-center gap-6 text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4C5B8]">
+                <a href="#diferenciais" class="hover:text-[#C0894E] transition-colors">Autonomia</a>
+                <a href="#recursos" class="hover:text-[#C0894E] transition-colors">O App</a>
+                <a href="#sites" class="hover:text-[#C0894E] transition-colors">O Site</a>
+                <a href="#panelinha" class="hover:text-[#C0894E] transition-colors">Panelinha</a>
+                <a href="#planos" class="hover:text-[#C0894E] transition-colors">Planos</a>
+            </div>
+
+            <!-- Desktop Premium WhatsApp CTA Button -->
+            <a href="https://wa.me/5500999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Acau%C3%A3." target="_blank" class="hidden md:flex items-center gap-2.5 px-5 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-wider text-[#121F21] bg-[#C0894E] shadow-[0_2px_15px_rgba(192,137,78,0.3)] hover:bg-[#D4A574] hover:scale-105 transition-all duration-300">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                <span>FALAR NO WHATSAPP</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: HERO (Dark Petrol Background) -->
+    <section id="hero" class="min-h-screen pt-36 pb-20 px-6 flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#121F21] text-[#FAF0EB]">
+        <!-- Subtle Ambient Glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#C0894E]/10 blur-[180px] pointer-events-none rounded-full"></div>
+
+        <div class="max-w-5xl mx-auto w-full flex flex-col items-center justify-center relative z-10">
+
+            <!-- Watermark Acauã Bird (Proportional, Perfectly Centered Behind Headline) -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[440px] sm:h-[440px] lg:w-[540px] lg:h-[540px] max-w-[90vw] pointer-events-none select-none -z-10 flex items-center justify-center opacity-[0.06] transition-opacity">
+                <img src="logo_acaua.svg" alt="" class="w-full h-full object-contain filter drop-shadow-[0_0_40px_rgba(192,137,78,0.2)]">
+            </div>
+
+            <!-- Headline: Line 1 "O ACAUÃ é" | Line 2: Copper Rotating Pill -->
+            <h1 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight flex flex-col items-center justify-center gap-3 sm:gap-4 mb-8 w-full text-center text-[#FAF0EB]">
+                <span class="inline-flex items-center justify-center">
+                    <span class="mr-3 sm:mr-4 font-medium">O</span>
+                    <span class="brand-gradient tracking-wider uppercase font-bold cursor-default">ACAUÃ</span>
+                    <span class="ml-3 sm:ml-4 font-medium">é</span>
+                </span>
+                <span id="rotating-text-pill" class="shrink-0 max-w-full mt-1"></span>
+            </h1>
+
+            <p class="text-[#D4C5B8] text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto mb-10">
+                O único ecossistema completo que combina gestão clínica offline 100% sigilosa e presença digital sob medida para atrair pacientes.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto">
+                <a href="#panelinha" class="btn-copper px-8 py-4 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-3">
+                    <span>CALCULAR COMBO PANELINHA</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </a>
+                <a href="#planos" class="px-8 py-4 rounded-full border border-[#C0894E]/40 hover:border-[#C0894E] text-[#FAF0EB] text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
+                    <span>Ver Planos Individuais</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TEXTLOOP RIBBON BANNER (Divisor Oficial) -->
+    <div id="text-loop-section" class="w-full"></div>
+
+    <!-- SECTION 2: AUTONOMIA & SEGURANÇA (Light Cream Background) -->
+    <section id="diferenciais" class="py-20 px-6 bg-[#FAF0EB] text-[#1B4B4F] border-b border-[#D4C5B8] relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-[#C0894E] font-bold tracking-[0.2em] text-xs uppercase mb-2 block font-sans">ÉTICA & SEGURANÇA CLÍNICA</span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-[#1B4B4F]">
+                    Sua Liberdade Profissional. <br>
+                    <span class="text-[#C0894E] italic">Seu Compromisso Ético.</span>
+                </h2>
+                <p class="text-[#1B4B4F]/80 text-xs sm:text-sm leading-relaxed">
+                    Enquanto 99% das plataformas guardam anotações sigilosas em servidores de terceiros na nuvem, a Acauã devolve a posse total dos dados ao psicólogo com banco criptografado local — sem mensalidades e sem vazamentos.
+                </p>
+            </div>
+
+            <!-- 2-Column Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                
+                <!-- Left Column: 3 Pillars of Freedom (7 cols) -->
+                <div class="lg:col-span-7 space-y-4 flex flex-col justify-between">
+                    
+                    <!-- Card Pillar 1: Independência Financeira -->
+                    <div class="glass-card spotlight-card p-5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 rounded-xl bg-[#1B4B4F]/10 border border-[#1B4B4F]/20 text-[#1B4B4F] flex items-center justify-center shrink-0 font-heading font-bold text-lg group-hover:scale-105 transition-transform">
+                                01
+                            </div>
+                            <div class="space-y-0.5">
+                                <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
+                                    <span>Independência Financeira (Zero Mensalidades)</span>
+                                    <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#C0894E]/15 text-[#C0894E] border border-[#C0894E]/30">Pago Uma Vez</span>
+                                </h4>
+                                <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
+                                    Você não precisa ser refém de assinaturas perpétuas de R$ 150/mês. Adquira no lançamento e seja proprietário vitalício da sua ferramenta.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Pillar 2: Dever de Guarda Ética -->
+                    <div class="glass-card spotlight-card p-5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 rounded-xl bg-[#8B9A7B]/20 border border-[#8B9A7B]/40 text-[#1B4B4F] flex items-center justify-center shrink-0 font-heading font-bold text-lg group-hover:scale-105 transition-transform">
+                                02
+                            </div>
+                            <div class="space-y-0.5">
+                                <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
+                                    <span>Guarda Sigilosa Direta (Resolução CFP nº 01/2009)</span>
+                                    <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#8B9A7B]/20 text-[#1B4B4F] border border-[#8B9A7B]/40">100% Legal</span>
+                                </h4>
+                                <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
+                                    O Código de Ética do CFP estabelece que a responsabilidade indelegável pela guarda dos prontuários é do psicólogo. A Acauã criptografa o arquivo localmente.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Pillar 3: Portabilidade e Posse -->
+                    <div class="glass-card spotlight-card p-5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 rounded-xl bg-[#C0894E]/15 border border-[#C0894E]/30 text-[#C0894E] flex items-center justify-center shrink-0 font-heading font-bold text-lg group-hover:scale-105 transition-transform">
+                                03
+                            </div>
+                            <div class="space-y-0.5">
+                                <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
+                                    <span>Portabilidade & Backup sem Reféns</span>
+                                    <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#1B4B4F]/10 text-[#1B4B4F] border border-[#1B4B4F]/20">Autonomia</span>
+                                </h4>
+                                <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
+                                    Trocou de notebook ou quer salvar uma cópia em um pendrive seguro? O banco de dados SQLite é portável, permitindo backups locais instantâneos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Visual Comparison & Security Dashboard (5 cols) -->
+                <div class="lg:col-span-5 flex">
+                    <div class="glass-card copper-accent-card spotlight-card p-6 rounded-3xl flex flex-col justify-between w-full relative bg-white">
+                        
+                        <div>
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-[#D4C5B8]">
+                                <span class="text-[10px] font-mono font-bold uppercase text-[#C0894E] tracking-widest flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-[#C0894E] animate-ping"></span>
+                                    SEGURANÇA LOCAL AES-256
+                                </span>
+                                <span class="text-[11px] font-bold text-[#1B4B4F] bg-[#8B9A7B]/25 border border-[#8B9A7B]/40 px-2 py-0.5 rounded-full">Inviolável</span>
+                            </div>
+
+                            <h3 class="font-heading text-2xl font-bold text-[#1B4B4F] mb-3 leading-snug">
+                                Zero Servidores de Terceiros. <br>
+                                <span class="text-[#C0894E]">Zero Risco de Vazamento.</span>
+                            </h3>
+
+                            <p class="text-[#1B4B4F]/75 text-xs leading-relaxed mb-4">
+                                Ao contrário dos SaaS comuns onde desenvolvedores terceiros podem acessar seus dados, com a Acauã ninguém tem acesso aos seus prontuários.
+                            </p>
+
+                            <!-- Direct Comparison Box -->
+                            <div class="space-y-2.5 mb-4">
+                                <div class="p-3 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-red-700 font-bold text-xs">✕</span>
+                                        <span class="text-xs text-red-900 font-medium">Sistemas em Nuvem Tradicionais</span>
+                                    </div>
+                                    <span class="text-[9px] text-red-700 font-bold">Mensalidade + Risco</span>
+                                </div>
+
+                                <div class="p-3 rounded-xl bg-[#1B4B4F]/10 border border-[#1B4B4F]/30 flex items-center justify-between shadow-sm">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-[#1B4B4F] font-bold text-xs">✓</span>
+                                        <span class="text-xs text-[#1B4B4F] font-bold">Acauã App Local</span>
+                                    </div>
+                                    <span class="text-[9px] text-[#C0894E] font-bold">100% Seu & Sigiloso</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Status Widget -->
+                        <div class="p-3.5 rounded-2xl bg-[#1B4B4F] text-[#FAF0EB] space-y-1.5 shadow-md">
+                            <div class="text-[10px] font-mono uppercase tracking-wider text-[#D4C5B8] flex items-center justify-between">
+                                <span>Status da Proteção de Dados:</span>
+                                <span class="text-[#C0894E] font-bold">Local Active</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 pt-0.5">
+                                <div class="w-7 h-7 rounded-lg bg-[#8B9A7B]/30 text-[#FAF0EB] flex items-center justify-center shrink-0">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-[#FAF0EB] font-bold text-xs">Banco SQLCipher Local</div>
+                                    <div class="text-[#D4C5B8] text-[10px]">Criptografia 256-bit ativada via Senha Mestra</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: O SOFTWARE ACAUÃ APP (Dark Petrol Background) -->
+    <section id="recursos" class="py-24 px-6 relative bg-[#153D40] text-[#FAF0EB] border-b border-white/5">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-6 space-y-6">
+                <div>
+                    <span class="text-[#C0894E] font-bold tracking-[0.2em] text-xs uppercase mb-3 block font-sans">FERRAMENTAS CLÍNICAS</span>
+                    <h2 class="font-heading text-4xl sm:text-5xl font-bold mb-4 text-[#FAF0EB]">Por dentro do <span class="text-[#C0894E]">Acauã App</span></h2>
+                    <p class="text-[#D4C5B8] text-sm">Tudo o que você precisa para gerenciar sua prática clínica com agilidade, sem depender de internet.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="glass-card-dark spotlight-card p-4 rounded-2xl flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-[#C0894E]/15 border border-[#C0894E]/30 text-[#C0894E] flex items-center justify-center shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-bold text-lg text-[#FAF0EB]">Prontuário & Anamnese</h4>
+                            <p class="text-[#D4C5B8] text-xs">Ficha de pacientes, histórico clínico e contatos de emergência organizados.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card-dark spotlight-card p-4 rounded-2xl flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-[#C0894E]/15 border border-[#C0894E]/30 text-[#C0894E] flex items-center justify-center shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-bold text-lg text-[#FAF0EB]">Evolução & Módulo RPD</h4>
+                            <p class="text-[#D4C5B8] text-xs">Registro de sessões e aplicação prática do Registro de Pensamentos Disfuncionais.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card-dark spotlight-card p-4 rounded-2xl flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-[#C0894E]/15 border border-[#C0894E]/30 text-[#C0894E] flex items-center justify-center shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-bold text-lg text-[#FAF0EB]">Emissão de PDFs & Recibos</h4>
+                            <p class="text-[#D4C5B8] text-xs">Gerador em 1 clique de Recibos, Atestados e Declarações padronizados com seu CRP.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Software Screen Frame -->
+            <div class="lg:col-span-6">
+                <div class="glass-card-dark copper-accent-card spotlight-card p-6 rounded-3xl bg-[#121F21]">
+                    <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                        </div>
+                        <span class="font-mono text-[11px] text-[#D4C5B8]">Acauã App v2.0 • Desktop Local</span>
+                        <span class="bg-[#8B9A7B]/20 text-[#8B9A7B] text-[9px] font-mono font-bold px-2 py-0.5 rounded border border-[#8B9A7B]/30">OFFLINE</span>
+                    </div>
+
+                    <!-- Interactive Tabs -->
+                    <div class="flex gap-2 bg-[#153D40] p-1.5 rounded-xl mb-4 border border-white/5">
+                        <button class="hero-tab active flex-1 py-1.5 rounded-lg text-xs font-bold text-[#121F21] bg-[#C0894E] transition-all" data-pane="pane-agenda">Agenda</button>
+                        <button class="hero-tab flex-1 py-1.5 rounded-lg text-xs font-bold text-[#D4C5B8] hover:text-[#FAF0EB] transition-all" data-pane="pane-rpd">RPD</button>
+                        <button class="hero-tab flex-1 py-1.5 rounded-lg text-xs font-bold text-[#D4C5B8] hover:text-[#FAF0EB] transition-all" data-pane="pane-finance">Finanças</button>
+                    </div>
+
+                    <!-- Interactive Pane Content -->
+                    <div class="space-y-3 min-h-[180px]">
+                        <div id="pane-agenda" class="hero-pane block">
+                            <div class="p-3 bg-[#153D40]/80 rounded-xl border border-white/5 text-xs flex justify-between items-center mb-2">
+                                <span class="text-[#D4C5B8]">Hoje • 5 Sessões</span>
+                                <span class="text-[#C0894E] font-mono font-bold">R$ 750,00</span>
+                            </div>
+                            <div class="p-3 bg-[#153D40]/80 rounded-xl border border-white/5 text-xs flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold text-[#FAF0EB]">14:00 — Ana Clara S.</div>
+                                    <div class="text-[10px] text-[#D4C5B8]">Terapia TCC • Prontuário Salvo</div>
+                                </div>
+                                <span class="bg-[#8B9A7B]/20 text-[#8B9A7B] text-[9px] font-bold px-2 py-0.5 rounded">Confirmado</span>
+                            </div>
+                        </div>
+
+                        <div id="pane-rpd" class="hero-pane hidden">
+                            <div class="p-3 bg-[#153D40]/80 rounded-xl border border-white/5 text-xs space-y-1.5">
+                                <div class="text-[#C0894E] font-bold">Registro de Pensamentos Disfuncionais (RPD)</div>
+                                <p class="text-[#D4C5B8] text-[10px] leading-relaxed">Pensamento: "Não vou conseguir me comunicar bem." | Reestruturação: "Estudei o tema e já apresentei antes."</p>
+                            </div>
+                        </div>
+
+                        <div id="pane-finance" class="hero-pane hidden">
+                            <div class="p-3 bg-[#153D40]/80 rounded-xl border border-white/5 text-xs flex justify-between items-center">
+                                <span class="text-[#FAF0EB] font-bold">Receita Bruta do Mês</span>
+                                <span class="text-[#C0894E] font-mono font-bold text-sm">R$ 4.200,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-white/10 flex justify-between items-center text-[10px] text-[#D4C5B8]">
+                        <span>Criptografia AES-256 (Local)</span>
+                        <span class="text-[#C0894E] font-mono font-bold">Sem mensalidade</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TRANSITION FULLSCREEN STACKING SECTION -->
+    <section id="fullscreen-stack-section" class="relative w-full h-[100dvh] bg-[#121F21] z-20 overflow-hidden border-t border-b border-white/5">
+        
+        <!-- PANEL 1: FULLSCREEN (z-10) -->
+        <div id="stack-panel-1" class="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center px-4 sm:px-6 bg-[#121F21] z-10 py-8">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[600px] sm:h-[800px] bg-[#C0894E]/10 blur-[180px] pointer-events-none rounded-full"></div>
+            
+            <div class="max-w-4xl mx-auto space-y-4 sm:space-y-8 relative z-10 text-[#FAF0EB]">
+                <span class="px-3.5 py-1 rounded-full bg-[#C0894E]/15 border border-[#C0894E]/30 text-[#C0894E] font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold inline-block">
+                    01 / 03 • Acauã Expansão
+                </span>
+                <h3 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-[#FAF0EB]">
+                    Mas calma aí... <br>
+                    <span class="shiny-text-copper italic">não é só isso!</span>
+                </h3>
+                <p class="text-[#D4C5B8] text-sm sm:text-lg lg:text-xl max-w-xl mx-auto font-light leading-relaxed">
+                    Sua prática clínica merece uma estrutura completa que vai muito além do gerenciamento interno.
+                </p>
+                <div class="pt-4 sm:pt-8 flex flex-col items-center gap-1.5 text-[#D4C5B8] font-mono text-[11px] sm:text-xs">
+                    <span>Role para continuar</span>
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#C0894E] animate-bounce" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 2: FULLSCREEN (z-20, starts translate-y-full) -->
+        <div id="stack-panel-2" class="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center px-4 sm:px-6 bg-[#FAF0EB] z-20 translate-y-full border-t border-[#C0894E]/40 shadow-[0_-20px_80px_rgba(0,0,0,0.25)] py-8">
+            <div class="max-w-4xl mx-auto space-y-4 sm:space-y-8 relative z-10 text-[#1B4B4F]">
+                <span class="px-3.5 py-1 rounded-full bg-[#1B4B4F]/10 border border-[#1B4B4F]/20 text-[#1B4B4F] font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold inline-block">
+                    02 / 03 • Ecossistema Completo
+                </span>
+                <h3 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-[#1B4B4F]">
+                    A Acauã também tem <br>
+                    <span class="text-[#C0894E] italic">mais para você.</span>
+                </h3>
+                <p class="text-[#1B4B4F]/80 text-sm sm:text-lg lg:text-xl max-w-xl mx-auto font-light leading-relaxed">
+                    Conectamos a sua gestão clínica a ferramentas ativas de atração e retenção de pacientes particulares.
+                </p>
+                <div class="pt-4 sm:pt-8 flex flex-col items-center gap-1.5 text-[#1B4B4F]/60 font-mono text-[11px] sm:text-xs">
+                    <span>Role para ver o resultado final</span>
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#C0894E] animate-bounce" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 3: FULLSCREEN (z-30, starts translate-y-full) -->
+        <div id="stack-panel-3" class="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center px-4 sm:px-6 bg-[#153D40] z-30 translate-y-full border-t border-[#C0894E]/50 shadow-[0_-25px_100px_rgba(0,0,0,0.4)] py-8">
+            <div class="max-w-5xl mx-auto space-y-5 sm:space-y-10 relative z-10 text-[#FAF0EB]">
+                <span class="px-4 py-1.5 rounded-full bg-[#C0894E]/20 text-[#C0894E] font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold border border-[#C0894E]/40 inline-block">
+                    03 / 03 • Presença Digital
+                </span>
+                <h3 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-[#FAF0EB]">
+                    O <span class="text-[#C0894E]">Acauã Sites</span>, <br>
+                    <span class="text-[#D4C5B8] italic">onde sua marca vira uma vitrine.</span>
+                </h3>
+                <p class="text-[#D4C5B8] text-sm sm:text-lg lg:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                    Sua marca posicionada no topo do Google com uma Landing Page de alta conversão e agendamento direto no seu WhatsApp.
+                </p>
+                <div class="pt-2 sm:pt-4">
+                    <a href="#sites" class="btn-copper inline-flex items-center gap-2.5 px-6 sm:px-10 py-3 sm:py-4 text-xs sm:text-sm font-bold uppercase tracking-wider shadow-lg">
+                        <span>Conhecer o Acauã Sites</span>
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- SECTION 4: PRESENÇA DIGITAL / ACAUÃ SITES (Light Cream Background) -->
+    <section id="sites" class="py-24 px-6 bg-[#FAF0EB] text-[#1B4B4F] border-b border-[#D4C5B8] relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10 space-y-14">
+            
+            <!-- Grid 2-Cols -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Left Column: Copy & 3 Pillars (7 cols) -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div>
+                        <span class="text-[#C0894E] font-bold tracking-[0.2em] text-xs uppercase mb-3 block font-sans">PRESENÇA DIGITAL & ATRAÇÃO DE PACIENTES</span>
+                        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4 leading-tight text-[#1B4B4F]">
+                            Sua Marca no Google. <br>
+                            <span class="text-[#C0894E] italic">Pacientes no seu WhatsApp.</span>
+                        </h2>
+                        <p class="text-[#1B4B4F]/80 text-xs sm:text-sm leading-relaxed">
+                            Redes sociais exigem postagens diárias sem garantia de retorno. <strong class="text-[#1B4B4F]">Seu site profissional no Google trabalha 24 horas por dia</strong> atraindo pacientes com intenção real de agendamento na sua região ou atendimento online.
+                        </p>
+                    </div>
+
+                    <!-- 3 Pillars Cards with Numbers -->
+                    <div class="space-y-3.5">
+                        
+                        <div class="glass-card spotlight-card p-4.5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group bg-white">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-[#1B4B4F]/10 border border-[#1B4B4F]/20 text-[#1B4B4F] flex items-center justify-center shrink-0 font-heading font-bold text-base group-hover:scale-105 transition-transform">
+                                    01
+                                </div>
+                                <div class="space-y-0.5">
+                                    <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
+                                        <span>Posicionamento SEO Local no Google</span>
+                                        <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#C0894E]/15 text-[#C0894E] border border-[#C0894E]/30">Visibilidade</span>
+                                    </h4>
+                                    <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
+                                        Seu consultório no topo das buscas quando pacientes pesquisarem por psicólogo na sua cidade ou consultas online.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card spotlight-card p-4.5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group bg-white">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-[#8B9A7B]/20 border border-[#8B9A7B]/40 text-[#1B4B4F] flex items-center justify-center shrink-0 font-heading font-bold text-base group-hover:scale-105 transition-transform">
+                                    02
+                                </div>
+                                <div class="space-y-0.5">
+                                    <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
+                                        <span>Agendamento Direto sem Intermediários</span>
+                                        <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#8B9A7B]/20 text-[#1B4B4F] border border-[#8B9A7B]/40">Sem Comissão</span>
+                                    </h4>
+                                    <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
+                                        Sem taxas por consulta ou intermediários. O paciente acessa a Landing Page e entra em contato direto com você.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card spotlight-card p-4.5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group bg-white">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-[#C0894E]/15 border border-[#C0894E]/30 text-[#C0894E] flex items-center justify-center shrink-0 font-heading font-bold text-base group-hover:scale-105 transition-transform">
+                                    03
+                                </div>
+                                <div class="space-y-0.5">
+                                    <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
+                                        <span>Autoridade Clínica & Design Sob Medida</span>
+                                        <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#1B4B4F]/10 text-[#1B4B4F] border border-[#1B4B4F]/20">Alta Conversão</span>
+                                    </h4>
+                                    <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
+                                        Copywriting focado na sua abordagem terapêutica, desenhado sob medida para transmitir confiança e acolhimento.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Right Column: High-End Live Website Mockup (5 cols) -->
+                <div class="lg:col-span-5 flex">
+                    <div class="glass-card copper-accent-card spotlight-card p-6 rounded-3xl border border-[#C0894E]/40 flex flex-col justify-between w-full relative bg-white">
+                        
+                        <!-- Browser Header -->
+                        <div class="flex items-center justify-between pb-3 border-b border-[#D4C5B8] mb-4">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                            </div>
+                            <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF0EB] border border-[#D4C5B8] text-[10px] text-[#1B4B4F] font-mono">
+                                <span>seunomepsicologia.com.br</span>
+                            </div>
+                            <span class="bg-[#8B9A7B]/20 text-[#1B4B4F] text-[9px] font-mono font-bold px-2 py-0.5 rounded border border-[#8B9A7B]/40">ONLINE</span>
+                        </div>
+
+                        <!-- Inner Landing Page Canvas -->
+                        <div class="bg-[#FAF0EB] rounded-2xl p-5 border border-[#D4C5B8] space-y-4 shadow-sm relative overflow-hidden text-[#1B4B4F]">
+                            
+                            <!-- Site Mini Navbar -->
+                            <div class="flex items-center justify-between pb-2.5 border-b border-[#D4C5B8] text-[10px]">
+                                <div class="font-heading font-bold text-[#1B4B4F] flex items-center gap-1.5">
+                                    <div class="w-5 h-5 rounded-md bg-[#1B4B4F] text-[#FAF0EB] flex items-center justify-center font-bold text-[10px]">
+                                        BS
+                                    </div>
+                                    <span>Dra. Beatriz Santos</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[#1B4B4F]/60 text-[9px]">
+                                    <span class="text-[#C0894E] font-bold">Início</span>
+                                    <span>Sobre</span>
+                                    <span>Contato</span>
+                                </div>
+                            </div>
+
+                            <!-- Hero Content -->
+                            <div class="space-y-2 text-center py-1">
+                                <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#C0894E]/15 border border-[#C0894E]/30 text-[#C0894E] text-[9px] font-bold tracking-wider uppercase">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#C0894E] animate-pulse"></span>
+                                    Psicologia Clínica • CRP 06/123456
+                                </div>
+
+                                <h3 class="font-heading font-bold text-xl text-[#1B4B4F] tracking-tight leading-snug">
+                                    Cuidando da sua saúde mental <br>
+                                    <span class="text-[#C0894E] italic">com base científica.</span>
+                                </h3>
+
+                                <p class="text-[#1B4B4F]/75 text-[11px] leading-relaxed max-w-xs mx-auto">
+                                    Terapia Cognitivo-Comportamental para Ansiedade, Depressão e Desenvolvimento Pessoal.
+                                </p>
+                            </div>
+
+                            <!-- Feature Tags Grid -->
+                            <div class="grid grid-cols-2 gap-2 text-left pt-1">
+                                <div class="p-2.5 rounded-xl bg-white border border-[#D4C5B8] space-y-0.5">
+                                    <div class="text-[#C0894E] font-bold text-[10px] flex items-center gap-1">
+                                        <span>✓</span> Presencial & Online
+                                    </div>
+                                    <div class="text-[#1B4B4F]/70 text-[9px]">Atendimento em todo o Brasil</div>
+                                </div>
+
+                                <div class="p-2.5 rounded-xl bg-white border border-[#D4C5B8] space-y-0.5">
+                                    <div class="text-[#C0894E] font-bold text-[10px] flex items-center gap-1">
+                                        <span>✓</span> Reembolso Convênio
+                                    </div>
+                                    <div class="text-[#1B4B4F]/70 text-[9px]">Emissão de Recibo / Nota</div>
+                                </div>
+                            </div>
+
+                            <!-- Social Proof Pill -->
+                            <div class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#D4C5B8] text-[9.5px]">
+                                <div class="flex items-center gap-1.5 text-[#1B4B4F]">
+                                    <div class="flex text-[#C0894E] text-xs">★★★★★</div>
+                                    <span class="font-bold text-[#1B4B4F]">5.0 / 5.0</span>
+                                </div>
+                                <span class="text-[#1B4B4F]/70 text-[9px]">32 Avaliações no Google</span>
+                            </div>
+
+                            <!-- High-Converting CTA Button -->
+                            <div class="pt-1">
+                                <a href="https://wa.me/5500999999999" target="_blank" class="btn-primary w-full py-2.5 text-xs font-bold uppercase inline-flex items-center justify-center gap-2 shadow-md">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                                    <span>AGENDAR CONSULTA NO WHATSAPP</span>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <!-- Footer Info & Domain Disclaimer -->
+                        <div class="mt-3 pt-2.5 border-t border-[#D4C5B8] flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-between gap-1.5 sm:gap-2 font-mono text-[9px] sm:text-[10px] text-center">
+                            <span class="text-[#C0894E] font-bold">Otimizado no Google</span>
+                            <span class="text-[#1B4B4F]/60 font-medium px-1">- Domínio não incluso -</span>
+                            <span class="text-[#C0894E] font-bold">Entrega em 5 dias</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 4B: POR DENTRO DO ACAUÃ SITES (Deep Petrol Background) -->
+    <section id="por-dentro-sites" class="py-24 px-6 bg-[#121F21] text-[#FAF0EB] border-t border-b border-white/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10 space-y-16">
+
+            <!-- Section Title -->
+            <div class="text-center space-y-3 max-w-3xl mx-auto">
+                <span class="text-[#C0894E] font-bold tracking-[0.25em] text-xs uppercase block font-sans">ENGENHARIA DE CONVERSÃO & PERFORMANCE</span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold tracking-tight leading-tight text-[#FAF0EB]">
+                    Por dentro do <span class="text-[#C0894E]">Acauã Sites</span>
+                </h2>
+                <p class="text-[#D4C5B8] text-xs sm:text-sm font-light leading-relaxed">
+                    Não fazemos apenas um site bonito. Desenvolvemos uma estrutura completa de marketing ético e alta velocidade pronta para atrair consultas particulares.
+                </p>
+            </div>
+
+            <!-- Expanding Accordion Showcase -->
+            <div class="expanding-accordion" id="sites-accordion">
+
+                <!-- ===== CARD 1: Design Exclusivo ===== -->
+                <div class="expanding-card" data-accordion-card>
+
+                    <div class="ec-icon-area">
+                        <div class="w-12 h-12 rounded-2xl bg-[#C0894E]/15 border border-[#C0894E]/30 flex items-center justify-center text-[#C0894E]">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="ec-collapsed-title">Design Exclusivo</div>
+
+                    <div class="expanding-content-body space-y-4 text-[#FAF0EB]">
+                        <div>
+                            <span class="text-[#C0894E] font-mono text-[10px] font-bold uppercase tracking-widest block mb-1">Identidade Visual</span>
+                            <h3 class="font-heading font-bold text-2xl text-[#FAF0EB] leading-tight">Design Feito Só para Você</h3>
+                        </div>
+                        <p class="text-[#D4C5B8] text-sm leading-relaxed">
+                            Nenhum template genérico. Cada site é criado do zero com a paleta de cores, tipografia e identidade visual que traduzem a sua abordagem terapêutica.
+                        </p>
+                        <ul class="space-y-2 text-xs text-[#D4C5B8]">
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Layout 100% exclusivo — ninguém terá igual</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Foto profissional integrada ao design</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Responsivo perfeito em celular, tablet e desktop</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Cores e tipografia alinhadas ao seu nicho</li>
+                        </ul>
+                        <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-[#D4C5B8]">
+                            <span>Revisões incluídas</span>
+                            <span class="text-[#C0894E] font-bold">Até aprovação total</span>
+                        </div>
+                    </div>
+
+                    <div class="ec-bottom-brand">
+                        <span class="text-[#C0894E] font-heading font-bold" style="font-size: 1.5rem; line-height: 1;">A</span>
+                    </div>
+
+                </div>
+
+                <!-- ===== CARD 2: Alta Conversão ===== -->
+                <div class="expanding-card" data-accordion-card>
+
+                    <div class="ec-icon-area">
+                        <div class="w-12 h-12 rounded-2xl bg-[#C0894E]/15 border border-[#C0894E]/30 flex items-center justify-center text-[#C0894E]">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="ec-collapsed-title">Alta Conversão</div>
+
+                    <div class="expanding-content-body space-y-4 text-[#FAF0EB]">
+                        <div>
+                            <span class="text-[#C0894E] font-mono text-[10px] font-bold uppercase tracking-widest block mb-1">Copy & Estrutura</span>
+                            <h3 class="font-heading font-bold text-2xl text-[#FAF0EB] leading-tight">Estrutura de Alta Conversão</h3>
+                        </div>
+                        <p class="text-[#D4C5B8] text-sm leading-relaxed">
+                            Cada seção do site é pensada para conduzir o visitante de forma natural até o botão de agendamento — sem pressão, 100% dentro da ética do CFP.
+                        </p>
+                        <ul class="space-y-2 text-xs text-[#D4C5B8]">
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Copy escrita por psicólogos, não por robôs</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Hierarquia visual que guia o olhar do paciente</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Prova social com depoimentos e avaliações éticas</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> CTA estratégico no momento certo</li>
+                        </ul>
+                        <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-[#D4C5B8]">
+                            <span>Código de Ética CFP</span>
+                            <span class="text-[#8B9A7B] font-bold">100% Adequado</span>
+                        </div>
+                    </div>
+
+                    <div class="ec-bottom-brand">
+                        <span class="text-[#C0894E] font-heading font-bold" style="font-size: 1.5rem; line-height: 1;">A</span>
+                    </div>
+
+                </div>
+
+                <!-- ===== CARD 3: Google & SEO ===== -->
+                <div class="expanding-card" data-accordion-card>
+
+                    <div class="ec-icon-area">
+                        <div class="w-12 h-12 rounded-2xl bg-[#C0894E]/15 border border-[#C0894E]/30 flex items-center justify-center text-[#C0894E]">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="ec-collapsed-title">SEO & Google</div>
+
+                    <div class="expanding-content-body space-y-4 text-[#FAF0EB]">
+                        <div>
+                            <span class="text-[#C0894E] font-mono text-[10px] font-bold uppercase tracking-widest block mb-1">Visibilidade Online</span>
+                            <h3 class="font-heading font-bold text-2xl text-[#FAF0EB] leading-tight">Topo do Google, Toda Semana</h3>
+                        </div>
+                        <p class="text-[#D4C5B8] text-sm leading-relaxed">
+                            Enquanto você atende, seu site trabalha. Configuramos o SEO local e o Google Meu Negócio para que pacientes da sua cidade te encontrem antes da concorrência.
+                        </p>
+                        <ul class="space-y-2 text-xs text-[#D4C5B8]">
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Google Meu Negócio configurado e verificado</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Aparece em "Psicólogo perto de mim"</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Schema markup para psicólogos (Google entende)</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Sitemap, meta tags e velocidade otimizados</li>
+                        </ul>
+                        <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-[#D4C5B8]">
+                            <span>Resultado médio</span>
+                            <span class="text-[#C0894E] font-bold">Top 3 em 30 dias</span>
+                        </div>
+                    </div>
+
+                    <div class="ec-bottom-brand">
+                        <span class="text-[#C0894E] font-heading font-bold" style="font-size: 1.5rem; line-height: 1;">A</span>
+                    </div>
+
+                </div>
+
+                <!-- ===== CARD 4: Entrega & Suporte ===== -->
+                <div class="expanding-card" data-accordion-card>
+
+                    <div class="ec-icon-area">
+                        <div class="w-12 h-12 rounded-2xl bg-[#C0894E]/15 border border-[#C0894E]/30 flex items-center justify-center text-[#C0894E]">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="ec-collapsed-title">Entrega em 5 Dias</div>
+
+                    <div class="expanding-content-body space-y-4 text-[#FAF0EB]">
+                        <div>
+                            <span class="text-[#C0894E] font-mono text-[10px] font-bold uppercase tracking-widest block mb-1">Entrega Rápida</span>
+                            <h3 class="font-heading font-bold text-2xl text-[#FAF0EB] leading-tight">No Ar em até 5 Dias Úteis</h3>
+                        </div>
+                        <p class="text-[#D4C5B8] text-sm leading-relaxed">
+                            Você só precisa nos mandar suas informações. Nossa equipe cuida de tudo: domínio, hospedagem, HTTPS, integração com WhatsApp e ajustes finais.
+                        </p>
+                        <ul class="space-y-2 text-xs text-[#D4C5B8]">
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Domínio e hospedagem configurados por nós</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> Certificado SSL (segurança HTTPS) incluso</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> WhatsApp com mensagem automática pronta</li>
+                            <li class="flex items-start gap-2"><span class="text-[#C0894E] font-bold mt-0.5">✓</span> 30 dias de suporte pós-entrega incluso</li>
+                        </ul>
+                        <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-[#D4C5B8]">
+                            <span>Prazo máximo</span>
+                            <span class="text-[#C0894E] font-bold">5 Dias Úteis</span>
+                        </div>
+                    </div>
+
+                    <div class="ec-bottom-brand">
+                        <span class="text-[#C0894E] font-heading font-bold" style="font-size: 1.5rem; line-height: 1;">A</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Bottom CTA Banner -->
+            <div class="glass-card-dark copper-accent-card spotlight-card p-8 sm:p-10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8 bg-[#153D40]">
+                <div class="space-y-3 text-center md:text-left max-w-2xl">
+                    <span class="px-3 py-1 rounded-full bg-[#C0894E]/20 border border-[#C0894E]/40 text-[#C0894E] font-mono text-[10px] uppercase tracking-wider font-bold inline-block">ENTREGA COMPLETA EM ATÉ 5 DIAS ÚTEIS</span>
+                    <h3 class="font-heading text-2xl sm:text-4xl font-bold text-[#FAF0EB] leading-snug">
+                        Sua vitrine profissional no ar <span class="text-[#C0894E] italic">sem precisar entender de código.</span>
+                    </h3>
+                    <p class="text-[#D4C5B8] text-xs sm:text-sm">
+                        Nossa equipe cuida de toda a configuração do seu site, domínio, certificado de segurança HTTPS e integração com o WhatsApp.
+                    </p>
+                </div>
+                <!-- CTA Block -->
+                <div class="shrink-0 flex flex-col items-center md:items-end gap-3">
+                    <div class="flex items-center gap-2 text-[10px] font-mono font-bold text-[#C0894E] uppercase tracking-widest">
+                        <span class="w-2 h-2 rounded-full bg-[#C0894E] animate-ping inline-block"></span>
+                        Vagas abertas — Lançamento
+                    </div>
+
+                    <a href="https://wa.me/5500999999999?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Acau%C3%A3%20Sites.%20Pode%20me%20passar%20mais%20detalhes%3F" target="_blank"
+                       class="btn-copper inline-flex items-center gap-3 px-8 py-4 text-xs font-bold uppercase tracking-wider shadow-lg">
+                        <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                        <span>Quero meu site agora</span>
+                    </a>
+
+                    <a href="#planos" class="text-[#D4C5B8] hover:text-[#C0894E] text-xs font-bold uppercase tracking-wider underline underline-offset-4 decoration-[#D4C5B8]/40 hover:decoration-[#C0894E] transition-all">
+                        Ver planos e preços →
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 5: PLANOS INDIVIDUAIS (Light Cream Background) -->
+    <section id="planos" class="py-24 px-6 bg-[#FAF0EB] text-[#1B4B4F] relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-14">
+                <span class="text-[#C0894E] font-bold tracking-[0.2em] text-xs uppercase mb-2 block font-sans">LANÇAMENTO ACADÊMICO</span>
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold mb-3 text-[#1B4B4F]">Escolha sua <span class="text-[#C0894E]">Estrutura Individual.</span></h2>
+                <p class="text-[#1B4B4F]/75 text-sm">Pague uma única vez no lançamento. Seja proprietário vitalício.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
+                <!-- Card 1: Apenas o App -->
+                <div class="relative flex flex-col" style="padding-top: 14px;">
+                    <div class="glass-card spotlight-card p-6 rounded-3xl flex flex-col justify-between flex-1 bg-white border border-[#D4C5B8]">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-[#1B4B4F] mb-1">Apenas o App</h3>
+                            <p class="text-[11px] text-[#1B4B4F]/70 mb-4">Para quem já tem site e precisa organizar prontuários e finanças.</p>
+
+                            <div class="mb-4 border-b border-[#D4C5B8] pb-4">
+                                <div class="text-4xl font-bold text-[#1B4B4F] font-heading">R$ 97</div>
+                                <span class="text-[10px] text-[#1B4B4F]/60 font-mono block mt-0.5">licença única / vitalícia</span>
+                            </div>
+
+                            <ul class="space-y-2.5 text-xs mb-6">
+                                <li class="flex items-center gap-2 text-[#1B4B4F]"><span class="text-[#C0894E] font-bold">✓</span> Licença Vitalícia no seu Nome</li>
+                                <li class="flex items-center gap-2 text-[#1B4B4F]"><span class="text-[#C0894E] font-bold">✓</span> Módulos de Prontuário, Agenda & RPD</li>
+                                <li class="flex items-center gap-2 text-[#1B4B4F]"><span class="text-[#C0894E] font-bold">✓</span> Emissão de Recibos/PDFs com CRP</li>
+                                <li class="flex items-center gap-2 text-zinc-400 line-through"><span>✗</span> Sem Landing Page (Site)</li>
+                            </ul>
+                        </div>
+
+                        <a href="https://wa.me/5500999999999?text=Oi!%20Quero%20comprar%20o%20Acau%C3%A3%20App%20por%20R$%2097." target="_blank"
+                           class="w-full py-3.5 bg-[#1B4B4F]/10 hover:bg-[#1B4B4F] text-[#1B4B4F] hover:text-[#FAF0EB] rounded-xl font-bold text-xs text-center uppercase tracking-widest transition-all">
+                            Comprar App
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Combo Completo — Highlighted Card -->
+                <div class="relative flex flex-col" style="padding-top: 14px;">
+
+                    <!-- Badge: above the card -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[#C0894E] text-[#121F21] text-[9px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-md whitespace-nowrap">O Mais Escolhido</div>
+
+                    <!-- Rotating border card -->
+                    <div class="rotating-border-card rounded-3xl flex-1 flex flex-col">
+
+                        <div class="relative z-[2] p-6 flex flex-col justify-between flex-1 text-[#FAF0EB]">
+
+                            <div>
+                                <h3 class="font-heading font-bold text-2xl text-[#FAF0EB] mb-1 pt-1">Combo Completo</h3>
+                                <p class="text-[11px] text-[#D4C5B8] mb-4 font-medium">A estrutura digital completa para quem está começando na clínica.</p>
+
+                                <div class="mb-4 border-b border-white/15 pb-4">
+                                    <div class="text-4xl font-bold text-[#C0894E] font-heading">R$ 297</div>
+                                    <span class="text-[10px] text-[#D4C5B8] font-mono block mt-0.5">pagamento único</span>
+                                </div>
+
+                                <ul class="space-y-2.5 text-xs text-[#FAF0EB] mb-6 font-medium">
+                                    <li class="flex items-center gap-2"><span class="text-[#C0894E]">✓</span> <strong>Acauã App Clínico Completo</strong></li>
+                                    <li class="flex items-center gap-2"><span class="text-[#C0894E]">✓</span> <strong>Sua Landing Page Profissional</strong></li>
+                                    <li class="flex items-center gap-2"><span class="text-[#C0894E]">✓</span> <strong>1 Hero + 5 Seções de Conteúdo</strong></li>
+                                    <li class="flex items-center gap-2"><span class="text-[#C0894E]">✓</span> <strong>Hospedagem Gratuita Vitalícia</strong></li>
+                                </ul>
+                            </div>
+
+                            <a href="https://wa.me/5500999999999?text=Oi!%20Quero%20garantir%20o%20Combo%20Completo%20da%20Acau%C3%A3%20por%20R$%20297." target="_blank"
+                               class="btn-copper w-full py-3.5 text-xs font-bold text-center uppercase tracking-wider shadow-lg">
+                                Fechar Combo Completo
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Apenas o Site -->
+                <div class="relative flex flex-col" style="padding-top: 14px;">
+                    <div class="glass-card spotlight-card p-6 rounded-3xl flex flex-col justify-between flex-1 bg-white border border-[#D4C5B8]">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-[#1B4B4F] mb-1">Apenas o Site</h3>
+                            <p class="text-[11px] text-[#1B4B4F]/70 mb-4">Sua vitrine digital para captar pacientes particulares no Google.</p>
+
+                            <div class="mb-4 border-b border-[#D4C5B8] pb-4">
+                                <div class="text-4xl font-bold text-[#1B4B4F] font-heading">R$ 247</div>
+                                <span class="text-[10px] text-[#1B4B4F]/60 font-mono block mt-0.5">criação única / sem aluguel</span>
+                            </div>
+
+                            <ul class="space-y-2.5 text-xs mb-6">
+                                <li class="flex items-center gap-2 text-[#1B4B4F]"><span class="text-[#C0894E] font-bold">✓</span> Design Exclusivo & Responsivo</li>
+                                <li class="flex items-center gap-2 text-[#1B4B4F]"><span class="text-[#C0894E] font-bold">✓</span> Copy focada em conversão</li>
+                                <li class="flex items-center gap-2 text-[#1B4B4F]"><span class="text-[#C0894E] font-bold">✓</span> Botão direto pro seu WhatsApp</li>
+                                <li class="flex items-center gap-2 text-zinc-400 line-through"><span>✗</span> Sem App de Prontuários</li>
+                            </ul>
+                        </div>
+
+                        <a href="https://wa.me/5500999999999?text=Oi!%20Quero%20criar%20meu%20site%20na%20Acau%C3%A3%20por%20R$%20247." target="_blank"
+                           class="w-full py-3.5 bg-[#1B4B4F]/10 hover:bg-[#1B4B4F] text-[#1B4B4F] hover:text-[#FAF0EB] rounded-xl font-bold text-xs text-center uppercase tracking-widest transition-all">
+                            Criar Meu Site
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIVIDER: Individual → Panelinha -->
+    <div style="background:#153D40; padding: 2.2rem 1.5rem;" class="relative flex items-center justify-center gap-6 overflow-hidden">
+        <div class="flex-1 h-px bg-gradient-to-r from-transparent to-[#C0894E]/40 max-w-xs"></div>
+        <div class="shrink-0 flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#C0894E]/30 bg-[#C0894E]/10 backdrop-blur-sm">
+            <p class="text-xs font-bold text-[#FAF0EB] leading-snug">
+                Porém, se <span class="text-[#C0894E] font-black">juntar a galera</span> — o desconto é ainda maior.
+            </p>
+        </div>
+        <div class="flex-1 h-px bg-gradient-to-l from-transparent to-[#C0894E]/40 max-w-xs"></div>
+    </div>
+
+    <!-- SECTION 6: COMBO PANELINHA (Dark Petrol Background) -->
+    <section id="panelinha" class="py-24 px-6 bg-[#121F21] text-[#FAF0EB] border-y border-white/5 relative overflow-hidden">
+        <!-- Ambient glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C0894E]/10 blur-[160px] pointer-events-none rounded-full"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10">
+
+            <!-- Header -->
+            <div class="text-center mb-14">
+                <span class="inline-block px-4 py-1.5 rounded-full border border-[#C0894E]/40 bg-[#C0894E]/10 text-[#C0894E] font-mono font-bold text-[10px] uppercase tracking-[0.25em] mb-4">Especial Universitários</span>
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-[#FAF0EB] mb-3">
+                    Combos <span class="text-[#C0894E] italic">"Panelinha"</span>
+                </h2>
+                <p class="text-[#D4C5B8] text-sm max-w-lg mx-auto leading-relaxed">
+                    Junte seus amigos da sala e dividam o valor. A economia que o recém-formado precisa para iniciar a clínica.
+                </p>
+            </div>
+
+            <!-- 3-Card Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+
+                <!-- ===== CARD 1: Só o App ===== -->
+                <div class="relative flex flex-col" style="padding-top: 14px;">
+                    <div class="glass-card-dark spotlight-card p-6 rounded-3xl flex flex-col justify-between flex-1 bg-[#153D40]">
+                        <div class="space-y-5">
+                            <div class="text-center">
+                                <span class="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4C5B8]">Só o App</span>
+                                <div class="mt-1 h-px bg-white/10"></div>
+                            </div>
+
+                            <!-- Row: 2 Amigos -->
+                            <div class="flex items-center justify-between">
+                                <span class="text-[#FAF0EB] text-sm font-medium">2 Amigos</span>
+                                <div class="text-right">
+                                    <div class="font-heading font-bold text-xl text-[#FAF0EB]">R$ 80<span class="text-xs text-[#D4C5B8] font-normal">/cada</span></div>
+                                    <div class="text-[10px] text-[#D4C5B8] font-mono">Total R$ 160</div>
+                                </div>
+                            </div>
+
+                            <!-- Row: 4 Amigos -->
+                            <div class="flex items-center justify-between">
+                                <span class="text-[#FAF0EB] text-sm font-medium">4 Amigos</span>
+                                <div class="text-right">
+                                    <div class="font-heading font-bold text-xl text-[#FAF0EB]">R$ 70<span class="text-xs text-[#D4C5B8] font-normal">/cada</span></div>
+                                    <div class="text-[10px] text-[#D4C5B8] font-mono">Total R$ 280</div>
+                                </div>
+                            </div>
+
+                            <!-- Row: 6 Amigos (highlight) -->
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-[#C0894E]/15 border border-[#C0894E]/30">
+                                <span class="text-[#C0894E] font-bold text-sm uppercase tracking-wide">6 Amigos</span>
+                                <div class="text-right">
+                                    <div class="font-heading font-bold text-2xl text-[#C0894E]">R$ 60<span class="text-sm font-normal text-[#FAF0EB]">/cada</span></div>
+                                    <div class="text-[10px] text-[#D4C5B8] font-mono">Total R$ 360</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="https://wa.me/5500999999999?text=Oi!%20Quero%20o%20Combo%20Panelinha%20-%20S%C3%B3%20o%20App." target="_blank"
+                           class="mt-6 w-full py-3.5 bg-white/10 hover:bg-white/20 text-[#FAF0EB] rounded-xl font-bold text-xs text-center uppercase tracking-widest transition-all">
+                            Comprar App
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ===== CARD 2: Combo Completo (Rotating Border) ===== -->
+                <div class="relative flex flex-col" style="padding-top: 14px;">
+                    <!-- Badge -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[#C0894E] text-[#121F21] text-[9px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-md whitespace-nowrap">O Melhor Custo-Benefício</div>
+
+                    <div class="rotating-border-card rounded-3xl flex-1 flex flex-col">
+                        <div class="relative z-[2] p-6 flex flex-col justify-between flex-1 text-[#FAF0EB]">
+                            <div class="space-y-5">
+                                <div class="text-center">
+                                    <span class="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#C0894E]">Combo Completo</span>
+                                    <div class="mt-1 h-px bg-white/10"></div>
+                                </div>
+
+                                <!-- Row: 2 Amigos -->
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[#FAF0EB] text-sm font-medium">2 Amigos</span>
+                                    <div class="text-right">
+                                        <div class="font-heading font-bold text-xl text-[#FAF0EB]">R$ 245<span class="text-xs text-[#D4C5B8] font-normal">/cada</span></div>
+                                        <div class="text-[10px] text-[#D4C5B8] font-mono">Total R$ 490</div>
+                                    </div>
+                                </div>
+
+                                <!-- Row: 4 Amigos -->
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[#FAF0EB] text-sm font-medium">4 Amigos</span>
+                                    <div class="text-right">
+                                        <div class="font-heading font-bold text-xl text-[#FAF0EB]">R$ 215<span class="text-xs text-[#D4C5B8] font-normal">/cada</span></div>
+                                        <div class="text-[10px] text-[#D4C5B8] font-mono">Total R$ 860</div>
+                                    </div>
+                                </div>
+
+                                <!-- Row: 6 Amigos (highlight) -->
+                                <div class="flex items-center justify-between p-3 rounded-2xl bg-[#C0894E]/20 border border-[#C0894E]/40">
+                                    <span class="text-[#C0894E] font-bold text-sm uppercase tracking-wide">6 Amigos</span>
+                                    <div class="text-right">
+                                        <div class="font-heading font-bold text-2xl text-[#C0894E]">R$ 190<span class="text-sm font-normal text-[#FAF0EB]">/cada</span></div>
+                                        <div class="text-[10px] text-[#D4C5B8] font-mono">Total R$ 1.140</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="https://wa.me/5500999999999?text=Oi!%20Quero%20o%20Combo%20Panelinha%20-%20Combo%20Completo." target="_blank"
+                               class="mt-6 btn-copper w-full py-3.5 text-xs font-bold text-center uppercase tracking-wider shadow-lg">
+                                Fechar Combo Completo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== CARD 3: Só o Site ===== -->
+                <div class="relative flex flex-col" style="padding-top: 14px;">
+                    <div class="glass-card-dark spotlight-card p-6 rounded-3xl flex flex-col justify-between flex-1 bg-[#153D40]">
+                        <div class="space-y-5">
+                            <div class="text-center">
+                                <span class="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4C5B8]">Só o Site</span>
+                                <div class="mt-1 h-px bg-white/10"></div>
+                            </div>
+
+                            <!-- Row: 2 Amigos -->
+                            <div class="flex items-center justify-between">
+                                <span class="text-[#FAF0EB] text-sm font-medium">2 Amigos</span>
+                                <div class="text-right">
+                                    <div class="font-heading font-bold text-xl text-[#FAF0EB]">R$ 210<span class="text-xs text-[#D4C5B8] font-normal">/cada</span></div>
+                                    <div class="text-[10px] text-[#D4C5B8] font-mono">Total R$ 420</div>
+                                </div>
+                            </div>
+
+                            <!-- Row: 4 Amigos -->
+                            <div class="flex items-center justify-between">
+                                <span class="text-[#FAF0EB] text-sm font-medium">4 Amigos</span>
+                                <div class="text-right">
+                                    <div class="font-heading font-bold text-xl text-[#FAF0EB]">R$ 190<span class="text-xs text-[#D4C5B8] font-normal">/cada</span></div>
+                                    <div class="text-[10px] text-[#D4C5B8] font-mono">Total R$ 760</div>
+                                </div>
+                            </div>
+
+                            <!-- Row: 6 Amigos (highlight) -->
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-[#C0894E]/15 border border-[#C0894E]/30">
+                                <span class="text-[#C0894E] font-bold text-sm uppercase tracking-wide">6 Amigos</span>
+                                <div class="text-right">
+                                    <div class="font-heading font-bold text-2xl text-[#C0894E]">R$ 150<span class="text-sm font-normal text-[#FAF0EB]">/cada</span></div>
+                                    <div class="text-[10px] text-[#D4C5B8] font-mono">Total R$ 900</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="https://wa.me/5500999999999?text=Oi!%20Quero%20o%20Combo%20Panelinha%20-%20S%C3%B3%20o%20Site." target="_blank"
+                           class="mt-6 w-full py-3.5 bg-white/10 hover:bg-white/20 text-[#FAF0EB] rounded-xl font-bold text-xs text-center uppercase tracking-widest transition-all">
+                            Criar Meu Site
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 7: FAQ (Light Cream Background) -->
+    <section id="faq" class="py-24 px-6 bg-[#FAF0EB] text-[#1B4B4F] border-t border-[#D4C5B8]">
+        <div class="max-w-3xl mx-auto px-6 w-full">
+            <div class="text-center mb-10">
+                <span class="text-[#C0894E] font-bold tracking-[0.2em] text-xs uppercase mb-2 block font-sans">ESCLARECIMENTOS</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-[#1B4B4F]">Dúvidas Frequentes</h2>
+            </div>
+
+            <div class="space-y-3">
+                <details class="glass-card rounded-2xl p-5 cursor-pointer bg-white border border-[#D4C5B8]">
+                    <summary class="flex justify-between items-center font-bold text-sm text-[#1B4B4F]">
+                        <span>O Acauã App atende às exigências da LGPD e do CFP?</span>
+                        <span class="text-[#C0894E] text-lg font-bold">+</span>
+                    </summary>
+                    <p class="text-xs text-[#1B4B4F]/80 leading-relaxed mt-3 pt-3 border-t border-[#D4C5B8]">
+                        Sim. O sistema utiliza banco de dados SQLite criptografado com SQLCipher (AES-256). Os prontuários ficam armazenados exclusivamente no seu notebook com Senha Mestra, garantindo a guarda sigilosa exigida pela Resolução CFP nº 01/2009 e LGPD.
+                    </p>
+                </details>
+
+                <details class="glass-card rounded-2xl p-5 cursor-pointer bg-white border border-[#D4C5B8]">
+                    <summary class="flex justify-between items-center font-bold text-sm text-[#1B4B4F]">
+                        <span>O pagamento é realmente único ou tem mensalidade?</span>
+                        <span class="text-[#C0894E] text-lg font-bold">+</span>
+                    </summary>
+                    <p class="text-xs text-[#1B4B4F]/80 leading-relaxed mt-3 pt-3 border-t border-[#D4C5B8]">
+                        O pagamento é 100% ÚNICO! Você adquire a licença do software ou a criação do site e eles são seus para sempre, sem mensalidades recorrentes.
+                    </p>
+                </details>
+
+                <details class="glass-card rounded-2xl p-5 cursor-pointer bg-white border border-[#D4C5B8]">
+                    <summary class="flex justify-between items-center font-bold text-sm text-[#1B4B4F]">
+                        <span>Como funciona o Combo Panelinha para turmas?</span>
+                        <span class="text-[#C0894E] text-lg font-bold">+</span>
+                    </summary>
+                    <p class="text-xs text-[#1B4B4F]/80 leading-relaxed mt-3 pt-3 border-t border-[#D4C5B8]">
+                        Você junta 2, 4 ou 6 amigos da sala ou estágio. Ao fazerem o pedido juntos, cada um recebe sua licença/site próprio de forma independente, aproveitando o desconto coletivo de turma!
+                    </p>
+                </details>
+
+                <details class="glass-card rounded-2xl p-5 cursor-pointer bg-white border border-[#D4C5B8]">
+                    <summary class="flex justify-between items-center font-bold text-sm text-[#1B4B4F]">
+                        <span>De quem é a responsabilidade dos dados?</span>
+                        <span class="text-[#C0894E] text-lg font-bold">+</span>
+                    </summary>
+                    <p class="text-xs text-[#1B4B4F]/80 leading-relaxed mt-3 pt-3 border-t border-[#D4C5B8]">
+                        100% sua. O Acauã App é um software <strong class="text-[#1B4B4F]">offline e local</strong> — os dados ficam salvos exclusivamente no seu computador, criptografados. Nenhum dado é enviado para servidores externos ou terceiros. Você é o único guardião das informações dos seus pacientes.
+                    </p>
+                </details>
+
+                <details class="glass-card rounded-2xl p-5 cursor-pointer bg-white border border-[#D4C5B8]">
+                    <summary class="flex justify-between items-center font-bold text-sm text-[#1B4B4F]">
+                        <span>E se eu formatar o computador ou trocar de PC?</span>
+                        <span class="text-[#C0894E] text-lg font-bold">+</span>
+                    </summary>
+                    <p class="text-xs text-[#1B4B4F]/80 leading-relaxed mt-3 pt-3 border-t border-[#D4C5B8]">
+                        Sem problema. Basta fazer um backup do arquivo do banco de dados antes de formatar (processo simples documentado). Ao reinstalar o Acauã App no novo PC, você importa o arquivo e todos os prontuários estarão lá, intactos.
+                    </p>
+                </details>
+
+                <details class="glass-card rounded-2xl p-5 cursor-pointer bg-white border border-[#D4C5B8]">
+                    <summary class="flex justify-between items-center font-bold text-sm text-[#1B4B4F]">
+                        <span>Sou estudante — posso usar sem ter o CRP?</span>
+                        <span class="text-[#C0894E] text-lg font-bold">+</span>
+                    </summary>
+                    <p class="text-xs text-[#1B4B4F]/80 leading-relaxed mt-3 pt-3 border-t border-[#D4C5B8]">
+                        Sim! O Acauã App é uma ferramenta de organização pessoal — você pode usá-lo durante o estágio supervisionado para organizar seus atendimentos. A licença é sua e não expira, então quando vier o CRP você já estará com tudo estruturado.
+                    </p>
+                </details>
+
+                <details class="glass-card rounded-2xl p-5 cursor-pointer bg-white border border-[#D4C5B8]">
+                    <summary class="flex justify-between items-center font-bold text-sm text-[#1B4B4F]">
+                        <span>E sobre domínio e hospedagem do site?</span>
+                        <span class="text-[#C0894E] text-lg font-bold">+</span>
+                    </summary>
+                    <p class="text-xs text-[#1B4B4F]/80 leading-relaxed mt-3 pt-3 border-t border-[#D4C5B8]">
+                        O site é hospedado gratuitamente e de forma vitalícia via <strong class="text-[#1B4B4F]">GitHub Pages</strong> — sem mensalidade, sem custo recorrente. Para o domínio personalizado (ex: <em>dra.seunome.com.br</em>), o único custo é o registro anual do domínio (~R$ 40/ano), feito diretamente por você no Registro.br. Isso é opcional; o site funciona normalmente sem domínio próprio.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREMIUM FULL-WIDTH FOOTER (Deep Petrol Background) -->
+    <footer class="w-full bg-[#121F21] border-t border-white/10 pt-16 pb-12 relative overflow-hidden text-[#D4C5B8]">
+        <!-- Subtle Ambient Glow -->
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-[#C0894E]/5 blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Top Footer Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+                
+                <!-- Column 1: Brand Info -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="space-y-2">
+                        <a href="#hero" class="flex items-center gap-3.5 font-heading font-bold text-2xl tracking-tight text-[#FAF0EB] group">
+                            <div class="w-12 h-12 rounded-xl bg-[#1B4B4F] border border-[#C0894E]/50 flex items-center justify-center p-1 shadow-md shrink-0 group-hover:border-[#C0894E] group-hover:scale-105 transition-all">
+                                <img src="logo_acaua.svg" alt="Acauã Logo" class="w-full h-full object-contain">
+                            </div>
+                            <span class="text-[#FAF0EB]">Acauã <span class="text-[#C0894E] font-bold">-</span> <span class="text-[#C0894E] font-bold text-2xl">App</span></span>
+                        </a>
+                        <p class="text-[#D4C5B8] text-xs sm:text-sm leading-relaxed max-w-md">
+                            Software desktop local 100% offline criptografado em SQLite SQLCipher (AES-256) para gestão clínica e prontuários com total sigilo CFP & LGPD.
+                        </p>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <a href="#sites" class="flex items-center gap-3.5 font-heading font-bold text-2xl tracking-tight text-[#FAF0EB] group">
+                            <div class="w-12 h-12 rounded-xl bg-[#1B4B4F] border border-[#C0894E]/50 flex items-center justify-center p-1 shadow-md shrink-0 group-hover:border-[#C0894E] group-hover:scale-105 transition-all">
+                                <img src="logo_acaua.svg" alt="Acauã Logo" class="w-full h-full object-contain">
+                            </div>
+                            <span class="text-[#FAF0EB]">Acauã <span class="text-[#C0894E] font-bold">-</span> <span class="text-[#C0894E] font-bold text-2xl">Sites</span></span>
+                        </a>
+                        <p class="text-[#D4C5B8] text-xs sm:text-sm leading-relaxed max-w-md">
+                            Presença digital profissional no Google com landing pages exclusivas e otimizadas para posicionar seu consultório e atrair novos pacientes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Column 2: Navegação -->
+                <div class="space-y-4">
+                    <h4 class="font-heading font-bold text-sm text-[#C0894E] uppercase tracking-[0.2em]">Navegação</h4>
+                    <ul class="space-y-2.5 text-xs text-[#D4C5B8] font-medium">
+                        <li><a href="#hero" class="hover:text-[#C0894E] transition-colors">Início</a></li>
+                        <li><a href="#diferenciais" class="hover:text-[#C0894E] transition-colors">Autonomia & Sigilo</a></li>
+                        <li><a href="#recursos" class="hover:text-[#C0894E] transition-colors">O App Offline</a></li>
+                        <li><a href="#sites" class="hover:text-[#C0894E] transition-colors">Presença no Google</a></li>
+                        <li><a href="#panelinha" class="hover:text-[#C0894E] transition-colors">Combo Panelinha</a></li>
+                        <li><a href="#planos" class="hover:text-[#C0894E] transition-colors">Tabela de Planos</a></li>
+                        <li><a href="#faq" class="hover:text-[#C0894E] transition-colors">Dúvidas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Tecnologia -->
+                <div class="space-y-4">
+                    <h4 class="font-heading font-bold text-sm text-[#C0894E] uppercase tracking-[0.2em]">Tecnologia & Apps</h4>
+                    <ul class="space-y-2.5 text-xs text-[#D4C5B8] font-medium">
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Software Desktop Tauri + Rust
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Banco SQLCipher Local Criptografado
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Gerador de Prontuários e Anamnese
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Sem Servidores / Sem Vazamento
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Exportação PDF Criptografada
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Backup Local Instantâneo
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Atendimento -->
+                <div class="space-y-4">
+                    <h4 class="font-heading font-bold text-sm text-[#C0894E] uppercase tracking-[0.2em]">Atendimento</h4>
+                    
+                    <ul class="space-y-3 text-xs text-[#D4C5B8]">
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E] font-bold">•</span>
+                            <span class="text-[#FAF0EB] font-bold">Suporte Técnico Ativo</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E] font-bold">•</span>
+                            <span>Segunda a Sexta, das <strong class="text-[#FAF0EB]">07h às 17h</strong></span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E] font-bold">•</span>
+                            <span>Atendimento direto para psicólogos</span>
+                        </li>
+                    </ul>
+
+                    <div class="pt-1">
+                        <a href="https://wa.me/5500999999999?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20a%20Acau%C3%A3." target="_blank" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#1B4B4F] border border-[#C0894E]/40 text-[#FAF0EB] text-xs font-bold uppercase tracking-wider shadow-sm hover:bg-[#2A5F63] transition-all">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                            <span>WhatsApp Suporte</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Footer Bar -->
+            <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#D4C5B8]/70">
+                <div class="flex items-center gap-3">
+                    <span class="font-heading font-bold text-[#FAF0EB] text-base">ACAUÃ</span>
+                    <span>•</span>
+                    <span>Copyright © 2026 Acauãpsi. Todos os direitos reservados.</span>
+                </div>
+                <div class="text-[#C0894E] font-medium tracking-wide">
+                    Tecnologia feita por psicólogos, para psicólogos.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a id="floating-whatsapp" href="https://wa.me/5500999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Acau%C3%A3." target="_blank" class="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-[#1B4B4F] border border-[#C0894E]/60 text-[#FAF0EB] flex items-center justify-center shadow-[0_4px_25px_rgba(0,0,0,0.4)] opacity-0 pointer-events-none translate-y-6 transition-all duration-500 hover:scale-110 hover:border-[#C0894E] animate-wpp-pulse">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    </a>
+
+    <!-- ReactBits Canvas Background -->
+    <script src="dot-field.js"></script>
+    <!-- ReactBits RotatingText Engine -->
+    <script src="rotating-text.js"></script>
+    <!-- ReactBits StaggeredMenu Engine -->
+    <script src="staggered-menu.js"></script>
+    <!-- ReactBits ClickSpark Engine -->
+    <script src="click-spark.js"></script>
+    <!-- ReactBits TextLoop Engine -->
+    <script src="text-loop.js"></script>
+
+    <!-- Custom Pure JS Interactivity Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Dynamic Header Navbar (Auto-Hide on Scroll Down, Reveal on Scroll Up)
+            let lastScrollY = window.scrollY;
+            const nav = document.getElementById('navbar');
+            const floatWpp = document.getElementById('floating-whatsapp');
+
+            function handleNavScroll() {
+                const currentScrollY = window.scrollY;
+
+                // Glass blur background past 60px
+                if (currentScrollY > 60) {
+                    nav.classList.add('bg-[#121F21]/95', 'backdrop-blur-xl', 'border-white/10', 'shadow-xl');
+                    nav.classList.remove('bg-transparent', 'border-transparent');
+                } else {
+                    nav.classList.remove('bg-[#121F21]/95', 'backdrop-blur-xl', 'border-white/10', 'shadow-xl');
+                    nav.classList.add('bg-transparent', 'border-transparent');
+                }
+
+                // Auto-Hide / Reveal
+                const smHeader = document.querySelector('.staggered-menu-header');
+                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                    nav.classList.add('-translate-y-full');
+                    nav.classList.remove('translate-y-0');
+                    if (smHeader) smHeader.style.transform = 'translateY(-100%)';
+                } else if (currentScrollY < lastScrollY) {
+                    nav.classList.remove('-translate-y-full');
+                    nav.classList.add('translate-y-0');
+                    if (smHeader) smHeader.style.transform = 'translateY(0%)';
+                }
+
+                // Floating WhatsApp visibility
+                if (currentScrollY > 200) {
+                    if (floatWpp) {
+                        floatWpp.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-6');
+                        floatWpp.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                    }
+                } else {
+                    if (floatWpp) {
+                        floatWpp.classList.add('opacity-0', 'pointer-events-none', 'translate-y-6');
+                        floatWpp.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                    }
+                }
+
+                lastScrollY = currentScrollY;
+            }
+            window.addEventListener('scroll', handleNavScroll);
+            handleNavScroll();
+
+            // 2. Smooth Scroll Animation
+            function smoothScrollTo(targetEl, duration = 800) {
+                const navHeight = 80;
+                const targetPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                let startTime = null;
+
+                function easeInOutCubic(t, b, c, d) {
+                    t /= d / 2;
+                    if (t < 1) return c / 2 * t * t * t + b;
+                    t -= 2;
+                    return c / 2 * (t * t * t + 2) + b;
+                }
+
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+                    window.scrollTo(0, run);
+                    if (timeElapsed < duration) {
+                        requestAnimationFrame(animation);
+                    }
+                }
+
+                requestAnimationFrame(animation);
+            }
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        smoothScrollTo(targetElement, 750);
+                    }
+                });
+            });
+
+            // 3. HERO SOFTWARE TABS SWITCHER (Section 3)
+            const heroTabs = document.querySelectorAll('.hero-tab');
+            const heroPanes = document.querySelectorAll('.hero-pane');
+
+            heroTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.getAttribute('data-pane');
+                    heroTabs.forEach(t => {
+                        t.classList.remove('active', 'bg-[#C0894E]', 'text-[#121F21]');
+                        t.classList.add('text-[#D4C5B8]');
+                    });
+                    tab.classList.add('active', 'bg-[#C0894E]', 'text-[#121F21]');
+                    tab.classList.remove('text-[#D4C5B8]');
+
+                    heroPanes.forEach(pane => pane.classList.add('hidden'));
+                    const targetPane = document.getElementById(targetId);
+                    if (targetPane) targetPane.classList.remove('hidden');
+                });
+            });
+
+            // 4. REACTBITS SPOTLIGHT TRACKING (Throttled with rAF)
+            const spotlightCards = document.querySelectorAll('.spotlight-card');
+            spotlightCards.forEach(card => {
+                let rafSpotlight = null;
+                card.addEventListener('mousemove', (e) => {
+                    if (rafSpotlight) return;
+                    rafSpotlight = requestAnimationFrame(() => {
+                        const rect = card.getBoundingClientRect();
+                        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                        rafSpotlight = null;
+                    });
+                });
+            });
+
+            // 5. FAQ ACCORDION
+            const detailsList = document.querySelectorAll("details");
+            detailsList.forEach((targetDetail) => {
+                targetDetail.addEventListener("click", () => {
+                    detailsList.forEach((detail) => {
+                        if (detail !== targetDetail) {
+                            detail.removeAttribute("open");
+                        }
+                    });
+                });
+            });
+
+            // 6. SCROLL REVEAL OBSERVER
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                revealObserver.observe(el);
+            });
+
+            // 7. GSAP FULLSCREEN PANELS STACKING TIMELINE
+            if (window.ScrollTrigger && window.gsap) {
+                gsap.registerPlugin(ScrollTrigger);
+
+                const section = document.getElementById('fullscreen-stack-section');
+                const panel1 = document.getElementById('stack-panel-1');
+                const panel2 = document.getElementById('stack-panel-2');
+                const panel3 = document.getElementById('stack-panel-3');
+
+                if (section && panel1 && panel2 && panel3) {
+                    gsap.set([panel1, panel2, panel3], { force3D: true, willChange: "transform" });
+
+                    const tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top top",
+                            end: "+=1200",
+                            pin: true,
+                            scrub: 0.15,
+                            anticipatePin: 1
+                        }
+                    });
+
+                    tl.to(panel2, {
+                        y: "0%",
+                        ease: "none",
+                        duration: 1
+                    }, 0)
+                    .to(panel1, {
+                        scale: 0.94,
+                        opacity: 0.35,
+                        ease: "none",
+                        duration: 1
+                    }, 0);
+
+                    tl.to(panel3, {
+                        y: "0%",
+                        ease: "none",
+                        duration: 1
+                    }, 1)
+                    .to(panel2, {
+                        scale: 0.94,
+                        opacity: 0.35,
+                        ease: "none",
+                        duration: 1
+                    }, 1);
+                }
+            }
+
+            // 8. EXPANDING ACCORDION CARDS (Autoplay + Hover)
+            const accordionCards = document.querySelectorAll('[data-accordion-card]');
+            if (accordionCards.length > 0) {
+                let currentIdx = 0;
+                let autoplayTimer = null;
+
+                function setCard(idx) {
+                    accordionCards.forEach((card, i) => {
+                        card.classList.toggle('active-expanded', i === idx);
+                    });
+                }
+
+                function startAutoplay() {
+                    stopAutoplay();
+                    autoplayTimer = setInterval(() => {
+                        currentIdx = (currentIdx + 1) % accordionCards.length;
+                        setCard(currentIdx);
+                    }, 3200);
+                }
+
+                function stopAutoplay() {
+                    if (autoplayTimer) {
+                        clearInterval(autoplayTimer);
+                        autoplayTimer = null;
+                    }
+                }
+
+                setCard(0);
+                startAutoplay();
+
+                accordionCards.forEach((card, index) => {
+                    card.addEventListener('mouseenter', () => {
+                        stopAutoplay();
+                        currentIdx = index;
+                        setCard(index);
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        startAutoplay();
+                    });
+                });
+            }
+
+            // 9. PAUSE ROTATING BORDER ANIMATION WHEN OFF-SCREEN
+            const rotatingCards = document.querySelectorAll('.rotating-border-card');
+            if (rotatingCards.length > 0) {
+                const rotObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const card = entry.target;
+                        card.style.setProperty(
+                            '--rot-state',
+                            entry.isIntersecting ? 'running' : 'paused'
+                        );
+                    });
+                }, { rootMargin: '100px' });
+                rotatingCards.forEach(card => rotObserver.observe(card));
+            }
+
+        });
+    </script>
+</body>
+</html>
