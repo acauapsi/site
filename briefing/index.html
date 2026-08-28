@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Briefing Clínico — Acauã Sites</title>
     <meta name="description" content="Questionário oficial de criação de sites para psicólogos — Acauã Sites.">
+    <!-- Favicon -->
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS (Static Built) -->
-    <link rel="stylesheet" href="tailwind-output.css">
+    <link rel="stylesheet" href="../tailwind-output.css">
 
     <style>
         * {
@@ -38,139 +40,135 @@
             height: 160px !important;
             width: auto !important;
             max-height: 160px !important;
-            max-width: 220px !important;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto;
+            display: block !important;
+            margin: 0 auto !important;
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
         }
         .brand-logo-header {
-            height: 28px !important;
+            height: 24px !important;
             width: auto !important;
-            max-height: 28px !important;
-            object-fit: contain;
+            display: block !important;
+            border: none !important;
+            background: transparent !important;
         }
 
-        /* Step Card Animation */
-        .step-view {
-            display: none;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .step-view.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Main Container - 100% Unificado com o Fundo (Sem Borda e Sem Caixa Dentro de Caixa) */
+        /* Painel contínuo */
         .panel-container {
             background-color: #121F21;
             border: none;
             box-shadow: none;
         }
 
-        /* Unified Option Card (Used for Radios & Checkboxes) */
+        /* Interactive Select Cards */
         .option-box {
-            background-color: #0D191B;
+            background-color: #0E1A1C;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 0.875rem;
-            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            padding: 10px 14px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease-in-out;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 0.85rem;
-            color: #D4C5B8;
+            gap: 10px;
             user-select: none;
+            font-size: 13px;
+            color: #D4C5B8;
         }
         .option-box:hover {
-            border-color: rgba(192, 137, 78, 0.5);
-            background-color: #16292C;
+            border-color: #C0894E;
+            background-color: #14282B;
             color: #FAF0EB;
         }
         .option-box.selected {
-            border-color: #C0894E !important;
-            background-color: rgba(192, 137, 78, 0.15) !important;
-            color: #FAF0EB !important;
-            box-shadow: 0 0 0 1px #C0894E inset;
+            border-color: #C0894E;
+            background-color: #1A3236;
+            color: #FAF0EB;
+            box-shadow: 0 0 15px rgba(192, 137, 78, 0.15);
         }
         .option-box.selected .indicator-circle {
-            border-color: #C0894E;
             background-color: #C0894E;
-        }
-        .option-box.selected .indicator-square {
             border-color: #C0894E;
-            background-color: #C0894E;
+            box-shadow: 0 0 8px rgba(192, 137, 78, 0.6);
         }
-        .option-box.selected .indicator-square svg {
-            display: block;
+        .option-box.selected .indicator-check {
+            background-color: #C0894E;
+            border-color: #C0894E;
         }
 
-        /* Text Input */
+        /* Custom Inputs */
         .custom-input {
-            background-color: #0D191B;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #FAF0EB;
-            border-radius: 0.75rem;
-            padding: 0.8rem 1rem;
-            font-size: 0.875rem;
             width: 100%;
-            transition: all 0.2s ease;
+            background-color: #0E1A1C;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: #FAF0EB;
+            outline: none;
+            transition: border-color 0.2s;
         }
         .custom-input:focus {
             border-color: #C0894E;
-            box-shadow: 0 0 0 1px #C0894E;
-            outline: none;
-            background-color: #0A1315;
+            box-shadow: 0 0 10px rgba(192, 137, 78, 0.2);
         }
         .custom-input::placeholder {
             color: rgba(212, 197, 184, 0.4);
+            font-size: 12px;
         }
 
-        /* Copper Action Button */
+        /* Buttons */
         .btn-copper {
             background-color: #C0894E;
-            color: #0E1719;
+            color: #121F21;
             font-weight: 700;
             border-radius: 9999px;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 20px rgba(192, 137, 78, 0.25);
+            transition: all 0.2s;
         }
         .btn-copper:hover {
             background-color: #D4A574;
             transform: translateY(-1px);
-            box-shadow: 0 6px 25px rgba(192, 137, 78, 0.4);
+            box-shadow: 0 6px 20px rgba(192, 137, 78, 0.3);
         }
-
-        /* Back Ghost Button */
         .btn-ghost {
             background-color: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.15);
             color: #D4C5B8;
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 9999px;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
         .btn-ghost:hover {
-            border-color: #C0894E;
             color: #FAF0EB;
-            background-color: rgba(255, 255, 255, 0.05);
+            border-color: #C0894E;
+            background-color: rgba(192, 137, 78, 0.05);
         }
-
-        /* WhatsApp Button (Maximum Vibrancy & Contrast) */
+        /* Botão WhatsApp Oficial */
         .btn-wpp-master {
-            background-color: #25D366 !important;
-            color: #072214 !important;
-            font-weight: 800 !important;
+            background-color: #25D366;
+            color: #FFFFFF;
+            font-weight: 700;
             border-radius: 9999px;
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
         .btn-wpp-master:hover {
-            background-color: #20BD5A !important;
+            background-color: #22BF5B;
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.6);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+        }
+
+        /* Step View Switching Animation */
+        .step-view {
+            display: none;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .step-view.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -180,7 +178,7 @@
     <header class="sticky top-0 z-50 bg-[#121F21] border-b border-white/5">
         <div class="max-w-2xl mx-auto px-5 py-3.5 flex items-center justify-between">
             <div class="flex items-center gap-2.5">
-                <img src="logo_acaua.svg" alt="Acauã" class="brand-logo-header" style="width: 24px; height: 24px; max-width: 24px; max-height: 24px;">
+                <img src="../logo_acaua.svg" alt="Acauã" class="brand-logo-header" style="width: 24px; height: 24px; max-width: 24px; max-height: 24px;">
                 <div>
                     <span class="font-heading font-bold text-lg tracking-wider text-[#FAF0EB]">ACAUÃ <span class="text-[#C0894E]">SITES</span></span>
                 </div>
@@ -207,7 +205,7 @@
             <div class="panel-container p-8 sm:p-12 text-center space-y-5">
                 <!-- Logo Nobre e Proporcional Sem Borda -->
                 <div class="flex justify-center py-2">
-                    <img src="logo_acaua.svg" alt="Acauã" class="brand-logo-main" style="height: 160px; width: auto; max-height: 160px;">
+                    <img src="../logo_acaua.svg" alt="Acauã" class="brand-logo-main" style="height: 160px; width: auto; max-height: 160px;">
                 </div>
 
                 <div class="space-y-2">
