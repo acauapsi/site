@@ -187,6 +187,48 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Navbar & Hero Animated Brand Gradient */
+        @keyframes brandGradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navbar Brand Link (Turns solid copper on hover) */
+        .brand-gradient-nav {
+            background: linear-gradient(90deg, #FAF0EB 0%, #C0894E 30%, #D4A574 50%, #FAF0EB 70%, #C0894E 100%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            animation: brandGradientFlow 4s ease infinite;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .brand-gradient-nav:hover {
+            animation: none;
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: #C0894E !important;
+            color: #C0894E !important;
+            text-shadow: 0 0 20px rgba(192, 137, 78, 0.4);
+            transform: scale(1.03);
+        }
+
+        /* WhatsApp Pulsing Animation */
+        @keyframes wppPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(192, 137, 78, 0.3);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 35px rgba(192, 137, 78, 0.5), 0 0 0 8px rgba(192, 137, 78, 0.1);
+            }
+        }
+        .animate-wpp-pulse {
+            animation: wppPulse 3.5s ease-in-out infinite;
+        }
+
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
     </style>
@@ -197,39 +239,28 @@
     <div class="bg-noise"></div>
     <div class="ambient-aurora"></div>
 
-    <!-- ===== NAVBAR ===== -->
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md bg-petrol-950/80 border-b border-copper-400/15">
-        <div class="max-w-6xl mx-auto px-5 h-20 flex items-center justify-between">
-            <!-- Logo Acauã -->
-            <a href="../" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 flex items-center justify-center filter drop-shadow-[0_0_12px_rgba(192,137,78,0.4)] group-hover:scale-105 transition-transform">
-                    <img src="../logo_acaua.svg" alt="Acauã" class="w-full h-full object-contain">
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-heading font-bold text-2xl tracking-[0.14em] text-sand-50 uppercase leading-none">ACAUÃ</span>
-                    <span class="text-[9px] font-mono tracking-widest text-copper-400 uppercase">App Clínico</span>
-                </div>
+    <!-- Header Navbar (Smart Auto-Hide on Scroll Down, Reveal on Scroll Up) -->
+    <nav id="navbar" class="fixed top-0 w-full z-[100] py-4 transition-all duration-500 transform ease-in-out bg-transparent border-b border-transparent">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <a href="../#hero" class="brand-gradient-nav font-heading font-bold text-2xl tracking-wider select-none cursor-pointer">
+                ACAUÃ
             </a>
 
-            <!-- Menu Desktop -->
-            <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-wider font-medium text-sand-300">
-                <a href="#diferenciais" class="hover:text-copper-300 transition-colors">Diferenciais</a>
-                <a href="#modulos" class="hover:text-copper-300 transition-colors">Módulos</a>
-                <a href="#seguranca" class="hover:text-copper-300 transition-colors">Segurança & CFP</a>
-                <a href="#precos" class="hover:text-copper-300 transition-colors">Preços</a>
-                <a href="#faq" class="hover:text-copper-300 transition-colors">FAQ</a>
-            </nav>
-
-            <!-- CTA Topo -->
-            <div class="flex items-center gap-3">
-                <a href="https://wa.me/5584987347580?text=Ol%C3%A1!%20Gostaria%20de%20garantir%20minha%20licen%C3%A7a%20do%20Acau%C3%A3%20App." target="_blank" class="btn-copper text-xs px-5 py-2.5 rounded-full uppercase tracking-wider font-bold flex items-center gap-2">
-                    <i class="fab fa-whatsapp"></i>
-                    <span class="hidden sm:inline">Comprar App</span>
-                    <span class="sm:hidden">Comprar</span>
-                </a>
+            <div class="hidden md:flex items-center gap-6 text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4C5B8]">
+                <a href="../#diferenciais" class="hover:text-[#C0894E] transition-colors">Autonomia</a>
+                <a href="../app/" class="text-[#C0894E] font-extrabold transition-colors">O App</a>
+                <a href="../sites/" class="hover:text-[#C0894E] transition-colors">O Site</a>
+                <a href="../#panelinha" class="hover:text-[#C0894E] transition-colors">Panelinha</a>
+                <a href="../#planos" class="hover:text-[#C0894E] transition-colors">Planos</a>
             </div>
+
+            <!-- Desktop Premium WhatsApp CTA Button -->
+            <a href="https://wa.me/5500999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Acau%C3%A3." target="_blank" class="hidden md:flex items-center gap-2.5 px-5 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-wider text-[#121F21] bg-[#C0894E] shadow-[0_2px_15px_rgba(192,137,78,0.3)] hover:bg-[#D4A574] hover:scale-105 transition-all duration-300">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                <span>FALAR NO WHATSAPP</span>
+            </a>
         </div>
-    </header>
+    </nav>
 
     <!-- ===== HERO SECTION ===== -->
     <section class="min-h-screen pt-36 pb-20 px-6 relative z-10 flex flex-col items-center justify-center text-center">
@@ -730,35 +761,130 @@
         </div>
     </section>
 
-    <!-- ===== RODAPÉ ===== -->
-    <footer class="py-12 px-6 border-t border-copper-400/15 text-center relative z-10 bg-petrol-950">
-        <div class="max-w-4xl mx-auto space-y-6">
-            
-            <div class="flex items-center justify-center gap-3">
-                <img src="../logo_acaua.svg" alt="Acauã" class="w-8 h-8 object-contain">
-                <span class="font-heading font-bold text-xl tracking-widest text-sand-50 uppercase">ACAUÃ</span>
+    <!-- PREMIUM FULL-WIDTH FOOTER (Deep Petrol Background) -->
+    <footer class="w-full bg-[#121F21] border-t border-white/10 pt-16 pb-12 relative overflow-hidden text-[#D4C5B8]">
+        <!-- Subtle Ambient Glow -->
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-[#C0894E]/5 blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Top Footer Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+                
+                <!-- Column 1: Brand Info -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="space-y-2">
+                        <a href="../app/" class="flex items-center gap-3.5 font-heading font-bold text-2xl tracking-tight text-[#FAF0EB] group">
+                            <div class="w-12 h-12 rounded-xl bg-[#1B4B4F] border border-[#C0894E]/50 flex items-center justify-center p-1 shadow-md shrink-0 group-hover:border-[#C0894E] group-hover:scale-105 transition-all">
+                                <img src="../logo_acaua.svg" alt="Acauã Logo" class="w-full h-full object-contain">
+                            </div>
+                            <span class="text-[#FAF0EB]">Acauã <span class="text-[#C0894E] font-bold">-</span> <span class="text-[#C0894E] font-bold text-2xl">App</span></span>
+                        </a>
+                        <p class="text-[#D4C5B8] text-xs sm:text-sm leading-relaxed max-w-md">
+                            Software desktop local 100% offline criptografado em SQLite SQLCipher (AES-256) para gestão clínica e prontuários com total sigilo CFP & LGPD.
+                        </p>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <a href="../sites/" class="flex items-center gap-3.5 font-heading font-bold text-2xl tracking-tight text-[#FAF0EB] group">
+                            <div class="w-12 h-12 rounded-xl bg-[#1B4B4F] border border-[#C0894E]/50 flex items-center justify-center p-1 shadow-md shrink-0 group-hover:border-[#C0894E] group-hover:scale-105 transition-all">
+                                <img src="../logo_acaua.svg" alt="Acauã Logo" class="w-full h-full object-contain">
+                            </div>
+                            <span class="text-[#FAF0EB]">Acauã <span class="text-[#C0894E] font-bold">-</span> <span class="text-[#C0894E] font-bold text-2xl">Sites</span></span>
+                        </a>
+                        <p class="text-[#D4C5B8] text-xs sm:text-sm leading-relaxed max-w-md">
+                            Presença digital profissional no Google com landing pages exclusivas e otimizadas para posicionar seu consultório e atrair novos pacientes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Column 2: Navegação -->
+                <div class="space-y-4">
+                    <h4 class="font-heading font-bold text-sm text-[#C0894E] uppercase tracking-[0.2em]">Navegação</h4>
+                    <ul class="space-y-2.5 text-xs text-[#D4C5B8] font-medium">
+                        <li><a href="../#hero" class="hover:text-[#C0894E] transition-colors">Início</a></li>
+                        <li><a href="../#diferenciais" class="hover:text-[#C0894E] transition-colors">Autonomia & Sigilo</a></li>
+                        <li><a href="../app/" class="text-[#C0894E] font-bold transition-colors">O App Offline</a></li>
+                        <li><a href="../sites/" class="hover:text-[#C0894E] transition-colors">Presença no Google</a></li>
+                        <li><a href="../#panelinha" class="hover:text-[#C0894E] transition-colors">Combo Panelinha</a></li>
+                        <li><a href="../#planos" class="hover:text-[#C0894E] transition-colors">Tabela de Planos</a></li>
+                        <li><a href="../#faq" class="hover:text-[#C0894E] transition-colors">Dúvidas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Tecnologia -->
+                <div class="space-y-4">
+                    <h4 class="font-heading font-bold text-sm text-[#C0894E] uppercase tracking-[0.2em]">Tecnologia & Apps</h4>
+                    <ul class="space-y-2.5 text-xs text-[#D4C5B8] font-medium">
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Software Desktop Tauri + Rust
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Banco SQLCipher Local Criptografado
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Gerador de Prontuários e Anamnese
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Sem Servidores / Sem Vazamento
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Exportação PDF Criptografada
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E]">✓</span> Backup Local Instantâneo
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Atendimento -->
+                <div class="space-y-4">
+                    <h4 class="font-heading font-bold text-sm text-[#C0894E] uppercase tracking-[0.2em]">Atendimento</h4>
+                    
+                    <ul class="space-y-3 text-xs text-[#D4C5B8]">
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E] font-bold">•</span>
+                            <span class="text-[#FAF0EB] font-bold">Suporte Técnico Ativo</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E] font-bold">•</span>
+                            <span>Segunda a Sexta, das <strong class="text-[#FAF0EB]">07h às 17h</strong></span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C0894E] font-bold">•</span>
+                            <span>Atendimento direto para psicólogos</span>
+                        </li>
+                    </ul>
+
+                    <div class="pt-1">
+                        <a href="https://wa.me/5500999999999?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20o%20Acau%C3%A3%20App." target="_blank" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#1B4B4F] border border-[#C0894E]/40 text-[#FAF0EB] text-xs font-bold uppercase tracking-wider shadow-sm hover:bg-[#2A5F63] transition-all">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                            <span>WhatsApp Suporte</span>
+                        </a>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="flex justify-center items-center gap-4 text-copper-300 text-sm">
-                <a href="../" class="hover:text-sand-50 transition-colors">Início</a>
-                <span>•</span>
-                <a href="../sites/" class="hover:text-sand-50 transition-colors">Acauã Sites</a>
-                <span>•</span>
-                <a href="../briefing/" class="hover:text-sand-50 transition-colors">Briefing</a>
-                <span>•</span>
-                <a href="../links/" class="hover:text-sand-50 transition-colors">Hub de Links</a>
-                <span>•</span>
-                <a href="https://wa.me/5584987347580" target="_blank" class="hover:text-sand-50 transition-colors">WhatsApp</a>
+            <!-- Bottom Footer Bar -->
+            <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#D4C5B8]/70">
+                <div class="flex items-center gap-3">
+                    <span class="font-heading font-bold text-[#FAF0EB] text-base">ACAUÃ</span>
+                    <span>•</span>
+                    <span>Copyright © 2026 Acauãpsi. Todos os direitos reservados.</span>
+                </div>
+                <div class="text-[#C0894E] font-medium tracking-wide">
+                    Tecnologia feita por psicólogos, para psicólogos.
+                </div>
             </div>
-
-            <p class="text-[10px] font-mono text-sand-300/60 uppercase tracking-widest">
-                © 2026 ACAUÃ • TECNOLOGIA & AUTONOMIA CLÍNICA VITALÍCIA
-            </p>
-
         </div>
     </footer>
 
-    <!-- Particles Script -->
+    <!-- WhatsApp Floating Button -->
+    <a id="floating-whatsapp" href="https://wa.me/5500999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Acau%C3%A3%20App." target="_blank" class="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-[#1B4B4F] border border-[#C0894E]/60 text-[#FAF0EB] flex items-center justify-center shadow-[0_4px_25px_rgba(0,0,0,0.4)] opacity-0 pointer-events-none translate-y-6 transition-all duration-500 hover:scale-110 hover:border-[#C0894E] animate-wpp-pulse">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    </a>
+
+    <!-- Particles & Scroll Script -->
     <script>
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
@@ -813,6 +939,42 @@
             requestAnimationFrame(animate);
         }
         animate();
+
+        // Navbar and Floating WhatsApp Scroll Behavior
+        let lastScrollY = window.scrollY;
+        const nav = document.getElementById('navbar');
+        const floatWpp = document.getElementById('floating-whatsapp');
+
+        function handleNavScroll() {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > 60) {
+                nav.classList.add('bg-[#121F21]/80', 'backdrop-blur-md', 'border-[#D4C5B8]/10');
+                nav.classList.remove('bg-transparent', 'border-transparent');
+            } else {
+                nav.classList.remove('bg-[#121F21]/80', 'backdrop-blur-md', 'border-[#D4C5B8]/10');
+                nav.classList.add('bg-transparent', 'border-transparent');
+            }
+
+            if (currentScrollY > 200 && currentScrollY > lastScrollY) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+
+            if (floatWpp) {
+                if (currentScrollY > 400) {
+                    floatWpp.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-6');
+                    floatWpp.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                } else {
+                    floatWpp.classList.add('opacity-0', 'pointer-events-none', 'translate-y-6');
+                    floatWpp.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                }
+            }
+
+            lastScrollY = currentScrollY;
+        }
+        window.addEventListener('scroll', handleNavScroll, { passive: true });
     </script>
 
 </body>
