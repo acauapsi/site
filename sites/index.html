@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Metadata -->
+    <title>Acauã Sites | Landing Pages de Alto Padrão para Psicólogos</title>
+    <meta name="description" content="Landing pages de alta conversão para psicólogos captarem pacientes particulares. Design exclusivo, 6 seções estratégicas, hospedagem vitalícia gratuita.">
+    <meta property="og:title" content="Acauã Sites | Presença Digital para Psicólogos">
+    <meta property="og:description" content="Capte pacientes particulares com uma landing page profissional e elegante. Sem mensalidades de hospedagem.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#081011">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        petrol: {
+                            950: '#081011',
+                            900: '#0C1617',
+                            850: '#102022',
+                            800: '#142E31',
+                            700: '#1B4B4F',
+                            600: '#2A5F63',
+                        },
+                        copper: {
+                            200: '#E8C5A0',
+                            300: '#D4A574',
+                            400: '#C0894E',
+                            500: '#A07040',
+                            600: '#8A5D32',
+                        },
+                        sand: {
+                            50: '#FFFFFF',
+                            100: '#FAF0EB',
+                            200: '#F0E4DC',
+                            300: '#D4C5B8',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        cinzel: ['"Cinzel"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: #081011; }
+        ::-webkit-scrollbar-thumb { background: #1B4B4F; border-radius: 999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #C0894E; }
+
+        body {
+            background-color: #081011;
+            color: #FAF0EB;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .ambient-aurora {
+            position: fixed;
+            top: -15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(192, 137, 78, 0.16) 0%, rgba(27, 75, 79, 0.24) 40%, transparent 75%);
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes brandShimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .metallic-title {
+            background: linear-gradient(110deg, #FAF0EB 0%, #D4A574 25%, #FAF0EB 45%, #C0894E 65%, #FAF0EB 85%, #D4A574 100%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: brandShimmer 7s linear infinite;
+        }
+
+        .glass-panel {
+            background: rgba(16, 32, 34, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 165, 116, 0.15);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .spotlight-card {
+            background: linear-gradient(135deg, rgba(16, 32, 34, 0.75) 0%, rgba(10, 20, 21, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 165, 116, 0.15);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .spotlight-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(192, 137, 78, 0.45);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(192, 137, 78, 0.15);
+        }
+
+        .btn-copper {
+            background: linear-gradient(135deg, #C0894E 0%, #A07040 100%);
+            color: #081011;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(192, 137, 78, 0.35);
+        }
+        .btn-copper:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #D4A574 0%, #C0894E 100%);
+            box-shadow: 0 8px 30px rgba(192, 137, 78, 0.5);
+        }
+
+        .rotating-border-card {
+            position: relative;
+            overflow: hidden;
+            background: #142E31;
+            box-shadow: 0 0 40px rgba(192, 137, 78, 0.2);
+        }
+        .rotating-border-card::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: conic-gradient(from 0deg, #A07040, #C0894E, #FAF0EB, #C0894E, #A07040);
+            animation: rotateBorder 4s linear infinite;
+        }
+        .rotating-border-card::after {
+            content: '';
+            position: absolute;
+            background: #0C1617;
+            inset: 2px;
+            border-radius: inherit;
+            z-index: 1;
+        }
+        @keyframes rotateBorder {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="relative selection:bg-[#C0894E] selection:text-[#081011]">
+
+    <canvas id="particle-canvas"></canvas>
+    <div class="bg-noise"></div>
+    <div class="ambient-aurora"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md bg-petrol-950/80 border-b border-copper-400/15">
+        <div class="max-w-6xl mx-auto px-5 h-20 flex items-center justify-between">
+            <!-- Logo Acauã -->
+            <a href="../" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 flex items-center justify-center filter drop-shadow-[0_0_12px_rgba(192,137,78,0.4)] group-hover:scale-105 transition-transform">
+                    <img src="../logo_acaua.svg" alt="Acauã" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading font-bold text-2xl tracking-[0.14em] text-sand-50 uppercase leading-none">ACAUÃ</span>
+                    <span class="text-[9px] font-mono tracking-widest text-copper-400 uppercase">Sites & Presença</span>
+                </div>
+            </a>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-wider font-medium text-sand-300">
+                <a href="#por-que-site" class="hover:text-copper-300 transition-colors">Por Que Ter Site</a>
+                <a href="#anatomia" class="hover:text-copper-300 transition-colors">6 Seções Inclusas</a>
+                <a href="#processo" class="hover:text-copper-300 transition-colors">Como Funciona</a>
+                <a href="#precos" class="hover:text-copper-300 transition-colors">Preços</a>
+                <a href="#faq" class="hover:text-copper-300 transition-colors">FAQ</a>
+            </nav>
+
+            <!-- CTA Topo -->
+            <div class="flex items-center gap-3">
+                <a href="../briefing/" class="text-xs px-4 py-2.5 rounded-full border border-copper-400/40 hover:border-copper-400 text-copper-300 hover:text-sand-50 uppercase tracking-wider font-semibold transition-all">
+                    Iniciar Briefing
+                </a>
+                <a href="https://wa.me/5584987347580?text=Ol%C3%A1!%20Gostaria%20de%20criar%20meu%20site%20com%20a%20Acau%C3%A3." target="_blank" class="btn-copper text-xs px-5 py-2.5 rounded-full uppercase tracking-wider font-bold flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="hidden sm:inline">Criar Meu Site</span>
+                    <span class="sm:hidden">Criar</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="min-h-screen pt-36 pb-20 px-6 relative z-10 flex flex-col items-center justify-center text-center">
+        <div class="max-w-4xl mx-auto space-y-6">
+            
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-copper-400/40 bg-copper-400/10 text-copper-300 font-mono text-[11px] uppercase tracking-[0.2em] shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-copper-400 animate-pulse"></span>
+                Presença Digital de Alto Padrão • Hospedagem Vitalícia
+            </div>
+
+            <!-- Headline -->
+            <h1 class="font-heading text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-sand-50 leading-[1.08]">
+                Sua presença digital<br>
+                <span class="metallic-title">no padrão que a sua clínica merece.</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-sand-300/90 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                Landing pages de alta conversão pensadas exclusivamente para psicólogos captarem pacientes particulares no Google e Instagram. <strong>Sem mensalidades de hospedagem</strong> e sem trabalho técnico.
+            </p>
+
+            <!-- Buttons -->
+            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#precos" class="btn-copper text-xs sm:text-sm px-8 py-4 rounded-full uppercase tracking-widest font-bold shadow-xl flex items-center gap-2 w-full sm:w-auto justify-center">
+                    <span>Criar Meu Site Agora</span>
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                <a href="../briefing/" class="px-7 py-4 rounded-full bg-petrol-850/80 border border-copper-400/30 hover:border-copper-400 text-sand-200 hover:text-sand-50 text-xs sm:text-sm uppercase tracking-wider font-semibold transition-all backdrop-blur-md w-full sm:w-auto justify-center flex items-center gap-2">
+                    <i class="fas fa-clipboard-list text-copper-400"></i>
+                    <span>Preencher Questionário de Briefing</span>
+                </a>
+            </div>
+
+            <!-- Mockup do Site -->
+            <div class="pt-12 relative max-w-4xl mx-auto">
+                <div class="absolute -inset-1.5 bg-gradient-to-r from-copper-400/30 via-petrol-600/40 to-copper-400/30 rounded-3xl blur-xl opacity-75"></div>
+                <div class="relative rounded-2xl overflow-hidden border border-copper-400/30 bg-petrol-900 shadow-2xl">
+                    <img src="../praxys_website_mockup.jpg" alt="Acauã Sites Mockup" class="w-full h-auto object-cover">
+                </div>
+
+                <!-- Floating Tags -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
+                    <div class="glass-panel p-3 rounded-xl text-center">
+                        <span class="text-copper-300 text-xs font-mono font-bold block">100% RESPONSIVO</span>
+                        <span class="text-[10px] text-sand-300/80">Perfeito no Celular e PC</span>
+                    </div>
+                    <div class="glass-panel p-3 rounded-xl text-center">
+                        <span class="text-copper-300 text-xs font-mono font-bold block">SEO GOOGLE</span>
+                        <span class="text-[10px] text-sand-300/80">Otimizado para buscas</span>
+                    </div>
+                    <div class="glass-panel p-3 rounded-xl text-center">
+                        <span class="text-copper-300 text-xs font-mono font-bold block">SEM ALUGUEL</span>
+                        <span class="text-[10px] text-sand-300/80">Hospedagem vitalícia</span>
+                    </div>
+                    <div class="glass-panel p-3 rounded-xl text-center">
+                        <span class="text-copper-300 text-xs font-mono font-bold block">WHATSAPP DIRETO</span>
+                        <span class="text-[10px] text-sand-300/80">Agendamento em 1 clique</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO 1: POR QUE O PSICÓLOGO PRECISA DE SITE ===== -->
+    <section id="por-que-site" class="py-24 px-6 relative z-10 border-t border-white/5 bg-petrol-900/60">
+        <div class="max-w-5xl mx-auto space-y-12">
+            
+            <div class="text-center space-y-3">
+                <span class="text-copper-400 font-mono font-bold text-xs tracking-[0.2em] uppercase block">Posicionamento Clínico</span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold text-sand-50">
+                    Por Que o Psicólogo Moderno Precisa de um Site Próprio?
+                </h2>
+                <p class="text-sand-300 text-sm max-w-xl mx-auto">
+                    Depender apenas de convênios ou do feed do Instagram limita o seu crescimento e atrai pacientes desqualificados.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Benefício 1 -->
+                <div class="spotlight-card p-7 rounded-3xl space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-copper-400/15 border border-copper-400/30 text-copper-300 flex items-center justify-center text-xl">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-2xl text-sand-50">Cobrar o Valor Justo</h3>
+                    <p class="text-xs text-sand-300 leading-relaxed">
+                        Plataformas e planos de saúde repassam valores irrisórios por consulta. Um site próprio de alto padrão transmite autoridade imediata para você cobrar o valor particular integral.
+                    </p>
+                </div>
+
+                <!-- Benefício 2 -->
+                <div class="spotlight-card p-7 rounded-3xl space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-copper-400/15 border border-copper-400/30 text-copper-300 flex items-center justify-center text-xl">
+                        <i class="fas fa-magnifying-glass-location"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-2xl text-sand-50">Ser Encontrado no Google</h3>
+                    <p class="text-xs text-sand-300 leading-relaxed">
+                        Quem busca "Psicólogo em [Sua Cidade]" no Google já decidiu que quer fazer terapia. Seu site coloca você no caminho desse paciente no momento exato da decisão.
+                    </p>
+                </div>
+
+                <!-- Benefício 3 -->
+                <div class="spotlight-card p-7 rounded-3xl space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-copper-400/15 border border-copper-400/30 text-copper-300 flex items-center justify-center text-xl">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-2xl text-sand-50">Identidade & Ética</h3>
+                    <p class="text-xs text-sand-300 leading-relaxed">
+                        Explique sua abordagem, sua formação e as queixas que você atende com clareza e respeito às normas do CFP, sem depender do algoritmo instável das redes sociais.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO 2: ANATOMIA DO SITE (6 SEÇÕES) ===== -->
+    <section id="anatomia" class="py-24 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto space-y-16">
+            
+            <div class="text-center space-y-3">
+                <span class="text-copper-400 font-mono font-bold text-xs tracking-[0.2em] uppercase block">Estrutura Inclusa</span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold text-sand-50">
+                    A Anatomia Perfeita da sua Landing Page
+                </h2>
+                <p class="text-sand-300 text-sm max-w-xl mx-auto">
+                    Cada seção do seu site é desenhada estrategicamente para acolher o paciente, tirar dúvidas e levá-lo ao agendamento.
+                </p>
+            </div>
+
+            <!-- Grid de 6 Seções Inclusas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- 1. Hero -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <span class="text-copper-400 font-mono font-bold text-xs">SEÇÃO 01</span>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 my-2">Hero de Alto Impacto</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            A primeira impressão do visitante. Foto profissional de alta resolução, seu CRP em evidência, título acolhedor e botão imediato de contato.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fas fa-bolt"></i>
+                        <span>Retenção nos Primeiros 3s</span>
+                    </div>
+                </div>
+
+                <!-- 2. Sobre Mim -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <span class="text-copper-400 font-mono font-bold text-xs">SEÇÃO 02</span>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 my-2">Sobre Mim & Biografia</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            Apresentação humanizada da sua trajetória, faculdade, especializações e propósito clínico, estabelecendo rapport antes mesmo da primeira sessão.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fas fa-id-card"></i>
+                        <span>Autoridade com Humanidade</span>
+                    </div>
+                </div>
+
+                <!-- 3. Abordagem Teórica -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <span class="text-copper-400 font-mono font-bold text-xs">SEÇÃO 03</span>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 my-2">Abordagem & Método</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            Explicação acessível e clara de como você conduz o processo psicoterapêutico (TCC, Psicanálise, Fenomenologia, Humanista, etc.) sem jargões acadêmicos.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fas fa-book-open-reader"></i>
+                        <span>Clareza para o Leigo</span>
+                    </div>
+                </div>
+
+                <!-- 4. Demandas Atendidas -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <span class="text-copper-400 font-mono font-bold text-xs">SEÇÃO 04</span>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 my-2">Demandas & Especialidades</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            Cards visuais para queixas como ansiedade, depressão, luto, transição de carreira, autoconhecimento e relacionamentos, gerando identificação imediata.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fas fa-heart-pulse"></i>
+                        <span>Identificação Terapêutica</span>
+                    </div>
+                </div>
+
+                <!-- 5. FAQ de Dúvidas -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <span class="text-copper-400 font-mono font-bold text-xs">SEÇÃO 05</span>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 my-2">FAQ Quebra de Objeções</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            Respostas para dúvidas comuns: Como funciona a 1ª sessão? O atendimento é online ou presencial? Como funciona o sigilo? Como é feito o pagamento?
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fas fa-circle-question"></i>
+                        <span>Elimina Inseguranças</span>
+                    </div>
+                </div>
+
+                <!-- 6. Agendamento Direto -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <span class="text-copper-400 font-mono font-bold text-xs">SEÇÃO 06</span>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 my-2">Agendamento no WhatsApp</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            Botão direto que abre uma conversa com você no WhatsApp com mensagem de agendamento já pronta, garantindo conversão instantânea sem formulários cansativos.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Conversão em 1 Toque</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO 3: COMO FUNCIONA (3 PASSOS) ===== -->
+    <section id="processo" class="py-24 px-6 relative z-10 bg-petrol-900/40 border-y border-white/5">
+        <div class="max-w-4xl mx-auto space-y-12">
+            
+            <div class="text-center space-y-3">
+                <span class="text-copper-400 font-mono font-bold text-xs tracking-[0.2em] uppercase block">Zero Trabalho Técnico</span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold text-sand-50">
+                    Seu Site Pronto em 3 Passos Simples
+                </h2>
+                <p class="text-sand-300 text-sm max-w-lg mx-auto">
+                    Você não precisa saber programação, design ou marketing. Nós cuidamos de tudo para você.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                <!-- Passo 1 -->
+                <div class="p-6 rounded-3xl bg-petrol-950/90 border border-copper-400/20 space-y-3">
+                    <span class="w-9 h-9 rounded-full bg-copper-400/20 text-copper-300 font-bold font-mono text-sm flex items-center justify-center">1</span>
+                    <h3 class="font-heading font-bold text-xl text-sand-100">Você Preenche o Briefing</h3>
+                    <p class="text-xs text-sand-300 leading-relaxed">
+                        Em 5 a 10 minutos pelo celular, você responde nosso <a href="../briefing/" class="text-copper-300 underline font-semibold">questionário guiado</a> com suas informações e preferências.
+                    </p>
+                </div>
+
+                <!-- Passo 2 -->
+                <div class="p-6 rounded-3xl bg-petrol-950/90 border border-copper-400/20 space-y-3">
+                    <span class="w-9 h-9 rounded-full bg-copper-400/20 text-copper-300 font-bold font-mono text-sm flex items-center justify-center">2</span>
+                    <h3 class="font-heading font-bold text-xl text-sand-100">Criamos seu Design & Copy</h3>
+                    <p class="text-xs text-sand-300 leading-relaxed">
+                        Nossa equipe desenvolve a estrutura visual, imagens e textos persuasivos e éticos de todas as 6 seções da sua landing page.
+                    </p>
+                </div>
+
+                <!-- Passo 3 -->
+                <div class="p-6 rounded-3xl bg-petrol-950/90 border border-copper-400/20 space-y-3">
+                    <span class="w-9 h-9 rounded-full bg-copper-400/20 text-copper-300 font-bold font-mono text-sm flex items-center justify-center">3</span>
+                    <h3 class="font-heading font-bold text-xl text-sand-100">Publicamos no Seu Domínio</h3>
+                    <p class="text-xs text-sand-300 leading-relaxed">
+                        Aprovamos o site com você e colocamos no ar com hospedagem vitalícia gratuita, certificado de segurança SSL e SEO ativado.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Botão Iniciar Briefing -->
+            <div class="text-center pt-4">
+                <a href="../briefing/" class="btn-copper text-xs px-8 py-4 rounded-full uppercase tracking-widest font-bold shadow-xl inline-flex items-center gap-2">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Iniciar Questionário de Briefing Agora</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO 4: TABELA DE PREÇOS ===== -->
+    <section id="precos" class="py-24 px-6 relative z-10">
+        <div class="max-w-5xl mx-auto space-y-16">
+            
+            <div class="text-center space-y-3">
+                <span class="inline-block px-4 py-1 rounded-full border border-copper-400/40 bg-copper-400/10 text-copper-300 font-mono text-[10px] uppercase tracking-widest">Oferta de Lançamento</span>
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-sand-50">
+                    Sua Vitrine Profissional Sem Mensalidades
+                </h2>
+                <p class="text-sand-300 text-sm max-w-lg mx-auto">
+                    Criação única e completa. Sem custo de servidor mensal. Adquira individualmente ou com o desconto coletivo de amigos.
+                </p>
+            </div>
+
+            <!-- Grid de Planos: Individual & Panelinha -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
+                
+                <!-- CARD 1: Plano Individual do Site -->
+                <div class="p-8 rounded-3xl bg-petrol-900/90 border border-copper-400/30 flex flex-col justify-between relative shadow-xl">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs text-copper-300 font-bold uppercase tracking-wider">Criação Individual</span>
+                            <span class="bg-copper-400/20 text-copper-300 text-[10px] font-bold px-3 py-1 rounded-full uppercase font-mono">50% OFF</span>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading font-bold text-3xl text-sand-50">Acauã Sites</h3>
+                            <p class="text-xs text-sand-300 mt-1">Landing page profissional completa.</p>
+                        </div>
+
+                        <div class="border-y border-white/10 py-5 space-y-1">
+                            <div class="text-xs text-sand-300/50 line-through font-mono">De R$ 494</div>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-sm font-bold text-copper-400">Por</span>
+                                <span class="font-heading font-bold text-5xl text-sand-50">R$ 247</span>
+                            </div>
+                            <span class="text-[10px] text-copper-300 font-mono block">criação única • sem mensalidade de hospedagem</span>
+                        </div>
+
+                        <ul class="space-y-3 text-xs text-sand-200">
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-copper-400"></i> Landing Page com 6 Seções Completas</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-copper-400"></i> Redação Persuasiva & Design Responsivo</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-copper-400"></i> Otimização SEO para buscas no Google</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-copper-400"></i> Hospedagem Gratuita Vitalícia Inclusa</li>
+                        </ul>
+                    </div>
+
+                    <a href="https://wa.me/5584987347580?text=Ol%C3%A1!%20Quero%20criar%20meu%20site%20individual%20na%20Acau%C3%A3%20por%20R$%20247." target="_blank" class="mt-8 btn-copper w-full py-4 text-xs font-bold text-center uppercase tracking-widest rounded-xl">
+                        Criar Meu Site Individual
+                    </a>
+                </div>
+
+                <!-- CARD 2: Panelinha Só o Site (Rotating Border) -->
+                <div class="rotating-border-card rounded-3xl flex flex-col justify-between relative shadow-2xl">
+                    <div class="relative z-10 p-8 flex flex-col justify-between flex-1 space-y-6">
+                        
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-mono text-xs text-copper-300 font-bold uppercase tracking-wider">Combos Panelinha</span>
+                                <span class="bg-copper-400 text-petrol-950 text-[10px] font-bold px-3 py-1 rounded-full uppercase font-mono tracking-wider">Até 70% OFF</span>
+                            </div>
+
+                            <h3 class="font-heading font-bold text-3xl text-sand-50">Panelinha do Site</h3>
+                            <p class="text-xs text-sand-300 mt-1">Junte amigos e dividam o valor da criação.</p>
+                        </div>
+
+                        <!-- Rows Panelinha -->
+                        <div class="space-y-3.5 border-y border-white/10 py-5">
+                            
+                            <!-- 2 Amigos -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-sand-100 text-sm font-medium block">2 Amigos</span>
+                                    <span class="text-[10px] text-copper-400 font-mono font-semibold">57% OFF</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[10px] text-sand-300/50 line-through font-mono">Total De R$ 988</div>
+                                    <div class="font-heading font-bold text-xl text-sand-50">R$ 210<span class="text-xs text-sand-300 font-normal">/cada</span></div>
+                                    <div class="text-[10px] text-sand-300/70 font-mono">Total R$ 420</div>
+                                </div>
+                            </div>
+
+                            <!-- 4 Amigos -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-sand-100 text-sm font-medium block">4 Amigos</span>
+                                    <span class="text-[10px] text-copper-400 font-mono font-semibold">62% OFF</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[10px] text-sand-300/50 line-through font-mono">Total De R$ 1.976</div>
+                                    <div class="font-heading font-bold text-xl text-sand-50">R$ 190<span class="text-xs text-sand-300 font-normal">/cada</span></div>
+                                    <div class="text-[10px] text-sand-300/70 font-mono">Total R$ 760</div>
+                                </div>
+                            </div>
+
+                            <!-- 6 Amigos (Destaque) -->
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-copper-400/15 border border-copper-400/30">
+                                <div>
+                                    <span class="text-copper-300 font-bold text-sm uppercase tracking-wide block">6 Amigos</span>
+                                    <span class="text-[10px] bg-copper-400 text-petrol-950 font-bold px-1.5 py-0.5 rounded font-mono">70% OFF</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[10px] text-sand-300/60 line-through font-mono">Total De R$ 2.964</div>
+                                    <div class="font-heading font-bold text-2xl text-copper-300">R$ 150<span class="text-sm font-normal text-sand-100">/cada</span></div>
+                                    <div class="text-[10px] text-sand-300 font-mono">Total R$ 900</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <a href="https://wa.me/5584987347580?text=Ol%C3%A1!%20Quero%20fechar%20o%20Combo%20Panelinha%20do%20Acau%C3%A3%20Sites." target="_blank" class="btn-copper w-full py-4 text-xs font-bold text-center uppercase tracking-widest rounded-xl">
+                            Fechar Panelinha do Site
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Callout Combo Completo -->
+            <div class="p-6 rounded-2xl bg-petrol-850 border border-copper-400/20 text-center max-w-2xl mx-auto space-y-2">
+                <p class="text-xs text-sand-300">
+                    💡 <strong>Precisa também do software de gestão e prontuários?</strong> Conheça nossa página do <a href="../app/" class="text-copper-300 underline font-bold hover:text-copper-200">Acauã App</a> ou aproveite o <a href="../#planos" class="text-copper-300 underline font-bold hover:text-copper-200">Combo Completo por R$ 297</a>.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO 5: FAQ DE CRIAÇÃO DE SITES ===== -->
+    <section id="faq" class="py-24 px-6 relative z-10 bg-petrol-900/60 border-t border-white/5">
+        <div class="max-w-3xl mx-auto space-y-12">
+            
+            <div class="text-center space-y-3">
+                <span class="text-copper-400 font-mono font-bold text-xs tracking-[0.2em] uppercase block">Tire Suas Dúvidas</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-sand-50">
+                    Perguntas Frequentes sobre o Acauã Sites
+                </h2>
+            </div>
+
+            <div class="space-y-4 text-xs">
+                
+                <details class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/15 group cursor-pointer transition-all">
+                    <summary class="font-bold text-sm text-sand-100 flex items-center justify-between">
+                        <span>Preciso pagar mensalidade de hospedagem ou servidor?</span>
+                        <i class="fas fa-chevron-down text-copper-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-3 text-sand-300 leading-relaxed font-light">
+                        Não! Nós estruturamos o seu site em infraestrutura de alta performance com hospedagem vitalícia gratuita. O único custo anual opcional é o registro do seu domínio .com.br (cerca de R$ 40/ano no Registro.br).
+                    </p>
+                </details>
+
+                <details class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/15 group cursor-pointer transition-all">
+                    <summary class="font-bold text-sm text-sand-100 flex items-center justify-between">
+                        <span>Eu preciso escrever todos os textos do site?</span>
+                        <i class="fas fa-chevron-down text-copper-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-3 text-sand-300 leading-relaxed font-light">
+                        Não! Você só precisa responder nosso questionário guiado de briefing. Nossa equipe redige os textos com copy profissional e ética, adaptando a linguagem para a sua abordagem e público.
+                    </p>
+                </details>
+
+                <details class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/15 group cursor-pointer transition-all">
+                    <summary class="font-bold text-sm text-sand-100 flex items-center justify-between">
+                        <span>Como funciona o botão do WhatsApp?</span>
+                        <i class="fas fa-chevron-down text-copper-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-3 text-sand-300 leading-relaxed font-light">
+                        Quando o visitante clica no botão, o WhatsApp dele abre automaticamente com uma mensagem pré-formatada para você (ex: "Olá, vi seu site e gostaria de saber os horários para consulta").
+                    </p>
+                </details>
+
+                <details class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/15 group cursor-pointer transition-all">
+                    <summary class="font-bold text-sm text-sand-100 flex items-center justify-between">
+                        <span>O site funciona bem em celulares?</span>
+                        <i class="fas fa-chevron-down text-copper-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-3 text-sand-300 leading-relaxed font-light">
+                        100%! Mais de 85% dos pacientes acessam pelo smartphone. Todo o design é construído com foco prioritário em telas mobile, carregando em menos de 1 segundo.
+                    </p>
+                </details>
+
+                <details class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/15 group cursor-pointer transition-all">
+                    <summary class="font-bold text-sm text-sand-100 flex items-center justify-between">
+                        <span>Como funciona a compra coletiva em Panelinha?</span>
+                        <i class="fas fa-chevron-down text-copper-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-3 text-sand-300 leading-relaxed font-light">
+                        Você reúne 2, 4 ou 6 psicólogos. Cada membro do grupo preenche o seu próprio briefing individual e criamos sites exclusivos e personalizados para cada um.
+                    </p>
+                </details>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== RODAPÉ ===== -->
+    <footer class="py-12 px-6 border-t border-copper-400/15 text-center relative z-10 bg-petrol-950">
+        <div class="max-w-4xl mx-auto space-y-6">
+            
+            <div class="flex items-center justify-center gap-3">
+                <img src="../logo_acaua.svg" alt="Acauã" class="w-8 h-8 object-contain">
+                <span class="font-heading font-bold text-xl tracking-widest text-sand-50 uppercase">ACAUÃ</span>
+            </div>
+
+            <div class="flex justify-center items-center gap-4 text-copper-300 text-sm">
+                <a href="../" class="hover:text-sand-50 transition-colors">Início</a>
+                <span>•</span>
+                <a href="../app/" class="hover:text-sand-50 transition-colors">Acauã App</a>
+                <span>•</span>
+                <a href="../briefing/" class="hover:text-sand-50 transition-colors">Briefing</a>
+                <span>•</span>
+                <a href="../links/" class="hover:text-sand-50 transition-colors">Hub de Links</a>
+                <span>•</span>
+                <a href="https://wa.me/5584987347580" target="_blank" class="hover:text-sand-50 transition-colors">WhatsApp</a>
+            </div>
+
+            <p class="text-[10px] font-mono text-sand-300/60 uppercase tracking-widest">
+                © 2026 ACAUÃ • PRESENÇA DIGITAL & LANDING PAGES PARA PSICÓLOGOS
+            </p>
+
+        </div>
+    </footer>
+
+    <!-- Particles Script -->
+    <script>
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                this.color = Math.random() > 0.4 ? '#C0894E' : '#2A5F63';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+</body>
+</html>

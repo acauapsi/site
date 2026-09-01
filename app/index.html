@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Metadata -->
+    <title>Acauã App | Software Clínico Offline & Vitalício para Psicólogos</title>
+    <meta name="description" content="Prontuários eletrônicos com criptografia AES-256, agenda clínica, módulo RPD e emissão de recibos com CRP. Sem mensalidades, 100% offline e seguro.">
+    <meta property="og:title" content="Acauã App | Software Clínico para Psicólogos">
+    <meta property="og:description" content="Autonomia, sigilo ético e zero mensalidades. O software definitivo para a sua prática clínica.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#081011">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        petrol: {
+                            950: '#081011',
+                            900: '#0C1617',
+                            850: '#102022',
+                            800: '#142E31',
+                            700: '#1B4B4F',
+                            600: '#2A5F63',
+                        },
+                        copper: {
+                            200: '#E8C5A0',
+                            300: '#D4A574',
+                            400: '#C0894E',
+                            500: '#A07040',
+                            600: '#8A5D32',
+                        },
+                        sand: {
+                            50: '#FFFFFF',
+                            100: '#FAF0EB',
+                            200: '#F0E4DC',
+                            300: '#D4C5B8',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        cinzel: ['"Cinzel"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: #081011; }
+        ::-webkit-scrollbar-thumb { background: #1B4B4F; border-radius: 999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #C0894E; }
+
+        body {
+            background-color: #081011;
+            color: #FAF0EB;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .ambient-aurora {
+            position: fixed;
+            top: -15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(192, 137, 78, 0.16) 0%, rgba(27, 75, 79, 0.24) 40%, transparent 75%);
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes brandShimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .metallic-title {
+            background: linear-gradient(110deg, #FAF0EB 0%, #D4A574 25%, #FAF0EB 45%, #C0894E 65%, #FAF0EB 85%, #D4A574 100%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: brandShimmer 7s linear infinite;
+        }
+
+        .glass-panel {
+            background: rgba(16, 32, 34, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 165, 116, 0.15);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .spotlight-card {
+            background: linear-gradient(135deg, rgba(16, 32, 34, 0.75) 0%, rgba(10, 20, 21, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 165, 116, 0.15);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .spotlight-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(192, 137, 78, 0.45);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(192, 137, 78, 0.15);
+        }
+
+        .btn-copper {
+            background: linear-gradient(135deg, #C0894E 0%, #A07040 100%);
+            color: #081011;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(192, 137, 78, 0.35);
+        }
+        .btn-copper:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #D4A574 0%, #C0894E 100%);
+            box-shadow: 0 8px 30px rgba(192, 137, 78, 0.5);
+        }
+
+        .rotating-border-card {
+            position: relative;
+            overflow: hidden;
+            background: #142E31;
+            box-shadow: 0 0 40px rgba(192, 137, 78, 0.2);
+        }
+        .rotating-border-card::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: conic-gradient(from 0deg, #A07040, #C0894E, #FAF0EB, #C0894E, #A07040);
+            animation: rotateBorder 4s linear infinite;
+        }
+        .rotating-border-card::after {
+            content: '';
+            position: absolute;
+            background: #0C1617;
+            inset: 2px;
+            border-radius: inherit;
+            z-index: 1;
+        }
+        @keyframes rotateBorder {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="relative selection:bg-[#C0894E] selection:text-[#081011]">
+
+    <canvas id="particle-canvas"></canvas>
+    <div class="bg-noise"></div>
+    <div class="ambient-aurora"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md bg-petrol-950/80 border-b border-copper-400/15">
+        <div class="max-w-6xl mx-auto px-5 h-20 flex items-center justify-between">
+            <!-- Logo Acauã -->
+            <a href="../" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 flex items-center justify-center filter drop-shadow-[0_0_12px_rgba(192,137,78,0.4)] group-hover:scale-105 transition-transform">
+                    <img src="../logo_acaua.svg" alt="Acauã" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading font-bold text-2xl tracking-[0.14em] text-sand-50 uppercase leading-none">ACAUÃ</span>
+                    <span class="text-[9px] font-mono tracking-widest text-copper-400 uppercase">App Clínico</span>
+                </div>
+            </a>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-wider font-medium text-sand-300">
+                <a href="#diferenciais" class="hover:text-copper-300 transition-colors">Diferenciais</a>
+                <a href="#modulos" class="hover:text-copper-300 transition-colors">Módulos</a>
+                <a href="#seguranca" class="hover:text-copper-300 transition-colors">Segurança & CFP</a>
+                <a href="#precos" class="hover:text-copper-300 transition-colors">Preços</a>
+                <a href="#faq" class="hover:text-copper-300 transition-colors">FAQ</a>
+            </nav>
+
+            <!-- CTA Topo -->
+            <div class="flex items-center gap-3">
+                <a href="https://wa.me/5584987347580?text=Ol%C3%A1!%20Gostaria%20de%20garantir%20minha%20licen%C3%A7a%20do%20Acau%C3%A3%20App." target="_blank" class="btn-copper text-xs px-5 py-2.5 rounded-full uppercase tracking-wider font-bold flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="hidden sm:inline">Comprar App</span>
+                    <span class="sm:hidden">Comprar</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="min-h-screen pt-36 pb-20 px-6 relative z-10 flex flex-col items-center justify-center text-center">
+        <div class="max-w-4xl mx-auto space-y-6">
+            
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-copper-400/40 bg-copper-400/10 text-copper-300 font-mono text-[11px] uppercase tracking-[0.2em] shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-copper-400 animate-pulse"></span>
+                Software Clínico Offline • Acesso Vitalício
+            </div>
+
+            <!-- Headline -->
+            <h1 class="font-heading text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-sand-50 leading-[1.08]">
+                Seu consultório organizado.<br>
+                <span class="metallic-title">Seus prontuários blindados.</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-sand-300/90 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                Prontuários eletrônicos com criptografia militar AES-256 local, agenda inteligente, módulo RPD e emissão de recibos com CRP. <strong>Sem mensalidades perpétuas</strong> e 100% offline.
+            </p>
+
+            <!-- Buttons -->
+            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#precos" class="btn-copper text-xs sm:text-sm px-8 py-4 rounded-full uppercase tracking-widest font-bold shadow-xl flex items-center gap-2 w-full sm:w-auto justify-center">
+                    <span>Garantir Licença Vitalícia</span>
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                <a href="#modulos" class="px-7 py-4 rounded-full bg-petrol-850/80 border border-copper-400/30 hover:border-copper-400 text-sand-200 hover:text-sand-50 text-xs sm:text-sm uppercase tracking-wider font-semibold transition-all backdrop-blur-md w-full sm:w-auto justify-center flex items-center gap-2">
+                    <i class="fas fa-layer-group text-copper-400"></i>
+                    <span>Ver Ferramentas Inclusas</span>
+                </a>
+            </div>
+
+            <!-- Mockup do Software -->
+            <div class="pt-12 relative max-w-4xl mx-auto">
+                <div class="absolute -inset-1.5 bg-gradient-to-r from-copper-400/30 via-petrol-600/40 to-copper-400/30 rounded-3xl blur-xl opacity-75"></div>
+                <div class="relative rounded-2xl overflow-hidden border border-copper-400/30 bg-petrol-900 shadow-2xl">
+                    <img src="../praxys_crm_mockup.jpg" alt="Acauã App Interface" class="w-full h-auto object-cover">
+                </div>
+
+                <!-- Floating Tags -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
+                    <div class="glass-panel p-3 rounded-xl text-center">
+                        <span class="text-copper-300 text-xs font-mono font-bold block">100% OFFLINE</span>
+                        <span class="text-[10px] text-sand-300/80">Funciona sem internet</span>
+                    </div>
+                    <div class="glass-panel p-3 rounded-xl text-center">
+                        <span class="text-copper-300 text-xs font-mono font-bold block">AES-256</span>
+                        <span class="text-[10px] text-sand-300/80">Criptografia local</span>
+                    </div>
+                    <div class="glass-panel p-3 rounded-xl text-center">
+                        <span class="text-copper-300 text-xs font-mono font-bold block">ZERO MENSALIDADE</span>
+                        <span class="text-[10px] text-sand-300/80">Pagamento único</span>
+                    </div>
+                    <div class="glass-panel p-3 rounded-xl text-center">
+                        <span class="text-copper-300 text-xs font-mono font-bold block">CFP & LGPD</span>
+                        <span class="text-[10px] text-sand-300/80">Total conformidade ética</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO 1: O FIM DAS MENSALIDADES ===== -->
+    <section id="diferenciais" class="py-24 px-6 relative z-10 border-t border-white/5 bg-petrol-900/60">
+        <div class="max-w-5xl mx-auto space-y-12">
+            
+            <div class="text-center space-y-3">
+                <span class="text-copper-400 font-mono font-bold text-xs tracking-[0.2em] uppercase block">Por Que Mudar?</span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold text-sand-50">
+                    O Fim das Mensalidades & Dependência de Servidores
+                </h2>
+                <p class="text-sand-300 text-sm max-w-xl mx-auto">
+                    A maioria dos softwares prende o psicólogo a mensalidades infinitas e armazena os dados mais sigilosos dos pacientes em nuvens vulneráveis.
+                </p>
+            </div>
+
+            <!-- Comparativo Nuvem vs Acauã -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Nuvem Tradicional -->
+                <div class="p-7 rounded-3xl bg-petrol-950/90 border border-red-500/20 space-y-5">
+                    <div class="flex items-center gap-3 text-red-400">
+                        <div class="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-sand-100">Softwares Tradicionais em Nuvem</h3>
+                    </div>
+                    <ul class="space-y-3 text-xs text-sand-300">
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-red-400 font-bold">✗</span>
+                            <span><strong>Mensalidade Perpétua:</strong> R$ 90 a R$ 250 todo mês (mais de R$ 2.000 por ano jogados fora).</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-red-400 font-bold">✗</span>
+                            <span><strong>Sem Internet = Sem Atendimento:</strong> Queda de sinal no consultório trava seu acesso ao prontuário.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-red-400 font-bold">✗</span>
+                            <span><strong>Refém da Plataforma:</strong> Cancelou a assinatura? Você perde o acesso ao histórico e prontuários.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-red-400 font-bold">✗</span>
+                            <span><strong>Vazamentos & Nuvem:</strong> Dados sensíveis trafegando por servidores que você não controla.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Acauã App -->
+                <div class="p-7 rounded-3xl bg-petrol-800/60 border border-copper-400/40 space-y-5 shadow-[0_0_40px_rgba(192,137,78,0.15)] relative overflow-hidden">
+                    <div class="absolute top-0 right-0 px-4 py-1 bg-copper-400 text-petrol-950 text-[10px] font-bold font-mono uppercase tracking-widest rounded-bl-xl">Soberania Total</div>
+                    
+                    <div class="flex items-center gap-3 text-copper-300">
+                        <div class="w-8 h-8 rounded-full bg-copper-400/20 flex items-center justify-center">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-sand-50">Acauã App Clínico</h3>
+                    </div>
+                    <ul class="space-y-3 text-xs text-sand-200">
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-copper-400 font-bold">✓</span>
+                            <span><strong>Pagamento Único:</strong> Compre uma única vez e o software é seu para sempre, sem cobranças futuras.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-copper-400 font-bold">✓</span>
+                            <span><strong>100% Offline:</strong> Abra e registre sessões mesmo sem conexão à internet, com velocidade instantânea.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-copper-400 font-bold">✓</span>
+                            <span><strong>Banco de Dados Local:</strong> Todos os prontuários ficam trancados na sua máquina com criptografia militar AES-256.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-copper-400 font-bold">✓</span>
+                            <span><strong>Backup em 1 Clique:</strong> Exporte e guarde cópias criptografadas em pendrives ou pastas seguras quando quiser.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO 2: MÓDULOS & RECURSOS CLÍNICOS ===== -->
+    <section id="modulos" class="py-24 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto space-y-16">
+            
+            <div class="text-center space-y-3">
+                <span class="text-copper-400 font-mono font-bold text-xs tracking-[0.2em] uppercase block">Recursos Inclusos</span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold text-sand-50">
+                    O Arsenal Completo para sua Prática Clínica
+                </h2>
+                <p class="text-sand-300 text-sm max-w-xl mx-auto">
+                    Projetado especificamente para a rotina do psicólogo, eliminando burocracia e garantindo precisão técnica.
+                </p>
+            </div>
+
+            <!-- Grid de 6 Módulos Ricos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- 1. Prontuário Eletrônico -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-copper-400/15 border border-copper-400/30 text-copper-300 flex items-center justify-center text-xl mb-4">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 mb-2">Prontuário & Evoluções</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            Histórico clínico confidencial com registro estruturado de queixa principal, hipótese diagnóstica, plano terapêutico e evolução sessão a sessão. Busca instantânea por paciente.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fas fa-lock"></i>
+                        <span>Criptografia por Paciente</span>
+                    </div>
+                </div>
+
+                <!-- 2. Agenda Inteligente -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-copper-400/15 border border-copper-400/30 text-copper-300 flex items-center justify-center text-xl mb-4">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 mb-2">Agenda & Horários</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            Controle visual de grade de atendimentos diários e semanais. Status rápido de sessões confirmadas, realizadas, faltas e remarcações em um clique.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fas fa-clock"></i>
+                        <span>Visão Semanal e Mensal</span>
+                    </div>
+                </div>
+
+                <!-- 3. Módulo RPD -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-copper-400/15 border border-copper-400/30 text-copper-300 flex items-center justify-center text-xl mb-4">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 mb-2">Módulo RPD Integrado</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            Instrumento técnico da TCC para Registro de Pensamentos Disfuncionais. Registre situações, pensamentos automáticos, emoções, distorções e respostas adaptativas.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fas fa-sliders"></i>
+                        <span>Classificação Cognitiva</span>
+                    </div>
+                </div>
+
+                <!-- 4. Emissão de Recibos/PDFs -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-copper-400/15 border border-copper-400/30 text-copper-300 flex items-center justify-center text-xl mb-4">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 mb-2">Recibos & Laudos em PDF</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            Emita recibos para reembolso de plano de saúde e declaração de IR em PDF em menos de 10 segundos, com seu CRP, nome profissional e assinatura digital.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fas fa-signature"></i>
+                        <span>Cabeçalho Personalizado</span>
+                    </div>
+                </div>
+
+                <!-- 5. Gestão Financeira -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-copper-400/15 border border-copper-400/30 text-copper-300 flex items-center justify-center text-xl mb-4">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 mb-2">Controle Financeiro</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            Acompanhe pagamentos recebidos e pendentes por paciente. Saiba exatamente seu faturamento mensal, ticket médio e fluxo de caixa da clínica.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fas fa-wallet"></i>
+                        <span>Relatório de Faturamento</span>
+                    </div>
+                </div>
+
+                <!-- 6. Backup & Exportação -->
+                <div class="spotlight-card p-7 rounded-3xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-copper-400/15 border border-copper-400/30 text-copper-300 flex items-center justify-center text-xl mb-4">
+                            <i class="fas fa-hard-drive"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-sand-50 mb-2">Backup em 1 Clique</h3>
+                        <p class="text-xs text-sand-300 leading-relaxed">
+                            Crie cópias de segurança criptografadas do seu consultório inteiro instantaneamente. Guarde em seu pendrive ou disco externo com tranquilidade total.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[11px] font-mono text-copper-300 flex items-center gap-2">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Exportação em Formato Aberto</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO 3: SEGURANÇA & CFP ===== -->
+    <section id="seguranca" class="py-24 px-6 relative z-10 bg-petrol-900/40 border-y border-white/5">
+        <div class="max-w-4xl mx-auto text-center space-y-8">
+            
+            <div class="w-16 h-16 rounded-full bg-copper-400/15 border border-copper-400/40 text-copper-300 flex items-center justify-center text-2xl mx-auto shadow-lg">
+                <i class="fas fa-user-shield"></i>
+            </div>
+
+            <div class="space-y-3">
+                <span class="text-copper-400 font-mono font-bold text-xs tracking-[0.2em] uppercase block">Conformidade & Ética</span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold text-sand-50">
+                    O Sigilo Ético Exigido pelo CFP Levado a Sério
+                </h2>
+                <p class="text-sand-300 text-sm max-w-2xl mx-auto leading-relaxed">
+                    O Código de Ética Profissional do Psicólogo e a LGPD exigem a proteção inviolável do sigilo dos prontuários. Ao manter seus arquivos locais e criptografados, você elimina o maior vetor de risco: vazamento em nuvens de terceiros.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 text-left">
+                <div class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/20 space-y-2">
+                    <span class="text-copper-400 font-mono font-bold text-xs">01. Chave Mestre</span>
+                    <p class="text-xs text-sand-300">Somente a sua senha descriptografa os arquivos. Nem mesmo a Acauã tem acesso aos dados.</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/20 space-y-2">
+                    <span class="text-copper-400 font-mono font-bold text-xs">02. Guarda por 5 Anos</span>
+                    <p class="text-xs text-sand-300">Em conformidade com a resolução do CFP, seus prontuários ficam arquivados com segurança vitalícia.</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/20 space-y-2">
+                    <span class="text-copper-400 font-mono font-bold text-xs">03. Portabilidade</span>
+                    <p class="text-xs text-sand-300">Exportação aberta dos dados a qualquer momento em PDF ou JSON, sem travas ou custos.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO 4: TABELA DE PREÇOS ===== -->
+    <section id="precos" class="py-24 px-6 relative z-10">
+        <div class="max-w-5xl mx-auto space-y-16">
+            
+            <div class="text-center space-y-3">
+                <span class="inline-block px-4 py-1 rounded-full border border-copper-400/40 bg-copper-400/10 text-copper-300 font-mono text-[10px] uppercase tracking-widest">Oferta de Lançamento</span>
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-sand-50">
+                    Invista Uma Única Vez na sua Estrutura
+                </h2>
+                <p class="text-sand-300 text-sm max-w-lg mx-auto">
+                    Sem taxas escondidas. Sem anuidade. Adquira sua licença individual ou junte seus colegas para um desconto ainda maior.
+                </p>
+            </div>
+
+            <!-- Grid de Planos: Individual & Panelinha -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
+                
+                <!-- CARD 1: Plano Individual do App -->
+                <div class="p-8 rounded-3xl bg-petrol-900/90 border border-copper-400/30 flex flex-col justify-between relative shadow-xl">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs text-copper-300 font-bold uppercase tracking-wider">Licença Individual</span>
+                            <span class="bg-copper-400/20 text-copper-300 text-[10px] font-bold px-3 py-1 rounded-full uppercase font-mono">50% OFF</span>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading font-bold text-3xl text-sand-50">Acauã App</h3>
+                            <p class="text-xs text-sand-300 mt-1">Acesso vitalício para 1 psicólogo.</p>
+                        </div>
+
+                        <div class="border-y border-white/10 py-5 space-y-1">
+                            <div class="text-xs text-sand-300/50 line-through font-mono">De R$ 194</div>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-sm font-bold text-copper-400">Por</span>
+                                <span class="font-heading font-bold text-5xl text-sand-50">R$ 97</span>
+                            </div>
+                            <span class="text-[10px] text-copper-300 font-mono block">pagamento único • economia de R$ 97</span>
+                        </div>
+
+                        <ul class="space-y-3 text-xs text-sand-200">
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-copper-400"></i> Licença Vitalícia no seu Nome/CRP</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-copper-400"></i> Módulos de Prontuário, Agenda & RPD</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-copper-400"></i> Emissão Ilimitada de Recibos & Laudos</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-copper-400"></i> Suporte Direto e Atualizações</li>
+                        </ul>
+                    </div>
+
+                    <a href="https://wa.me/5584987347580?text=Ol%C3%A1!%20Quero%20garantir%20minha%20licen%C3%A7a%20individual%20do%20Acau%C3%A3%20App%20por%20R$%2097." target="_blank" class="mt-8 btn-copper w-full py-4 text-xs font-bold text-center uppercase tracking-widest rounded-xl">
+                        Comprar App Individual
+                    </a>
+                </div>
+
+                <!-- CARD 2: Panelinha Só o App (Rotating Border) -->
+                <div class="rotating-border-card rounded-3xl flex flex-col justify-between relative shadow-2xl">
+                    <div class="relative z-10 p-8 flex flex-col justify-between flex-1 space-y-6">
+                        
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-mono text-xs text-copper-300 font-bold uppercase tracking-wider">Combos Panelinha</span>
+                                <span class="bg-copper-400 text-petrol-950 text-[10px] font-bold px-3 py-1 rounded-full uppercase font-mono tracking-wider">Até 69% OFF</span>
+                            </div>
+
+                            <h3 class="font-heading font-bold text-3xl text-sand-50">Panelinha do App</h3>
+                            <p class="text-xs text-sand-300 mt-1">Junte amigos e dividam o valor da licença.</p>
+                        </div>
+
+                        <!-- Rows Panelinha -->
+                        <div class="space-y-3.5 border-y border-white/10 py-5">
+                            
+                            <!-- 2 Amigos -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-sand-100 text-sm font-medium block">2 Amigos</span>
+                                    <span class="text-[10px] text-copper-400 font-mono font-semibold">59% OFF</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[10px] text-sand-300/50 line-through font-mono">Total De R$ 388</div>
+                                    <div class="font-heading font-bold text-xl text-sand-50">R$ 80<span class="text-xs text-sand-300 font-normal">/cada</span></div>
+                                    <div class="text-[10px] text-sand-300/70 font-mono">Total R$ 160</div>
+                                </div>
+                            </div>
+
+                            <!-- 4 Amigos -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-sand-100 text-sm font-medium block">4 Amigos</span>
+                                    <span class="text-[10px] text-copper-400 font-mono font-semibold">64% OFF</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[10px] text-sand-300/50 line-through font-mono">Total De R$ 776</div>
+                                    <div class="font-heading font-bold text-xl text-sand-50">R$ 70<span class="text-xs text-sand-300 font-normal">/cada</span></div>
+                                    <div class="text-[10px] text-sand-300/70 font-mono">Total R$ 280</div>
+                                </div>
+                            </div>
+
+                            <!-- 6 Amigos (Destaque) -->
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-copper-400/15 border border-copper-400/30">
+                                <div>
+                                    <span class="text-copper-300 font-bold text-sm uppercase tracking-wide block">6 Amigos</span>
+                                    <span class="text-[10px] bg-copper-400 text-petrol-950 font-bold px-1.5 py-0.5 rounded font-mono">69% OFF</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[10px] text-sand-300/60 line-through font-mono">Total De R$ 1.164</div>
+                                    <div class="font-heading font-bold text-2xl text-copper-300">R$ 60<span class="text-sm font-normal text-sand-100">/cada</span></div>
+                                    <div class="text-[10px] text-sand-300 font-mono">Total R$ 360</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <a href="https://wa.me/5584987347580?text=Ol%C3%A1!%20Quero%20fechar%20o%20Combo%20Panelinha%20do%20Acau%C3%A3%20App." target="_blank" class="btn-copper w-full py-4 text-xs font-bold text-center uppercase tracking-widest rounded-xl">
+                            Fechar Panelinha do App
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Callout Combo Completo -->
+            <div class="p-6 rounded-2xl bg-petrol-850 border border-copper-400/20 text-center max-w-2xl mx-auto space-y-2">
+                <p class="text-xs text-sand-300">
+                    💡 <strong>Precisa também de uma Landing Page profissional?</strong> Conheça nossa página dedicada de <a href="../sites/" class="text-copper-300 underline font-bold hover:text-copper-200">Acauã Sites</a> ou aproveite o <a href="../#planos" class="text-copper-300 underline font-bold hover:text-copper-200">Combo Completo por R$ 297</a>.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO 5: FAQ ESPECÍFICO DO SOFTWARE ===== -->
+    <section id="faq" class="py-24 px-6 relative z-10 bg-petrol-900/60 border-t border-white/5">
+        <div class="max-w-3xl mx-auto space-y-12">
+            
+            <div class="text-center space-y-3">
+                <span class="text-copper-400 font-mono font-bold text-xs tracking-[0.2em] uppercase block">Tire Suas Dúvidas</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-sand-50">
+                    Perguntas Frequentes sobre o Acauã App
+                </h2>
+            </div>
+
+            <div class="space-y-4 text-xs">
+                
+                <details class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/15 group cursor-pointer transition-all">
+                    <summary class="font-bold text-sm text-sand-100 flex items-center justify-between">
+                        <span>Preciso de internet para usar o Acauã App?</span>
+                        <i class="fas fa-chevron-down text-copper-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-3 text-sand-300 leading-relaxed font-light">
+                        Não! O software roda 100% no seu computador. Você pode abrir prontuários, registrar sessões e emitir recibos mesmo se estiver sem conexão com a internet no consultório.
+                    </p>
+                </details>
+
+                <details class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/15 group cursor-pointer transition-all">
+                    <summary class="font-bold text-sm text-sand-100 flex items-center justify-between">
+                        <span>Em quais sistemas operacionais o app funciona?</span>
+                        <i class="fas fa-chevron-down text-copper-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-3 text-sand-300 leading-relaxed font-light">
+                        O Acauã App é compatível com Windows e macOS (Macbook/iMac). A instalação é rápida e acompanhada de um passo a passo em vídeo simples.
+                    </p>
+                </details>
+
+                <details class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/15 group cursor-pointer transition-all">
+                    <summary class="font-bold text-sm text-sand-100 flex items-center justify-between">
+                        <span>E se eu trocar de computador no futuro?</span>
+                        <i class="fas fa-chevron-down text-copper-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-3 text-sand-300 leading-relaxed font-light">
+                        Sua licença é vitalícia e fica vinculada ao seu nome/CRP. Basta gerar um arquivo de backup em 1 clique na máquina antiga e restaurá-lo na nova com sua chave de acesso.
+                    </p>
+                </details>
+
+                <details class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/15 group cursor-pointer transition-all">
+                    <summary class="font-bold text-sm text-sand-100 flex items-center justify-between">
+                        <span>Existe alguma taxa de anuidade ou renovação escondida?</span>
+                        <i class="fas fa-chevron-down text-copper-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-3 text-sand-300 leading-relaxed font-light">
+                        Nenhuma. O pagamento é único. Você adquire a licença e tem direito de uso perpétuo do software com todas as ferramentas clínicas inclusas.
+                    </p>
+                </details>
+
+                <details class="p-5 rounded-2xl bg-petrol-950/80 border border-copper-400/15 group cursor-pointer transition-all">
+                    <summary class="font-bold text-sm text-sand-100 flex items-center justify-between">
+                        <span>Como funciona a compra em Panelinha?</span>
+                        <i class="fas fa-chevron-down text-copper-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-3 text-sand-300 leading-relaxed font-light">
+                        Você reúne 2, 4 ou 6 colegas psicólogos. Um de vocês entra em contato no WhatsApp, realiza o pagamento coletivo e enviamos licenças individuais separadas para cada membro do grupo.
+                    </p>
+                </details>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== RODAPÉ ===== -->
+    <footer class="py-12 px-6 border-t border-copper-400/15 text-center relative z-10 bg-petrol-950">
+        <div class="max-w-4xl mx-auto space-y-6">
+            
+            <div class="flex items-center justify-center gap-3">
+                <img src="../logo_acaua.svg" alt="Acauã" class="w-8 h-8 object-contain">
+                <span class="font-heading font-bold text-xl tracking-widest text-sand-50 uppercase">ACAUÃ</span>
+            </div>
+
+            <div class="flex justify-center items-center gap-4 text-copper-300 text-sm">
+                <a href="../" class="hover:text-sand-50 transition-colors">Início</a>
+                <span>•</span>
+                <a href="../sites/" class="hover:text-sand-50 transition-colors">Acauã Sites</a>
+                <span>•</span>
+                <a href="../briefing/" class="hover:text-sand-50 transition-colors">Briefing</a>
+                <span>•</span>
+                <a href="../links/" class="hover:text-sand-50 transition-colors">Hub de Links</a>
+                <span>•</span>
+                <a href="https://wa.me/5584987347580" target="_blank" class="hover:text-sand-50 transition-colors">WhatsApp</a>
+            </div>
+
+            <p class="text-[10px] font-mono text-sand-300/60 uppercase tracking-widest">
+                © 2026 ACAUÃ • TECNOLOGIA & AUTONOMIA CLÍNICA VITALÍCIA
+            </p>
+
+        </div>
+    </footer>
+
+    <!-- Particles Script -->
+    <script>
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                this.color = Math.random() > 0.4 ? '#C0894E' : '#2A5F63';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+</body>
+</html>
