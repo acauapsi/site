@@ -249,6 +249,7 @@
             <div class="hidden md:flex items-center gap-6 text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4C5B8]">
                 <a href="#diferenciais" class="hover:text-[#C0894E] transition-colors">Autonomia</a>
                 <a href="#modulos" class="hover:text-[#C0894E] transition-colors">Módulos</a>
+                <a href="#tour-app" class="hover:text-[#C0894E] transition-colors">Tour do App</a>
                 <a href="#seguranca" class="hover:text-[#C0894E] transition-colors">Segurança & CFP</a>
                 <a href="#precos" class="hover:text-[#C0894E] transition-colors">Planos</a>
                 <a href="#faq" class="hover:text-[#C0894E] transition-colors">FAQ</a>
@@ -521,6 +522,422 @@
                         <i class="fas fa-shield-alt"></i>
                         <span>Exportação em Formato Aberto</span>
                     </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO: TOUR INTERATIVO PELAS ABAS DO APP ===== -->
+    <section id="tour-app" class="py-24 px-6 relative z-10 bg-petrol-900/60 border-t border-white/5">
+        <div class="max-w-6xl mx-auto space-y-12">
+            
+            <!-- Section Header -->
+            <div class="text-center space-y-4 max-w-3xl mx-auto">
+                <span class="text-copper-400 font-mono font-bold text-xs tracking-[0.2em] uppercase block">
+                    Simulador Interativo • Interface Desktop
+                </span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold text-sand-50 tracking-tight">
+                    Veja o Acauã App em Funcionamento
+                </h2>
+                <p class="text-sand-300 text-sm sm:text-base leading-relaxed font-light">
+                    Clique nas abas abaixo para explorar as principais telas do software e ver como ele organiza seus atendimentos clínicos com máxima fluidez e sigilo absoluto.
+                </p>
+            </div>
+
+            <!-- Tab Navigation Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+                <button onclick="switchAppTab('prontuario')" id="tab-btn-prontuario" class="app-tour-btn px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-copper-400 text-petrol-950 shadow-[0_0_20px_rgba(192,137,78,0.3)]">
+                    <i class="fas fa-file-medical"></i>
+                    <span>1. Prontuários & Anamnese</span>
+                </button>
+                <button onclick="switchAppTab('agenda')" id="tab-btn-agenda" class="app-tour-btn px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-petrol-950/80 text-sand-300 border border-white/10 hover:border-copper-400/40 hover:text-sand-100">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>2. Agenda Clínica</span>
+                </button>
+                <button onclick="switchAppTab('rpd')" id="tab-btn-rpd" class="app-tour-btn px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-petrol-950/80 text-sand-300 border border-white/10 hover:border-copper-400/40 hover:text-sand-100">
+                    <i class="fas fa-brain"></i>
+                    <span>3. Módulo RPD (TCC)</span>
+                </button>
+                <button onclick="switchAppTab('recibos')" id="tab-btn-recibos" class="app-tour-btn px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-petrol-950/80 text-sand-300 border border-white/10 hover:border-copper-400/40 hover:text-sand-100">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>4. Recibos & Laudos</span>
+                </button>
+                <button onclick="switchAppTab('financeiro')" id="tab-btn-financeiro" class="app-tour-btn px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-petrol-950/80 text-sand-300 border border-white/10 hover:border-copper-400/40 hover:text-sand-100">
+                    <i class="fas fa-chart-line"></i>
+                    <span>5. Painel Financeiro</span>
+                </button>
+                <button onclick="switchAppTab('backup')" id="tab-btn-backup" class="app-tour-btn px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-petrol-950/80 text-sand-300 border border-white/10 hover:border-copper-400/40 hover:text-sand-100">
+                    <i class="fas fa-shield-halved"></i>
+                    <span>6. Backup & Soberania</span>
+                </button>
+            </div>
+
+            <!-- Desktop App Window Simulator -->
+            <div class="rounded-3xl border border-copper-400/30 bg-[#0F1A1C] shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden">
+                
+                <!-- Window Titlebar -->
+                <div class="bg-[#15272A] px-5 py-3.5 border-b border-white/10 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs font-mono text-sand-300">
+                        <i class="fas fa-lock text-copper-400 text-[10px]"></i>
+                        <span>Acauã App v2.4 • Consultório Clínico</span>
+                        <span class="hidden md:inline text-sand-400/50">| Banco Local: SQLite SQLCipher AES-256</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-0.5 rounded-full">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="hidden sm:inline">100% Offline</span>
+                    </div>
+                </div>
+
+                <!-- Window Body with Sidebar & Content Area -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[460px]">
+                    
+                    <!-- Simulated App Sidebar -->
+                    <div class="lg:col-span-3 bg-[#112124] border-r border-white/10 p-4 space-y-6 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <!-- Therapist Profile Preview -->
+                            <div class="flex items-center gap-3 p-2.5 rounded-xl bg-petrol-900/60 border border-white/5">
+                                <div class="w-10 h-10 rounded-full bg-copper-400/20 border border-copper-400/40 flex items-center justify-center text-copper-300 font-bold font-mono text-sm">
+                                    AP
+                                </div>
+                                <div class="overflow-hidden">
+                                    <h4 class="text-xs font-bold text-sand-100 truncate">Consultório Dra. Ana</h4>
+                                    <p class="text-[10px] font-mono text-copper-300 truncate">CRP 06/142981</p>
+                                </div>
+                            </div>
+
+                            <!-- Sidebar Menu Links -->
+                            <div class="space-y-1">
+                                <div onclick="switchAppTab('prontuario')" id="side-link-prontuario" class="side-tab-link flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-all bg-copper-400/15 text-copper-300 border border-copper-400/30">
+                                    <i class="fas fa-file-medical w-4 text-center"></i>
+                                    <span>Prontuários</span>
+                                </div>
+                                <div onclick="switchAppTab('agenda')" id="side-link-agenda" class="side-tab-link flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-all text-sand-300 hover:bg-petrol-900/40 hover:text-sand-100">
+                                    <i class="fas fa-calendar-check w-4 text-center"></i>
+                                    <span>Agenda Semanal</span>
+                                </div>
+                                <div onclick="switchAppTab('rpd')" id="side-link-rpd" class="side-tab-link flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-all text-sand-300 hover:bg-petrol-900/40 hover:text-sand-100">
+                                    <i class="fas fa-brain w-4 text-center"></i>
+                                    <span>Módulo RPD (TCC)</span>
+                                </div>
+                                <div onclick="switchAppTab('recibos')" id="side-link-recibos" class="side-tab-link flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-all text-sand-300 hover:bg-petrol-900/40 hover:text-sand-100">
+                                    <i class="fas fa-file-invoice-dollar w-4 text-center"></i>
+                                    <span>Recibos & Laudos</span>
+                                </div>
+                                <div onclick="switchAppTab('financeiro')" id="side-link-financeiro" class="side-tab-link flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-all text-sand-300 hover:bg-petrol-900/40 hover:text-sand-100">
+                                    <i class="fas fa-chart-line w-4 text-center"></i>
+                                    <span>Financeiro</span>
+                                </div>
+                                <div onclick="switchAppTab('backup')" id="side-link-backup" class="side-tab-link flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-all text-sand-300 hover:bg-petrol-900/40 hover:text-sand-100">
+                                    <i class="fas fa-shield-halved w-4 text-center"></i>
+                                    <span>Backup & Segurança</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mini Storage Status -->
+                        <div class="p-3 rounded-xl bg-petrol-950/80 border border-white/5 space-y-1.5">
+                            <div class="flex items-center justify-between text-[10px] text-sand-400 font-mono">
+                                <span>Armazenamento Local</span>
+                                <span class="text-copper-300">1.8 MB</span>
+                            </div>
+                            <div class="w-full h-1.5 rounded-full bg-petrol-900 overflow-hidden">
+                                <div class="w-[12%] h-full bg-copper-400 rounded-full"></div>
+                            </div>
+                            <p class="text-[9px] text-sand-400/70">Criptografado com chave mestra.</p>
+                        </div>
+                    </div>
+
+                    <!-- Main Dynamic Content Panel -->
+                    <div class="lg:col-span-9 p-5 sm:p-7 bg-[#0E181A] relative flex flex-col justify-between">
+                        
+                        <!-- TAB 1: PRONTUÁRIO & EVOLUÇÃO -->
+                        <div id="content-prontuario" class="app-tab-content space-y-5">
+                            <!-- Patient Header -->
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h3 class="text-base sm:text-lg font-bold text-sand-50">Mariana Silva Costa (31 anos)</h3>
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-copper-400/20 text-copper-300 border border-copper-400/30">Em Tratamento</span>
+                                    </div>
+                                    <p class="text-xs text-sand-400 font-mono mt-0.5">Sessão #18 • 01/09/2026 • Terça-feira, 14:00 • Presencial</p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[11px] font-mono px-3 py-1 rounded-lg bg-petrol-900 text-sand-300 border border-white/10 flex items-center gap-1.5">
+                                        <i class="fas fa-lock text-emerald-400 text-[10px]"></i> AES-256
+                                    </span>
+                                    <button class="px-3 py-1 rounded-lg bg-copper-400 text-petrol-950 font-bold text-xs hover:bg-copper-300 transition-colors">
+                                        Salvar (Ctrl+S)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Tabs in Prontuario -->
+                            <div class="flex items-center gap-2 border-b border-white/10 pb-2 text-xs font-mono">
+                                <span class="text-copper-300 font-bold border-b-2 border-copper-400 pb-2 -mb-2 px-1">Evolução Clínica</span>
+                                <span class="text-sand-400 px-2 cursor-pointer hover:text-sand-200">Anamnese Geral</span>
+                                <span class="text-sand-400 px-2 cursor-pointer hover:text-sand-200">Hipóteses Diagnósticas</span>
+                                <span class="text-sand-400 px-2 cursor-pointer hover:text-sand-200">Metas Terapêuticas</span>
+                            </div>
+
+                            <!-- Clinical Evolution Textarea Mockup -->
+                            <div class="p-4 rounded-2xl bg-petrol-950/90 border border-white/10 space-y-3 font-sans">
+                                <div class="flex items-center justify-between text-[11px] text-sand-400 font-mono">
+                                    <span>Registro da Sessão de Hoje:</span>
+                                    <span>Última modificação às 14:48</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-sand-200 leading-relaxed font-light">
+                                    Paciente comparece pontualmente. Relata redução significativa nas crises de ansiedade antecipatória após a prática diária da técnica de desativação fisiológica e preenchimento do RPD. Discutimos a exposição gradual no ambiente de trabalho programada para a próxima quinta-feira. Reavaliação de distorções de catastrofização concluída com sucesso.
+                                </p>
+                                <div class="pt-2 flex flex-wrap items-center justify-between gap-2 border-t border-white/5 text-[11px] text-sand-400 font-mono">
+                                    <span class="flex items-center gap-1.5 text-copper-300">
+                                        <i class="fas fa-circle-check text-emerald-400"></i> Sigilo CFP Ativo • Salvo Localmente
+                                    </span>
+                                    <div class="flex gap-2">
+                                        <span class="hover:text-sand-200 cursor-pointer underline">Gerar PDF da Evolução</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 2: AGENDA CLÍNICA -->
+                        <div id="content-agenda" class="app-tab-content hidden space-y-5">
+                            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                                <div>
+                                    <h3 class="text-base sm:text-lg font-bold text-sand-50">Agenda do Dia • Terça-feira</h3>
+                                    <p class="text-xs text-sand-400 font-mono mt-0.5">01 de Setembro de 2026 • 5 Atendimentos Programados</p>
+                                </div>
+                                <button class="px-3 py-1.5 rounded-lg bg-copper-400 text-petrol-950 font-bold text-xs hover:bg-copper-300 transition-colors flex items-center gap-1.5">
+                                    <i class="fas fa-plus text-[10px]"></i> Novo Horário
+                                </button>
+                            </div>
+
+                            <!-- Timeline List -->
+                            <div class="space-y-2.5">
+                                <div class="p-3.5 rounded-xl bg-petrol-950/90 border border-white/10 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs font-mono font-bold text-copper-300 w-12">08:00</span>
+                                        <div>
+                                            <h4 class="text-xs font-bold text-sand-100">Carlos Eduardo Valério</h4>
+                                            <p class="text-[10px] text-sand-400 font-mono">Psicoterapia Individual • Online</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Confirmado</span>
+                                        <span class="text-xs font-mono text-sand-300">R$ 200</span>
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-petrol-950/90 border border-white/10 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs font-mono font-bold text-copper-300 w-12">10:00</span>
+                                        <div>
+                                            <h4 class="text-xs font-bold text-sand-100">Beatriz Mendes Santos</h4>
+                                            <p class="text-[10px] text-sand-400 font-mono">Primeira Consulta (Anamnese) • Presencial</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30">Aguardando Wpp</span>
+                                        <span class="text-xs font-mono text-sand-300">R$ 220</span>
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-petrol-900/80 border border-copper-400/40 flex items-center justify-between shadow-[0_0_15px_rgba(192,137,78,0.15)]">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs font-mono font-bold text-copper-300 w-12">14:00</span>
+                                        <div>
+                                            <h4 class="text-xs font-bold text-sand-50 flex items-center gap-2">
+                                                Mariana Silva Costa
+                                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                            </h4>
+                                            <p class="text-[10px] text-copper-300/80 font-mono">Em Atendimento Agora</p>
+                                        </div>
+                                    </div>
+                                    <button class="px-3 py-1 rounded bg-copper-400 text-petrol-950 font-bold text-xs hover:bg-copper-300 transition-colors">
+                                        Abrir Prontuário
+                                    </button>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-petrol-950/40 border border-dashed border-white/10 flex items-center justify-between text-sand-400">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs font-mono w-12">16:00</span>
+                                        <span class="text-xs font-light italic">Horário Vago para Encaixe</span>
+                                    </div>
+                                    <button class="text-xs font-mono text-copper-300 hover:underline">+ Agendar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 3: MÓDULO RPD (TCC) -->
+                        <div id="content-rpd" class="app-tab-content hidden space-y-5">
+                            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                                <div>
+                                    <h3 class="text-base sm:text-lg font-bold text-sand-50">Registro de Pensamentos Disfuncionais (RPD)</h3>
+                                    <p class="text-xs text-sand-400 font-mono mt-0.5">Paciente: Mariana Silva Costa • Instrumento TCC Integrado</p>
+                                </div>
+                                <button class="px-3 py-1.5 rounded-lg bg-copper-400 text-petrol-950 font-bold text-xs hover:bg-copper-300 transition-colors flex items-center gap-1.5">
+                                    <i class="fas fa-plus text-[10px]"></i> Novo Registro
+                                </button>
+                            </div>
+
+                            <!-- RPD Table Card -->
+                            <div class="overflow-x-auto rounded-2xl border border-white/10 bg-petrol-950/90">
+                                <table class="w-full text-left text-xs">
+                                    <thead class="bg-petrol-900/80 text-copper-300 font-mono uppercase text-[10px] border-b border-white/10">
+                                        <tr>
+                                            <th class="p-3">Situação</th>
+                                            <th class="p-3">Pensamento Automático</th>
+                                            <th class="p-3">Distorção</th>
+                                            <th class="p-3">Resposta Racional</th>
+                                            <th class="p-3">Resultado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-white/5 text-sand-200 font-light">
+                                        <tr>
+                                            <td class="p-3 font-normal text-sand-100">Reunião de metas com diretoria</td>
+                                            <td class="p-3 text-red-300/90 italic">"Se eu gaguejar vão achar que não domino o projeto"</td>
+                                            <td class="p-3 font-mono text-[10px] text-amber-300">Catastrofização / Leitura Mental</td>
+                                            <td class="p-3 text-emerald-300/90">"Já apresentei 12 relatórios com elogios formais."</td>
+                                            <td class="p-3 font-mono text-[11px] text-emerald-400">Ansiedade 80% ➔ 20%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-petrol-900/40 border border-copper-400/20 text-xs text-sand-300 leading-relaxed font-light">
+                                💡 <strong class="text-sand-100">Praticidade na Sessão:</strong> Você preenche os registros junto com o paciente na tela e pode exportar relatórios comparativos de evolução cognitiva em PDF criptografado.
+                            </div>
+                        </div>
+
+                        <!-- TAB 4: RECIBOS & LAUDOS -->
+                        <div id="content-recibos" class="app-tab-content hidden space-y-5">
+                            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                                <div>
+                                    <h3 class="text-base sm:text-lg font-bold text-sand-50">Emissor de Recibos & Laudos em PDF</h3>
+                                    <p class="text-xs text-sand-400 font-mono mt-0.5">Em conformidade com a Resolução CFP nº 006/2019</p>
+                                </div>
+                                <button class="px-3 py-1.5 rounded-lg bg-copper-400 text-petrol-950 font-bold text-xs hover:bg-copper-300 transition-colors flex items-center gap-1.5">
+                                    <i class="fas fa-file-pdf text-[10px]"></i> Baixar PDF Pronto
+                                </button>
+                            </div>
+
+                            <!-- PDF Sheet Preview -->
+                            <div class="p-5 rounded-2xl bg-[#FAF0EB] text-[#121F21] border border-copper-400/30 shadow-inner space-y-3 font-serif">
+                                <div class="flex items-center justify-between border-b border-[#121F21]/20 pb-2">
+                                    <div>
+                                        <h4 class="font-bold text-sm text-[#1B4B4F] tracking-wide uppercase font-sans">DRA. ANA PAULA RIBEIRO</h4>
+                                        <p class="text-[10px] font-mono text-[#5A4D41]">Psicóloga Clínica • CRP 06/142981 • CPF 000.000.000-00</p>
+                                    </div>
+                                    <span class="text-xs font-sans font-bold text-[#C0894E] uppercase">RECIBO Nº 0148/2026</span>
+                                </div>
+                                <p class="text-xs leading-relaxed text-[#2C241E]">
+                                    Recebi de <strong>Mariana Silva Costa</strong>, inscrita no CPF sob o nº 123.456.789-00, a quantia de <strong>R$ 800,00 (oitocentos reais)</strong> referente a 4 (quatro) sessões de psicoterapia realizadas nos dias 04, 11, 18 e 25 de Agosto de 2026.
+                                </p>
+                                <div class="pt-2 flex items-center justify-between text-[10px] font-sans text-[#7A6B5D] border-t border-[#121F21]/10">
+                                    <span>São Paulo, 01 de Setembro de 2026</span>
+                                    <span class="font-bold text-[#1B4B4F]">Documento Assinado Digitalmente • Válido para IRPF</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 5: PAINEL FINANCEIRO -->
+                        <div id="content-financeiro" class="app-tab-content hidden space-y-5">
+                            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                                <div>
+                                    <h3 class="text-base sm:text-lg font-bold text-sand-50">Controle Financeiro da Clínica</h3>
+                                    <p class="text-xs text-sand-400 font-mono mt-0.5">Balanço Consolidado • Mês Atual</p>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                    +18% vs mês passado
+                                </span>
+                            </div>
+
+                            <!-- Metrics Grid -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <div class="p-3 rounded-xl bg-petrol-950/90 border border-white/10 space-y-1">
+                                    <span class="text-[10px] font-mono text-sand-400 uppercase">Faturamento Mês</span>
+                                    <p class="text-lg font-bold text-emerald-400 font-mono">R$ 7.400</p>
+                                </div>
+                                <div class="p-3 rounded-xl bg-petrol-950/90 border border-white/10 space-y-1">
+                                    <span class="text-[10px] font-mono text-sand-400 uppercase">Consultas Feitas</span>
+                                    <p class="text-lg font-bold text-sand-50 font-mono">37 sessões</p>
+                                </div>
+                                <div class="p-3 rounded-xl bg-petrol-950/90 border border-white/10 space-y-1">
+                                    <span class="text-[10px] font-mono text-sand-400 uppercase">A Receber</span>
+                                    <p class="text-lg font-bold text-amber-400 font-mono">R$ 440</p>
+                                </div>
+                                <div class="p-3 rounded-xl bg-petrol-950/90 border border-white/10 space-y-1">
+                                    <span class="text-[10px] font-mono text-sand-400 uppercase">Ticket Médio</span>
+                                    <p class="text-lg font-bold text-copper-300 font-mono">R$ 200</p>
+                                </div>
+                            </div>
+
+                            <!-- Mini History Table -->
+                            <div class="rounded-xl border border-white/10 bg-petrol-950/90 p-3 space-y-2">
+                                <span class="text-[11px] font-mono text-copper-300 font-bold uppercase block">Últimos Pagamentos</span>
+                                <div class="divide-y divide-white/5 text-xs text-sand-300">
+                                    <div class="py-1.5 flex items-center justify-between">
+                                        <span>Mariana Silva Costa (Pacote 4 sessões)</span>
+                                        <span class="font-mono text-emerald-400 font-bold">R$ 800,00 [PIX]</span>
+                                    </div>
+                                    <div class="py-1.5 flex items-center justify-between">
+                                        <span>Carlos Eduardo Valério (Consulta Avulsa)</span>
+                                        <span class="font-mono text-emerald-400 font-bold">R$ 200,00 [Cartão]</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 6: BACKUP & SOBERANIA -->
+                        <div id="content-backup" class="app-tab-content hidden space-y-5">
+                            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                                <div>
+                                    <h3 class="text-base sm:text-lg font-bold text-sand-50">Central de Backup & Soberania dos Dados</h3>
+                                    <p class="text-xs text-sand-400 font-mono mt-0.5">Seu banco de dados não passa pela nuvem de ninguém</p>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                    🔒 Blindado com AES-256
+                                </span>
+                            </div>
+
+                            <!-- Backup Actions Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="p-4 rounded-2xl bg-petrol-950/90 border border-copper-400/30 space-y-3">
+                                    <div class="w-9 h-9 rounded-lg bg-copper-400/20 text-copper-300 flex items-center justify-center text-base">
+                                        <i class="fas fa-download"></i>
+                                    </div>
+                                    <h4 class="font-bold text-sand-100 text-sm">Gerar Cópia de Segurança (.db)</h4>
+                                    <p class="text-xs text-sand-300 leading-relaxed font-light">
+                                        Cria um arquivo criptografado com todos os seus pacientes, históricos e recibos para salvar em seu pendrive ou HD externo.
+                                    </p>
+                                    <button class="w-full py-2 rounded-xl bg-copper-400 text-petrol-950 font-bold text-xs hover:bg-copper-300 transition-colors">
+                                        Fazer Backup Agora
+                                    </button>
+                                </div>
+
+                                <div class="p-4 rounded-2xl bg-petrol-950/90 border border-white/10 space-y-3">
+                                    <div class="w-9 h-9 rounded-lg bg-petrol-900 text-sand-300 flex items-center justify-center text-base">
+                                        <i class="fas fa-file-zipper"></i>
+                                    </div>
+                                    <h4 class="font-bold text-sand-100 text-sm">Exportar Prontuários em ZIP</h4>
+                                    <p class="text-xs text-sand-300 leading-relaxed font-light">
+                                        Exporta todos os laudos e evoluções em formato universal PDF/JSON conforme as diretrizes do CFP de portabilidade.
+                                    </p>
+                                    <button class="w-full py-2 rounded-xl bg-petrol-900 border border-white/20 text-sand-100 font-bold text-xs hover:bg-petrol-800 transition-colors">
+                                        Exportar em ZIP
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
@@ -939,6 +1356,43 @@
             requestAnimationFrame(animate);
         }
         animate();
+
+        // App Tour Interactive Tab Switcher
+        function switchAppTab(tabId) {
+            const tabIds = ['prontuario', 'agenda', 'rpd', 'recibos', 'financeiro', 'backup'];
+            
+            // Hide all contents and reset button styles
+            tabIds.forEach(id => {
+                const content = document.getElementById(`content-${id}`);
+                const btn = document.getElementById(`tab-btn-${id}`);
+                const sideLink = document.getElementById(`side-link-${id}`);
+
+                if (content) {
+                    content.classList.add('hidden');
+                }
+                if (btn) {
+                    btn.className = 'app-tour-btn px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-petrol-950/80 text-sand-300 border border-white/10 hover:border-copper-400/40 hover:text-sand-100';
+                }
+                if (sideLink) {
+                    sideLink.className = 'side-tab-link flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-all text-sand-300 hover:bg-petrol-900/40 hover:text-sand-100';
+                }
+            });
+
+            // Activate selected tab
+            const activeContent = document.getElementById(`content-${tabId}`);
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            const activeSideLink = document.getElementById(`side-link-${tabId}`);
+
+            if (activeContent) {
+                activeContent.classList.remove('hidden');
+            }
+            if (activeBtn) {
+                activeBtn.className = 'app-tour-btn px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-copper-400 text-petrol-950 shadow-[0_0_20px_rgba(192,137,78,0.3)]';
+            }
+            if (activeSideLink) {
+                activeSideLink.className = 'side-tab-link flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-all bg-copper-400/15 text-copper-300 border border-copper-400/30';
+            }
+        }
 
         // Navbar and Floating WhatsApp Scroll Behavior
         let lastScrollY = window.scrollY;
