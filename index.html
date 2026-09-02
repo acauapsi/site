@@ -421,6 +421,25 @@
             text-shadow: 0 0 20px rgba(192, 137, 78, 0.4);
             transform: scale(1.03);
         }
+
+        /* Hero Watermark Responsive Sizing & Alignment (Mobile à direita; PC ligeiramente à direita e mais baixo) */
+        #hero-watermark-logo {
+            left: 75%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 620px;
+            height: 620px;
+            opacity: 0.055;
+        }
+        @media (min-width: 640px) {
+            #hero-watermark-logo {
+                left: 56%;
+                top: 68%;
+                width: clamp(560px, 75vw, 860px);
+                height: clamp(560px, 75vw, 860px);
+                opacity: 0.05;
+            }
+        }
     </style>
 </head>
 <body class="relative z-10 selection:bg-[#C0894E] selection:text-[#121F21]">
@@ -455,9 +474,9 @@
 
         <div class="max-w-5xl mx-auto w-full flex flex-col items-center justify-center relative z-10">
 
-            <!-- Watermark Acauã Bird (Proportional, Perfectly Centered Behind Headline) -->
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[440px] sm:h-[440px] lg:w-[540px] lg:h-[540px] max-w-[90vw] pointer-events-none select-none -z-10 flex items-center justify-center opacity-[0.06] transition-opacity">
-                <img src="logo_acaua.svg" alt="" class="w-full h-full object-contain filter drop-shadow-[0_0_40px_rgba(192,137,78,0.2)]">
+            <!-- Watermark Acauã Bird (Deslocado para direita no mobile, centralizado no desktop) -->
+            <div id="hero-watermark-logo" class="absolute pointer-events-none select-none -z-10 flex items-center justify-center transition-all">
+                <img src="logo_acaua.svg" alt="" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 40px rgba(192,137,78,0.2));">
             </div>
 
             <!-- Headline: Line 1 "O ACAUÃ é" | Line 2: Copper Rotating Pill -->
@@ -513,57 +532,57 @@
                 <div class="lg:col-span-7 space-y-4 flex flex-col justify-between">
                     
                     <!-- Card Pillar 1: Independência Financeira -->
-                    <div class="glass-card spotlight-card p-5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group">
-                        <div class="flex items-center gap-4">
-                            <div class="w-11 h-11 rounded-xl bg-[#1B4B4F]/10 border border-[#1B4B4F]/20 text-[#1B4B4F] flex items-center justify-center shrink-0 font-heading font-bold text-lg group-hover:scale-105 transition-transform">
+                    <div class="glass-card spotlight-card p-5 sm:p-6 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all bg-white/60 group">
+                        <div class="flex items-center justify-between gap-3 mb-2.5">
+                            <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#C0894E] bg-[#C0894E]/10 border border-[#C0894E]/25 px-2.5 py-0.5 rounded-full">
+                                Pagamento Único
+                            </span>
+                            <span class="text-xs font-mono font-bold text-[#1B4B4F]/40 group-hover:text-[#C0894E] transition-colors">
                                 01
-                            </div>
-                            <div class="space-y-0.5">
-                                <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
-                                    <span>Independência Financeira (Zero Mensalidades)</span>
-                                    <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#C0894E]/15 text-[#C0894E] border border-[#C0894E]/30">Pago Uma Vez</span>
-                                </h4>
-                                <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
-                                    Você não precisa ser refém de assinaturas perpétuas de R$ 150/mês. Adquira no lançamento e seja proprietário vitalício da sua ferramenta.
-                                </p>
-                            </div>
+                            </span>
                         </div>
+                        <h4 class="font-heading font-bold text-[#1B4B4F] text-lg sm:text-xl leading-snug mb-1.5">
+                            Independência Financeira (Zero Mensalidades)
+                        </h4>
+                        <p class="text-[#1B4B4F]/75 text-xs sm:text-sm leading-relaxed font-light">
+                            Você não precisa ser refém de assinaturas perpétuas de R$ 150/mês. Adquira no lançamento e seja proprietário vitalício da sua ferramenta.
+                        </p>
                     </div>
 
                     <!-- Card Pillar 2: Dever de Guarda Ética -->
-                    <div class="glass-card spotlight-card p-5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group">
-                        <div class="flex items-center gap-4">
-                            <div class="w-11 h-11 rounded-xl bg-[#8B9A7B]/20 border border-[#8B9A7B]/40 text-[#1B4B4F] flex items-center justify-center shrink-0 font-heading font-bold text-lg group-hover:scale-105 transition-transform">
+                    <div class="glass-card spotlight-card p-5 sm:p-6 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all bg-white/60 group">
+                        <div class="flex items-center justify-between gap-3 mb-2.5">
+                            <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1B4B4F] bg-[#8B9A7B]/20 border border-[#8B9A7B]/40 px-2.5 py-0.5 rounded-full">
+                                Sigilo Ético CFP
+                            </span>
+                            <span class="text-xs font-mono font-bold text-[#1B4B4F]/40 group-hover:text-[#C0894E] transition-colors">
                                 02
-                            </div>
-                            <div class="space-y-0.5">
-                                <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
-                                    <span>Guarda Sigilosa Direta (Resolução CFP nº 01/2009)</span>
-                                    <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#8B9A7B]/20 text-[#1B4B4F] border border-[#8B9A7B]/40">100% Legal</span>
-                                </h4>
-                                <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
-                                    O Código de Ética do CFP estabelece que a responsabilidade indelegável pela guarda dos prontuários é do psicólogo. A Acauã criptografa o arquivo localmente.
-                                </p>
-                            </div>
+                            </span>
                         </div>
+                        <h4 class="font-heading font-bold text-[#1B4B4F] text-lg sm:text-xl leading-snug mb-1.5">
+                            Guarda Sigilosa Direta (Resolução CFP nº 01/2009)
+                        </h4>
+                        <p class="text-[#1B4B4F]/75 text-xs sm:text-sm leading-relaxed font-light">
+                            O Código de Ética do CFP estabelece que a responsabilidade indelegável pela guarda dos prontuários é do psicólogo. A Acauã criptografa o arquivo localmente.
+                        </p>
                     </div>
 
                     <!-- Card Pillar 3: Portabilidade e Posse -->
-                    <div class="glass-card spotlight-card p-5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group">
-                        <div class="flex items-center gap-4">
-                            <div class="w-11 h-11 rounded-xl bg-[#C0894E]/15 border border-[#C0894E]/30 text-[#C0894E] flex items-center justify-center shrink-0 font-heading font-bold text-lg group-hover:scale-105 transition-transform">
+                    <div class="glass-card spotlight-card p-5 sm:p-6 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all bg-white/60 group">
+                        <div class="flex items-center justify-between gap-3 mb-2.5">
+                            <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1B4B4F] bg-[#1B4B4F]/10 border border-[#1B4B4F]/20 px-2.5 py-0.5 rounded-full">
+                                Soberania de Dados
+                            </span>
+                            <span class="text-xs font-mono font-bold text-[#1B4B4F]/40 group-hover:text-[#C0894E] transition-colors">
                                 03
-                            </div>
-                            <div class="space-y-0.5">
-                                <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
-                                    <span>Portabilidade & Backup sem Reféns</span>
-                                    <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#1B4B4F]/10 text-[#1B4B4F] border border-[#1B4B4F]/20">Autonomia</span>
-                                </h4>
-                                <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
-                                    Trocou de notebook ou quer salvar uma cópia em um pendrive seguro? O banco de dados SQLite é portável, permitindo backups locais instantâneos.
-                                </p>
-                            </div>
+                            </span>
                         </div>
+                        <h4 class="font-heading font-bold text-[#1B4B4F] text-lg sm:text-xl leading-snug mb-1.5">
+                            Portabilidade & Backup sem Reféns
+                        </h4>
+                        <p class="text-[#1B4B4F]/75 text-xs sm:text-sm leading-relaxed font-light">
+                            Trocou de notebook ou quer salvar uma cópia em um pendrive seguro? O banco de dados SQLite é portável, permitindo backups locais instantâneos.
+                        </p>
                     </div>
 
                 </div>
@@ -838,55 +857,58 @@
                     <!-- 3 Pillars Cards with Numbers -->
                     <div class="space-y-3.5">
                         
-                        <div class="glass-card spotlight-card p-4.5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group bg-white">
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-[#1B4B4F]/10 border border-[#1B4B4F]/20 text-[#1B4B4F] flex items-center justify-center shrink-0 font-heading font-bold text-base group-hover:scale-105 transition-transform">
+                        <!-- Card 1: Posicionamento SEO -->
+                        <div class="glass-card spotlight-card p-5 sm:p-6 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group bg-white">
+                            <div class="flex items-center justify-between gap-3 mb-2.5">
+                                <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#C0894E] bg-[#C0894E]/10 border border-[#C0894E]/25 px-2.5 py-0.5 rounded-full">
+                                    Visibilidade Orgânica
+                                </span>
+                                <span class="text-xs font-mono font-bold text-[#1B4B4F]/40 group-hover:text-[#C0894E] transition-colors">
                                     01
-                                </div>
-                                <div class="space-y-0.5">
-                                    <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
-                                        <span>Posicionamento SEO Local no Google</span>
-                                        <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#C0894E]/15 text-[#C0894E] border border-[#C0894E]/30">Visibilidade</span>
-                                    </h4>
-                                    <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
-                                        Seu consultório no topo das buscas quando pacientes pesquisarem por psicólogo na sua cidade ou consultas online.
-                                    </p>
-                                </div>
+                                </span>
                             </div>
+                            <h4 class="font-heading font-bold text-[#1B4B4F] text-lg sm:text-xl leading-snug mb-1.5">
+                                Posicionamento SEO Local no Google
+                            </h4>
+                            <p class="text-[#1B4B4F]/75 text-xs sm:text-sm leading-relaxed font-light">
+                                Seu consultório no topo das buscas quando pacientes pesquisarem por psicólogo na sua cidade ou consultas online.
+                            </p>
                         </div>
 
-                        <div class="glass-card spotlight-card p-4.5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group bg-white">
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-[#8B9A7B]/20 border border-[#8B9A7B]/40 text-[#1B4B4F] flex items-center justify-center shrink-0 font-heading font-bold text-base group-hover:scale-105 transition-transform">
+                        <!-- Card 2: Agendamento Direto -->
+                        <div class="glass-card spotlight-card p-5 sm:p-6 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group bg-white">
+                            <div class="flex items-center justify-between gap-3 mb-2.5">
+                                <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1B4B4F] bg-[#8B9A7B]/20 border border-[#8B9A7B]/40 px-2.5 py-0.5 rounded-full">
+                                    Sem Intermediários
+                                </span>
+                                <span class="text-xs font-mono font-bold text-[#1B4B4F]/40 group-hover:text-[#C0894E] transition-colors">
                                     02
-                                </div>
-                                <div class="space-y-0.5">
-                                    <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
-                                        <span>Agendamento Direto sem Intermediários</span>
-                                        <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#8B9A7B]/20 text-[#1B4B4F] border border-[#8B9A7B]/40">Sem Comissão</span>
-                                    </h4>
-                                    <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
-                                        Sem taxas por consulta ou intermediários. O paciente acessa a Landing Page e entra em contato direto com você.
-                                    </p>
-                                </div>
+                                </span>
                             </div>
+                            <h4 class="font-heading font-bold text-[#1B4B4F] text-lg sm:text-xl leading-snug mb-1.5">
+                                Agendamento Direto no seu WhatsApp
+                            </h4>
+                            <p class="text-[#1B4B4F]/75 text-xs sm:text-sm leading-relaxed font-light">
+                                Sem taxas por consulta ou intermediários. O paciente acessa a Landing Page e entra em contato direto com você.
+                            </p>
                         </div>
 
-                        <div class="glass-card spotlight-card p-4.5 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group bg-white">
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-[#C0894E]/15 border border-[#C0894E]/30 text-[#C0894E] flex items-center justify-center shrink-0 font-heading font-bold text-base group-hover:scale-105 transition-transform">
+                        <!-- Card 3: Autoridade Clínica -->
+                        <div class="glass-card spotlight-card p-5 sm:p-6 rounded-2xl border border-[#D4C5B8] hover:border-[#C0894E] transition-all group bg-white">
+                            <div class="flex items-center justify-between gap-3 mb-2.5">
+                                <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1B4B4F] bg-[#1B4B4F]/10 border border-[#1B4B4F]/20 px-2.5 py-0.5 rounded-full">
+                                    Autoridade de Marca
+                                </span>
+                                <span class="text-xs font-mono font-bold text-[#1B4B4F]/40 group-hover:text-[#C0894E] transition-colors">
                                     03
-                                </div>
-                                <div class="space-y-0.5">
-                                    <h4 class="font-heading font-bold text-[#1B4B4F] text-lg flex items-center gap-2">
-                                        <span>Autoridade Clínica & Design Sob Medida</span>
-                                        <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[#1B4B4F]/10 text-[#1B4B4F] border border-[#1B4B4F]/20">Alta Conversão</span>
-                                    </h4>
-                                    <p class="text-[#1B4B4F]/75 text-xs leading-relaxed">
-                                        Copywriting focado na sua abordagem terapêutica, desenhado sob medida para transmitir confiança e acolhimento.
-                                    </p>
-                                </div>
+                                </span>
                             </div>
+                            <h4 class="font-heading font-bold text-[#1B4B4F] text-lg sm:text-xl leading-snug mb-1.5">
+                                Autoridade Clínica & Design Sob Medida
+                            </h4>
+                            <p class="text-[#1B4B4F]/75 text-xs sm:text-sm leading-relaxed font-light">
+                                Copywriting focado na sua abordagem terapêutica, desenhado sob medida para transmitir confiança e acolhimento.
+                            </p>
                         </div>
 
                     </div>
@@ -1318,19 +1340,33 @@
         </div>
     </section>
 
-    <!-- DIVIDER: Individual → Panelinha -->
-    <div style="background:#153D40; padding: 2.2rem 1.5rem;" class="relative flex items-center justify-center gap-6 overflow-hidden">
-        <div class="flex-1 h-px bg-gradient-to-r from-transparent to-[#C0894E]/40 max-w-xs"></div>
-        <div class="shrink-0 flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#C0894E]/30 bg-[#C0894E]/10 backdrop-blur-sm">
-            <p class="text-xs font-bold text-[#FAF0EB] leading-snug">
-                Porém, se <span class="text-[#C0894E] font-black">juntar a galera</span> — o desconto é ainda maior.
+    <!-- SEÇÃO DE TRANSIÇÃO: Individual → Panelinha (Sem degradê) -->
+    <div id="transicao-panelinha" style="background-color: #121F21; border-top: 1px solid rgba(192, 137, 78, 0.3); padding: 5rem 1.5rem 2rem 1.5rem;" class="relative text-center overflow-hidden">
+        <div class="max-w-4xl mx-auto flex flex-col items-center justify-center text-center space-y-4 relative z-10">
+            
+            <!-- Heading -->
+            <h3 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(26px, 4.5vw, 40px); font-weight: 700; color: #FAF0EB; line-height: 1.25; margin: 0 0 8px 0;">
+                Vai iniciar a clínica com colegas de estágio ou consultório compartilhado?
+            </h3>
+
+            <!-- Description -->
+            <p style="font-family: 'Inter', sans-serif; font-size: clamp(14px, 2vw, 17px); color: #D4C5B8; max-width: 680px; line-height: 1.6; margin: 0 auto; font-weight: 300;">
+                Feche a ferramenta em grupo e divida o investimento: <strong style="color: #C0894E; font-weight: 700;">economize até 70% por pessoa</strong> com licenças vitalícias e independentes para cada colega.
             </p>
+
+            <!-- Action Button -->
+            <div style="padding-top: 10px;">
+                <a href="#panelinha" class="btn-copper" style="display: inline-flex; align-items: center; gap: 10px; padding: 13px 32px; border-radius: 9999px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; box-shadow: 0 4px 20px rgba(192, 137, 78, 0.35);">
+                    <span>Ver Valores dos Combos Panelinha</span>
+                    <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </a>
+            </div>
+
         </div>
-        <div class="flex-1 h-px bg-gradient-to-l from-transparent to-[#C0894E]/40 max-w-xs"></div>
     </div>
 
-    <!-- SECTION 6: COMBO PANELINHA (Dark Petrol Background) -->
-    <section id="panelinha" class="py-24 px-6 bg-[#121F21] text-[#FAF0EB] border-y border-white/5 relative overflow-hidden">
+    <!-- SECTION 6: COMBO PANELINHA (Dark Petrol Background - Sem borda superior para transição contínua) -->
+    <section id="panelinha" class="py-24 px-6 bg-[#121F21] text-[#FAF0EB] border-b border-white/5 relative overflow-hidden">
         <!-- Ambient glow -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C0894E]/10 blur-[160px] pointer-events-none rounded-full"></div>
 
