@@ -1054,61 +1054,55 @@
                     <button type="button" onclick="goToStep(8)" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider font-semibold">
                         ← Voltar
                     </button>
-                    <button type="button" onclick="handleFinalSubmit()" class="btn-wpp-master py-2.5 px-6 text-xs uppercase tracking-wider flex items-center gap-2 cursor-pointer">
-                        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                        <span>Enviar</span>
+                    <button type="button" id="btn_final_submit" onclick="handleFinalSubmit()" class="btn-wpp-master py-2.5 px-7 text-xs uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-lg">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        <span>Enviar Briefing</span>
                     </button>
                 </div>
             </div>
         </div>
 
         <!-- ===================================================================
-             ETAPA 10: TELA FINAL COM O BOTÃO WHATSAPP EM DESTAQUE
+             ETAPA 10: TELA FINAL — CONFIRMAÇÃO DE ENVIO COM SUCESSO
              =================================================================== -->
         <div id="step-10" class="step-view">
             <div class="panel-container p-8 sm:p-12 text-center space-y-6">
                 <!-- Check Icon -->
-                <div class="w-16 h-16 mx-auto rounded-full bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366]">
+                <div class="w-16 h-16 mx-auto rounded-full bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366] shadow-[0_0_30px_rgba(37,211,102,0.25)]">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
                 </div>
 
-                <div class="space-y-1.5">
-                    <span class="mono-num text-[11px] text-[#25D366] font-medium tracking-widest uppercase">
-                        ✓ BRIEFING COPIADO COM SUCESSO
+                <div class="space-y-2">
+                    <span class="mono-num text-[11px] text-[#25D366] font-bold tracking-widest uppercase flex items-center justify-center gap-1.5">
+                        <span>●</span> BRIEFING ENTREGUE COM SUCESSO
                     </span>
-                    <h2 class="font-heading text-2xl font-bold text-[#FAF0EB]">Agora é só colar no WhatsApp!</h2>
+                    <h2 class="font-heading text-2xl sm:text-3xl font-bold text-[#FAF0EB]">Recebemos suas respostas na Acauã!</h2>
+                    <p class="text-xs sm:text-sm text-[#D4C5B8] max-w-md mx-auto leading-relaxed">
+                        Seus dados e direcionamentos clínicos foram enviados diretamente para a nossa equipe em <strong class="text-[#FAF0EB]">acauapsi@gmail.com</strong>.
+                    </p>
                 </div>
 
-                <!-- Instruções passo a passo -->
-                <div class="bg-[#0D191B] border border-white/10 rounded-2xl p-5 text-left space-y-3 max-w-sm mx-auto">
-                    <p class="text-[11px] text-[#C0894E] font-bold uppercase tracking-wider">Siga os 3 passos:</p>
-                    <div class="flex items-start gap-3">
-                        <span class="w-6 h-6 rounded-full bg-[#C0894E] text-[#121F21] text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
-                        <p class="text-xs text-[#FAF0EB]">Clique em <strong>"Abrir WhatsApp"</strong> abaixo — o WhatsApp Web vai abrir.</p>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <span class="w-6 h-6 rounded-full bg-[#C0894E] text-[#121F21] text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
-                        <p class="text-xs text-[#FAF0EB]">Abra a conversa com a <strong>Acauã Sites</strong> (ou busque o número).</p>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <span class="w-6 h-6 rounded-full bg-[#C0894E] text-[#121F21] text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
-                        <p class="text-xs text-[#FAF0EB]">Clique na caixa de texto e pressione <strong>Ctrl+V</strong> (ou segure e cole no celular) para colar o briefing — depois é só enviar!</p>
+                <!-- Card de Ação Rápida WhatsApp -->
+                <div class="bg-[#0D191B] border border-[#C0894E]/30 rounded-2xl p-6 text-center space-y-3.5 max-w-md mx-auto shadow-xl">
+                    <p class="text-xs text-[#FAF0EB] leading-relaxed">
+                        Deseja agilizar o início do seu site? Clique abaixo para nos dar um alô no WhatsApp e avisar que o formulário foi preenchido:
+                    </p>
+
+                    <div class="pt-1">
+                        <a id="btn_aviso_wpp" href="https://wa.me/5584987347580?text=Ol%C3%A1!%20Acabei%20de%20enviar%20o%20meu%20briefing%20cl%C3%ADnico%20pelo%20site%20da%20Acau%C3%A3." target="_blank" rel="noopener noreferrer"
+                           class="btn-wpp-master py-3 px-7 text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 w-full no-underline shadow-lg font-bold">
+                            <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                            <span>Avisar no WhatsApp</span>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Botões -->
+                <!-- Ações Secundárias -->
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                    <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer"
-                       class="btn-wpp-master py-2.5 px-7 text-xs uppercase tracking-wider flex items-center justify-center gap-2 w-full sm:w-auto no-underline">
-                        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                        <span>Abrir WhatsApp</span>
-                    </a>
                     <button type="button" onclick="copiarTextoBriefing()" class="btn-ghost py-2.5 px-6 text-xs uppercase tracking-wider flex items-center justify-center gap-2 w-full sm:w-auto">
-                        <span>Copiar Novamente</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        <span>Copiar Cópia das Respostas</span>
                     </button>
-                </div>
-
-                <div class="pt-1">
                     <button type="button" onclick="goToStep(9)" class="btn-ghost py-2 px-5 text-[11px] uppercase tracking-wider font-semibold opacity-50 hover:opacity-100">
                         ← Revisar Respostas
                     </button>
@@ -1324,8 +1318,8 @@
             goToStep(step + 1);
         }
 
-        // Final Submit with Term Agreement Check
-        function handleFinalSubmit() {
+        // Final Submit with Term Agreement Check & FormSubmit Integration
+        async function handleFinalSubmit() {
             clearErrors();
             const domNome = document.getElementById('dominio_nome').value.trim();
             if (!domNome) {
@@ -1339,12 +1333,65 @@
                 showToast('Por favor, marque a caixa de aceite dos termos do projeto.');
                 return;
             }
-            // Copia o briefing completo para o clipboard
+
+            const btnSubmit = document.getElementById('btn_final_submit');
+            const originalBtnHtml = btnSubmit ? btnSubmit.innerHTML : '';
+            if (btnSubmit) {
+                btnSubmit.disabled = true;
+                btnSubmit.style.opacity = '0.7';
+                btnSubmit.innerHTML = `
+                    <svg class="w-4 h-4 shrink-0 animate-spin" viewBox="0 0 24 24" fill="none">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                    </svg>
+                    <span>Enviando Briefing...</span>
+                `;
+            }
+
+            // Coleta resumo e payload estruturado
             const texto = coletarResumoCompleto();
+            const payload = coletarPayloadEmail();
+
+            try {
+                // Disparo para FormSubmit (Entrega completa sem limite de caracteres)
+                const res = await fetch('https://formsubmit.co/ajax/acauapsi@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (res.ok) {
+                    console.log('Briefing enviado com sucesso para acauapsi@gmail.com');
+                } else {
+                    console.warn('Resposta FormSubmit:', res.status);
+                }
+            } catch (err) {
+                console.error('Erro de conexão ao enviar FormSubmit:', err);
+            } finally {
+                if (btnSubmit) {
+                    btnSubmit.disabled = false;
+                    btnSubmit.style.opacity = '1';
+                    btnSubmit.innerHTML = originalBtnHtml;
+                }
+            }
+
+            // Atualiza link do WhatsApp de aviso com o nome do psicólogo
+            const nomeProf = document.getElementById('nome_completo').value.trim() || 'Psicólogo(a)';
+            const btnWpp = document.getElementById('btn_aviso_wpp');
+            if (btnWpp) {
+                const msg = `Olá! Acabei de enviar meu briefing clínico pelo site da Acauã para o e-mail acauapsi@gmail.com.\n\nNome: ${nomeProf}`;
+                btnWpp.href = `https://wa.me/5584987347580?text=${encodeURIComponent(msg)}`;
+            }
+
+            // Copia o briefing completo para a área de transferência por segurança
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(texto).catch(() => {});
             }
-            // Vai para a tela de instruções de envio
+
+            // Vai para a tela de confirmação de sucesso
             goToStep(10);
         }
 
@@ -1378,6 +1425,122 @@
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function coletarPayloadEmail() {
+            const nome = document.getElementById('nome_completo').value.trim() || 'Não informado';
+            const crp = document.getElementById('crp_numero').value.trim() || 'Não informado';
+            const wpp = document.getElementById('whatsapp_num').value.trim() || 'Não informado';
+            const insta = document.getElementById('instagram_user').value.trim() || 'Não possui';
+            const endereco = document.getElementById('endereco_completo').value.trim() || 'Apenas Online';
+
+            let nomeExibicao = nome;
+            if (formState.assinatura && (formState.assinatura.includes('[Nome]') || formState.assinatura.includes('[Meu Nome]'))) {
+                nomeExibicao = formState.assinatura.replace(/\[Nome\]|\[Meu Nome\]/gi, nome);
+            }
+
+            const idiomasList = [...formState.idiomas];
+            const idiomaOutro = document.getElementById('idioma_outro').value.trim();
+            if (idiomaOutro) idiomasList.push(idiomaOutro);
+            const idiomasStr = idiomasList.join(', ') || 'Português';
+
+            const abOutra = document.getElementById('abordagem_outra').value.trim();
+            const abordagem = abOutra || formState.linha_teorica || 'A definir';
+            const publicos = formState.publico_alvo.join(', ') || 'Adultos em geral';
+
+            const queixas = [...formState.queixas_lista];
+            const queixasOutras = document.getElementById('queixas_outras').value.trim();
+            if (queixasOutras) queixas.push(queixasOutras);
+            const queixasStr = queixas.join(', ') || 'Geral';
+
+            const casosNaoAtende = document.getElementById('casos_nao_atende').value.trim();
+            const naoAtende = casosNaoAtende || formState.anti_perfil || 'Sem restrições';
+            const diferencial = document.getElementById('diferencial_custom').value.trim() || 'A definir';
+
+            const b2bList = [...formState.servicos_b2b];
+            const b2bCustom = document.getElementById('servicos_b2b_custom').value.trim();
+            if (b2bCustom) b2bList.push(b2bCustom);
+            const b2b = b2bList.join(', ') || 'Clínica Individual';
+
+            const formacao = document.getElementById('formacao_academica').value.trim() || 'A informar';
+            const midiaText = document.getElementById('midia_publicacoes').value.trim();
+            const midia = midiaText || formState.midia_opcao || 'Não possui';
+
+            const duracao = formState.duracao;
+            const frequencia = formState.frequencia;
+            const primeiroContatoCustom = document.getElementById('primeiro_contato_custom').value.trim();
+            const primeiroContato = primeiroContatoCustom ? `${formState.primeiro_contato} (${primeiroContatoCustom})` : formState.primeiro_contato;
+
+            const pagtoList = [...formState.pagto];
+            const pagtoCustom = document.getElementById('pagto_custom').value.trim();
+            if (pagtoCustom) pagtoList.push(pagtoCustom);
+            const pagto = pagtoList.join(', ') || 'Pix';
+            const cancelamento = formState.cancelamento;
+
+            const sensacaoSite = document.getElementById('sensacao_site').value.trim() || formState.estilo_visual || 'Acolhimento';
+            const ref1 = document.getElementById('link_ref_1').value.trim();
+            const ref2 = document.getElementById('link_ref_2').value.trim();
+            const ref3 = document.getElementById('link_ref_3').value.trim();
+            const refsList = [ref1, ref2, ref3].filter(Boolean);
+            const refs = refsList.length > 0 ? refsList.join(' | ') : 'A critério da Acauã';
+            const antiRef = document.getElementById('anti_referencias').value.trim() || 'Nenhuma';
+
+            const secoes = formState.secoes_site.join(', ') || 'Padrão';
+            const fotos = formState.fotos;
+
+            const headline = document.getElementById('headline_texto').value.trim() || 'A definir pela Acauã';
+            const btnTexto = formState.btn_texto;
+            const wppCustom = document.getElementById('wpp_msg_custom').value.trim();
+            const wppMsg = wppCustom || formState.wpp_msg || 'Padrão';
+
+            const domSit = formState.dominio_situacao;
+            const domNome = document.getElementById('dominio_nome').value.trim() || 'A sugerir';
+            const gmn = formState.gmn;
+            const ads = formState.ads;
+            const seo = document.getElementById('palavras_chave_seo').value.trim() || 'Geral';
+            const obs = document.getElementById('observacoes_finais').value.trim() || 'Nenhuma';
+
+            return {
+                _subject: `Briefing Clínico: ${nomeExibicao} — CRP ${crp}`,
+                _template: 'table',
+                _captcha: 'false',
+                '01_Nome_Profissional': nomeExibicao,
+                '02_CRP': crp,
+                '03_ePsi_Ativo': formState.epsi,
+                '04_WhatsApp_Contato': wpp,
+                '05_Instagram': insta,
+                '06_Modalidade': formState.modalidade,
+                '07_Endereco_Consultorio': endereco,
+                '08_Idiomas': idiomasStr,
+                '09_Abordagem_Teorica': abordagem,
+                '10_Publico_Alvo': publicos,
+                '11_Queixas_Principais': queixasStr,
+                '12_Nao_Atende': naoAtende,
+                '13_Diferencial_Clinico': diferencial,
+                '14_Servicos_B2B_Eventos': b2b,
+                '15_Formacao_Academica': formacao,
+                '16_Presenca_Midia_Livros': midia,
+                '17_Duracao_Sessao': duracao,
+                '18_Frequencia_Sessoes': frequencia,
+                '19_Primeiro_Contato': primeiroContato,
+                '20_Formas_Pagamento': pagto,
+                '21_Politica_Cancelamento': cancelamento,
+                '22_Estetica_Sentimento': sensacaoSite,
+                '23_Sites_Referencia': refs,
+                '24_Evitar_no_Design': antiRef,
+                '25_Fotos_Disponiveis': fotos,
+                '26_Secoes_Site': secoes,
+                '27_Headline_Hero': headline,
+                '28_Texto_Botao_CTA': btnTexto,
+                '29_Mensagem_Padrao_WhatsApp': wppMsg,
+                '30_Situacao_Dominio': domSit,
+                '31_Nome_Sugerido_Dominio': domNome,
+                '32_Google_Meu_Negocio': gmn,
+                '33_Anuncios_GoogleAds': ads,
+                '34_Palavras_Chave_SEO': seo,
+                '35_Observacoes_Finais': obs,
+                '36_Termos_Aceitos': 'Sim, aceitou termos de alinhamento e transparência'
+            };
         }
 
         function coletarResumoCompleto() {
