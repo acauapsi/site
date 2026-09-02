@@ -20,7 +20,7 @@
             { label: 'FAQ', link: '#faq' }
         ],
         socialItems: [
-            { label: 'WhatsApp', link: 'https://wa.me/5500999999999' },
+            { label: 'WhatsApp', link: 'https://wa.me/5584987347580' },
             { label: 'Instagram', link: '#' },
             { label: 'Suporte CFP', link: '#' }
         ]

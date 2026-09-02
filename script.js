@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentPack = 'crm';
     let currentFriends = 4;
-    const whatsappNumber = "5500999999999";
+    const whatsappNumber = "5584987347580";
 
     // DOM Elements for Panelinha Calc
     const packButtons = document.querySelectorAll('.pack-btn');
