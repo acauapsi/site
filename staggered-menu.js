@@ -21,7 +21,7 @@
         ],
         socialItems: [
             { label: 'WhatsApp', link: 'https://wa.me/5584987347580' },
-            { label: 'Instagram', link: '#' },
+            { label: 'Instagram', link: 'https://instagram.com/acauapsi' },
             { label: 'Suporte CFP', link: '#' }
         ]
     };
