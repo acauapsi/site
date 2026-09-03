@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Briefing Clínico — Acauã Sites</title>
     <meta name="description" content="Questionário oficial de criação de sites para psicólogos — Acauã Sites.">
+
+    <!-- Open Graph / WhatsApp Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://acauapsi.com.br/briefing/">
+    <meta property="og:title" content="Briefing Clínico — Acauã Sites">
+    <meta property="og:description" content="Questionário oficial de criação de sites para psicólogos. Defina sua identidade, público e estrutura digital.">
+    <meta property="og:image" content="https://acauapsi.com.br/logo_acaua_dark.jpg">
+    <meta property="og:image:secure_url" content="https://acauapsi.com.br/logo_acaua_dark.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="1024">
+    <meta property="og:image:alt" content="Acauã Sites — Briefing Clínico">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Briefing Clínico — Acauã Sites">
+    <meta name="twitter:description" content="Questionário oficial de criação de sites para psicólogos.">
+    <meta name="twitter:image" content="https://acauapsi.com.br/logo_acaua_dark.jpg">
+    <meta name="theme-color" content="#121F21">
+
     <!-- Favicon -->
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     
@@ -61,12 +81,13 @@
             box-shadow: none;
         }
 
-        /* Interactive Select Cards */
+        /* Interactive Select Cards (Touch Target Mobile 44px+) */
         .option-box {
             background-color: #0E1A1C;
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
-            padding: 10px 14px;
+            padding: 12px 14px;
+            min-height: 44px;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             display: flex;
@@ -1227,9 +1248,10 @@
                     showToast('Por favor, informe seu número de CRP.');
                     return;
                 }
-                if (!wpp) {
+                const wppDigits = wpp.replace(/\D/g, '');
+                if (!wpp || wppDigits.length < 10) {
                     highlightError('whatsapp_num');
-                    showToast('Por favor, informe seu WhatsApp profissional com DDD.');
+                    showToast('Por favor, informe seu WhatsApp profissional com DDD válido (10 ou 11 dígitos).');
                     return;
                 }
                 if (formState.modalidade === 'Presencial / Híbrido') {
@@ -1726,6 +1748,22 @@
                     document.body.removeChild(a);
                 }
             }, 300);
+        }
+
+        // Máscara Inteligente para WhatsApp (XX) XXXXX-XXXX
+        const wppField = document.getElementById('whatsapp_num');
+        if (wppField) {
+            wppField.addEventListener('input', (e) => {
+                let v = e.target.value.replace(/\D/g, '');
+                if (v.length > 11) v = v.slice(0, 11);
+                if (v.length > 6) {
+                    e.target.value = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+                } else if (v.length > 2) {
+                    e.target.value = `(${v.slice(0,2)}) ${v.slice(2)}`;
+                } else if (v.length > 0) {
+                    e.target.value = `(${v}`;
+                }
+            });
         }
     </script>
 </body>
